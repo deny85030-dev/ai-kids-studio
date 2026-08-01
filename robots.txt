@@ -1,0 +1,19 @@
+# =============================================
+# ROBOTS.TXT - KREATORPEDIA.COM
+# =============================================
+
+User-agent: *
+Disallow: /
+
+# Blokir semua bot
+User-agent: googlebot
+Disallow: /
+
+User-agent: bingbot
+Disallow: /
+
+User-agent: yandex
+Disallow: /
+
+# Sitemap (jika ada)
+# Sitemap: https://ai-kids-studio.vercel.app/sitemap.xml
