@@ -3,76 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Viral Kids Studio - © Kreatorpedia.com</title>
-    
-    <!-- SEO & Proteksi -->
-    <meta name="robots" content="noindex, nofollow">
-    <meta name="googlebot" content="noindex, nofollow">
-    <meta name="author" content="Kreatorpedia.com">
-    <meta name="copyright" content="Kreatorpedia.com">
-    
+    <title>AI Viral Kids Studio</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- PROTECTION SCRIPT -->
-    <script>
-        // MATIKAN CLICK KANAN
-        document.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-            alert('⚠️ AKTIVITAS DIBLOKIR!\n\nContent ini dilindungi oleh:\n© KREATORPEDIA.COM');
-            return false;
-        });
-
-        // MATIKAN CTRL+U, CTRL+SHIFT+I, F12
-        document.addEventListener('keydown', function(e) {
-            if (e.ctrlKey && e.key === 'u') {
-                e.preventDefault();
-                alert('⚠️ View Source DILARANG!');
-                return false;
-            }
-            if (e.ctrlKey && e.shiftKey && e.key === 'I') {
-                e.preventDefault();
-                alert('⚠️ Developer Tools DILARANG!');
-                return false;
-            }
-            if (e.key === 'F12') {
-                e.preventDefault();
-                alert('⚠️ Developer Tools DILARANG!');
-                return false;
-            }
-            if (e.ctrlKey && e.key === 's') {
-                e.preventDefault();
-                alert('⚠️ Menyimpan halaman DILARANG!');
-                return false;
-            }
-        });
-
-        // WATERMARK
-        window.onload = function() {
-            const watermark = document.createElement('div');
-            watermark.style.cssText = `
-                position: fixed;
-                bottom: 10px;
-                right: 10px;
-                color: rgba(255,255,255,0.08);
-                font-size: 10px;
-                font-family: Arial, sans-serif;
-                pointer-events: none;
-                z-index: 9999;
-                letter-spacing: 1px;
-            `;
-            watermark.innerHTML = '© KREATORPEDIA.COM';
-            document.body.appendChild(watermark);
-        };
-
-        console.log('%c© 2024 Kreatorpedia.com - All Rights Reserved', 'font-size:12px;color:#6b7280;');
-    </script>
-    
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', system-ui, sans-serif; background: #090d16; }
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: #0f172a; }
         ::-webkit-scrollbar-thumb { background: #4f46e5; border-radius: 10px; }
+        
+        /* Anti-select text */
+        .no-select {
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
     </style>
 </head>
 <body>
@@ -782,7 +728,7 @@
             };
 
             // =============================================
-            // RENDER UI - TAMPILAN APLIKASI
+            // RENDER UI - TAMPILAN APLIKASI (DIPERCEPAT)
             // =============================================
             return (
                 <div className="min-h-screen flex flex-col bg-[#090d16] text-slate-100 selection:bg-indigo-500 selection:text-white font-sans">
