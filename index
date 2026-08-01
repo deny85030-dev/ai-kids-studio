@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Viral Kids Studio - © Kreatorpedia.com</title>
+    
+    <!-- SEO & Proteksi -->
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow">
+    <meta name="author" content="Kreatorpedia.com">
+    <meta name="copyright" content="Kreatorpedia.com">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- PROTECTION SCRIPT -->
+    <script>
+        // MATIKAN CLICK KANAN
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            alert('⚠️ AKTIVITAS DIBLOKIR!\n\nContent ini dilindungi oleh:\n© KREATORPEDIA.COM');
+            return false;
+        });
+
+        // MATIKAN CTRL+U, CTRL+SHIFT+I, F12
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === 'u') {
+                e.preventDefault();
+                alert('⚠️ View Source DILARANG!');
+                return false;
+            }
+            if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+                e.preventDefault();
+                alert('⚠️ Developer Tools DILARANG!');
+                return false;
+            }
+            if (e.key === 'F12') {
+                e.preventDefault();
+                alert('⚠️ Developer Tools DILARANG!');
+                return false;
+            }
+            if (e.ctrlKey && e.key === 's') {
+                e.preventDefault();
+                alert('⚠️ Menyimpan halaman DILARANG!');
+                return false;
+            }
+        });
+
+        // WATERMARK
+        window.onload = function() {
+            const watermark = document.createElement('div');
+            watermark.style.cssText = `
+                position: fixed;
+                bottom: 10px;
+                right: 10px;
+                color: rgba(255,255,255,0.08);
+                font-size: 10px;
+                font-family: Arial, sans-serif;
+                pointer-events: none;
+                z-index: 9999;
+                letter-spacing: 1px;
+            `;
+            watermark.innerHTML = '© KREATORPEDIA.COM';
+            document.body.appendChild(watermark);
+        };
+
+        console.log('%c© 2024 Kreatorpedia.com - All Rights Reserved', 'font-size:12px;color:#6b7280;');
+    </script>
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', system-ui, sans-serif; background: #090d16; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #4f46e5; border-radius: 10px; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <!-- React & ReactDOM dari CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/lucide-react@0.263.1/dist/umd/lucide-react.min.js"></script>
+
+    <script>
+        // =============================================
+        // KODE APP LENGKAP - AI VIRAL KIDS STUDIO
+        // =============================================
+        
+        const { useState, useEffect } = React;
+        const { 
+            Sparkles, Zap, Copy, Plus, RefreshCw, Check, CheckCircle2,
+            AlertCircle, ChevronRight, Settings, Folder, Trash2, Eye, Download
+        } = lucideReact;
+
+        const ANIMATION_STYLES = [
+            { id: 'doraemon', label: 'Doraemon Style', icon: '🔔', desc: 'Japanese 3D/2D suburban gadget adventures' },
+            { id: 'spongebob', label: 'SpongeBob Style', icon: '🧽', desc: 'Vibrant underwater cartoon comedy' },
+            { id: 'upin_ipin', label: 'Upin & Ipin Style', icon: '🇲🇾', desc: 'Tropical village 3D heartwarming stories' },
+            { id: 'roblox', label: 'Roblox Animation', icon: '🧱', desc: 'Blocky avatar gaming storytime' },
+            { id: 'stickman', label: 'Stickman Animation', icon: '✏️', desc: 'High-energy vector stick figure story' },
+            { id: 'talking_fruits', label: 'Talking Fruits', icon: '🍎', desc: 'Hyper-expressive animated fruit characters' },
+            { id: 'health_edu', label: 'Health Education', icon: '🩺', desc: 'Fun body biology & hygiene explainers' },
+            { id: 'animals', label: 'Cute Animals', icon: '🦊', desc: 'Wholesome animal kingdom adventures' },
+            { id: 'superheroes', label: 'Kids Superheroes', icon: '⚡', desc: 'Action-packed elemental powers' },
+            { id: 'fairy_tales', label: 'Fairy Tales', icon: '🏰', desc: 'Magical folklore & enchanted worlds' },
+            { id: 'school_stories', label: 'School Stories', icon: '🎒', desc: 'Relatable classroom & friendship tales' },
+            { id: 'family_stories', label: 'Family Stories', icon: '🏠', desc: 'Heartwarming home & sibling bonding' },
+            { id: 'fantasy', label: 'Epic Fantasy', icon: '🐉', desc: 'Dragons, magic spells & mythical quests' },
+            { id: 'horror_kids', label: 'Horror for Kids', icon: '👻', desc: 'Spooky-funny mystery tales' },
+            { id: 'educational', label: 'Educational Stories', icon: '🧠', desc: 'Fun science, math & moral lessons' },
+            { id: 'funny_stories', label: 'Funny Slapstick', icon: '🤡', desc: 'High-energy slapstick laugh-out-loud comedy' },
+            { id: 'custom', label: 'Custom Style', icon: '✨', desc: 'Define your own unique animation style' }
+        ];
+
+        const DURATION_OPTIONS = [
+            { value: '30 sec', storyboards: 2, label: '30 Sec (Shorts / Reel / TikTok)' },
+            { value: '60 sec', storyboards: 3, label: '60 Sec (1 Minute Story)' },
+            { value: '90 sec', storyboards: 4, label: '90 Sec (Extended Short)' },
+            { value: '2 min', storyboards: 5, label: '2 Minutes (Medium Story)' },
+            { value: '3 min', storyboards: 6, label: '3 Minutes (Full Episode)' },
+            { value: '5 min', storyboards: 8, label: '5 Minutes (Mini Movie)' },
+            { value: '10 min', storyboards: 12, label: '10 Minutes (Feature Special)' }
+        ];
+
+        const OPENROUTER_FREE_MODELS = [
+            { id: 'openrouter/free', name: '🧠 openrouter/free (Auto Best Free Router)', tag: 'Recommended' },
+            { id: 'google/gemma-2-9b-it:free', name: '🧠 google/gemma-2-9b-it (free)', tag: 'Fast' },
+            { id: 'meta-llama/llama-3.3-70b-instruct:free', name: '🧠 meta-llama/llama-3.3-70b-instruct (free)', tag: 'Smart' },
+            { id: 'deepseek/deepseek-r1:free', name: '🧠 deepseek/deepseek-r1 (free)', tag: 'Reasoning' },
+            { id: 'qwen/qwen-2.5-72b-instruct:free', name: '🧠 qwen/qwen-2.5-72b-instruct (free)', tag: 'Creative' },
+            { id: 'mistralai/mistral-small-24b-instruct-2501:free', name: '🧠 mistralai/mistral-small-24b (free)', tag: 'Balanced' }
+        ];
+
+        const GEMINI_DIRECT_MODELS = [
+            { id: 'gemini-2.5-flash', name: '⚡ Gemini 2.5 Flash (Google AI)', tag: 'Latest' },
+            { id: 'gemini-2.0-flash', name: '⚡ Gemini 2.0 Flash (Google AI)', tag: 'Stable' },
+            { id: 'gemini-1.5-flash', name: '⚡ Gemini 1.5 Flash (Google AI)', tag: 'Standard' }
+        ];
+
+        const TARGET_AUDIENCES = ['Kids', 'Family', 'Educational', 'Comedy', 'Adventure'];
+        const LANGUAGES = ['Indonesian', 'English', 'Spanish', 'Japanese', 'Other'];
+        const LOCAL_STORAGE_KEY = "AI_ANIMATION_STUDIO_PROJECT_V5";
+
+        function extractJSON(text) {
+            if (!text) return null;
+            try { return JSON.parse(text); } catch (e) {}
+            const cleaned = text.replace(/```json/gi, '').replace(/```/g, '').trim();
+            try { return JSON.parse(cleaned); } catch (e) {}
+            const matchObj = cleaned.match(/\{[\s\S]*\}/);
+            if (matchObj) { try { return JSON.parse(matchObj[0]); } catch (e) {} }
+            const matchArr = cleaned.match(/\[[\s\S]*\]/);
+            if (matchArr) { try { return JSON.parse(matchArr[0]); } catch (e) {} }
+            return null;
+        }
+
+        function generateFallbackTitles(theme, style, lang) {
+            const cleanTheme = theme ? theme.trim() : "Petualangan Ajaib";
+            return [
+                `Rahasia Dibalik ${cleanTheme}!`,
+                `Kisah Nyata: ${cleanTheme} (Versi Animasi)`,
+                `Apa Yang Terjadi Ketika ${cleanTheme}?`,
+                `Petualangan Ajaib: ${cleanTheme}`,
+                `Misi Penyelamatan ${cleanTheme}`,
+                `Kejutan Tak Terduga Saat ${cleanTheme}`,
+                `Kisah Mengharukan ${cleanTheme}`,
+                `Ternyata Begini Rasanya ${cleanTheme}!`,
+                `Misteri Di Balik ${cleanTheme}`,
+                `Detik-Detik ${cleanTheme} Paling Mencekam!`
+            ];
+        }
+
+        function generateFallbackCharacter(title, theme, style) {
+            const words = theme ? theme.split(' ') : [];
+            const charName = words.length > 0 && words[0].length > 2 ? words[0].replace(/[^a-zA-Z]/g, '') : "Kiki";
+            const cleanTitle = title || theme || "Petualangan Animasi";
+            
+            return {
+                characterName: charName,
+                archetype: "Pahlawan Utama Cerita",
+                face: "Wajah bulat ekspresif, mata besar bersinar ramah, ekspresi antusias khas animasi 3D/2D",
+                hair: "Rambut ikal warna cokelat terang potongan rapi",
+                clothes: "Jaket hoodie biru muda dengan kaos putih bertuliskan logo bintang, celana kargo pendek",
+                body: "Postur anak usia 8-10 tahun, lincah, proporsional",
+                colors: "#4EA8DE (Biru Hoodie), #F8F9FA (Kaos Putih), #6C757D (Celana Abu)",
+                accessories: "Ransel petualang warna jingga terang",
+                age: "8-10 Tahun",
+                expressionStyle: "Sangat ekspresif, ceria, berani, dan penyayang",
+                masterPromptSnippet: `Master Character: ${charName}, main hero of "${cleanTitle}", expressive face, big sparkling eyes, curly light brown hair, wearing light blue hoodie, white star t-shirt, grey cargo shorts, orange backpack, ${style} animation style`
+            };
+        }
+
+        function generateFallbackScript(title, style, duration, theme, charObj) {
+            const name = charObj?.characterName || "Kiki";
+            const cleanTitle = title || "Petualangan Ajaib";
+            const cleanTheme = theme || "petualangan tak terlupakan";
+
+            return `Di sebuah tempat yang indah dan penuh warna, petualangan "${cleanTitle}" dimulai. Hari itu, ${name} sedang bersiap-siap dengan ransel jingga kesayangannya untuk menghadapi tantangan baru tentang ${cleanTheme}.
+
+        Ketika melangkah keluar, ${name} menemukan sebuah kejutan tak terduga yang mengubah suasana. Tantangan ini membutuhkan keberanian dan kecerdikan. Meskipun sempat ragu, ${name} mengingat janji untuk selalu pantang menyerah.
+
+        Dengan tekad yang kuat, ${name} mengambil langkah pertama. Momen puncak terjadi ketika situasi menjadi menegangkan, namun ${name} berhasil menyelesaikan masalah dengan penuh keberanian dan kebaikan hati.
+
+        Pada akhirnya, petualangan ini memberikan pelajaran berharga bagi ${name} dan semua teman-temannya. Keberanian sejati bukan tentang tidak memiliki rasa takut, melainkan tentang bertindak demi kebaikan.`;
+        }
+
+        function generateFallbackStoryboards(durationObj, style, charObj, title, storyText, lang) {
+            const count = durationObj?.storyboards || 3;
+            const charSnippet = charObj?.masterPromptSnippet || `Main character for ${title}, ${style}`;
+            const charName = charObj?.characterName || "Kiki";
+            
+            const paragraphs = storyText
+                ? storyText.split(/\n+/).filter(p => p.trim().length > 10)
+                : [];
+
+            const boards = [];
+            const totalParas = paragraphs.length;
+
+            for (let i = 1; i <= count; i++) {
+                const paraIdx = totalParas > 0 ? Math.floor(((i - 1) / count) * totalParas) : 0;
+                const currentSectionText = paragraphs[paraIdx] || `Bagian adegan ${i} dari cerita "${title}".`;
+                
+                const prevBoardId = i > 1 ? i - 1 : null;
+                const continuityNote = prevBoardId 
+                    ? `🔗 Sambungan Visual: Melanjutkan transisi aksi dari Storyboard #${prevBoardId} Panel 6`
+                    : `🏁 Pembuka Cerita: Pengenalan karakter awal adegan`;
+
+                boards.push({
+                    storyboardId: i,
+                    sceneTitle: `Adegan ${i}: ${i === 1 ? 'Pengenalan & Awal Konflik' : i === count ? 'Klimaks & Penyelesaian' : 'Perkembangan Petualangan'} (${i}/${count})`,
+                    locationAndTime: `Lokasi Utama Adegan #${i} - Siang Hari`,
+                    continuityNotes: continuityNote,
+                    scriptSegment: currentSectionText,
+                    panels: [
+                        { panelNum: 1, action: `${charName} memasuki adegan sesuai alur cerita`, dialogue: `Awal mula adegan #${i}...` },
+                        { panelNum: 2, action: `${charName} mengamati situasi di sekitarnya dengan ekspresi fokus`, dialogue: `Apa yang terjadi selanjutnya?` },
+                        { panelNum: 3, action: `Kejadian penting terjadi memicu reaksi ${charName}`, dialogue: `Aku harus bertindak!` },
+                        { panelNum: 4, action: `${charName} mengambil aksi utama untuk mengatasi tantangan`, dialogue: `Ayo kita lakukan sekarang!` },
+                        { panelNum: 5, action: `Hasil dari aksi terlihat dengan ekspresi lega dan gembira`, dialogue: `Berhasil!` },
+                        { panelNum: 6, action: `${charName} bersiap melangkah ke adegan berikutnya`, dialogue: `Petualangan berlanjut...` }
+                    ],
+                    imagePrompt: `A 6-panel comic grid layout, ${style} art style. ${charSnippet}. Scene context: "${currentSectionText.substring(0, 100)}...". Panel 1 to 6 progression: character entering, observing, reacting, taking action, achieving result, transitioning to next board. Vibrant cartoon lighting, high continuity, 6-panel comic book format. Spoken dialogue in ${lang}.`,
+                    videoPrompt: `Omni Flash / Sora Video Prompt (Storyboard #${i}): Cinematic smooth camera pan, ${charSnippet}. Action: ${charName} taking heroic action in "${currentSectionText.substring(0, 80)}...". Dynamic cartoon motion, lighting matching ${style}, max 10s.`
+                });
+            }
+
+            return boards;
+        }
+
+        async function callUniversalAI(prompt, provider, model, openrouterKey, geminiKey, systemInstruction = "") {
+            if (provider === 'openrouter') {
+                if (!openrouterKey || openrouterKey.trim() === "") {
+                    throw new Error("NO_KEY: Silakan masukkan OpenRouter API Key di menu API Settings.");
+                }
+
+                const endpoint = "https://openrouter.ai/api/v1/chat/completions";
+                const messages = [];
+                if (systemInstruction) {
+                    messages.push({ role: "system", content: systemInstruction });
+                }
+                messages.push({ role: "user", content: prompt });
+
+                const response = await fetch(endpoint, {
+                    method: "POST",
+                    headers: {
+                        "Authorization": `Bearer ${openrouterKey.trim()}`,
+                        "Content-Type": "application/json",
+                        "HTTP-Referer": window.location.origin || "https://gemini-canvas.app",
+                        "X-Title": "AI Viral Kids Studio"
+                    },
+                    body: JSON.stringify({
+                        model: model || "openrouter/free",
+                        messages: messages,
+                        temperature: 0.7
+                    })
+                });
+
+                if (!response.ok) {
+                    const errData = await response.json().catch(() => ({}));
+                    throw new Error(errData.error?.message || `OpenRouter API Error (${response.status})`);
+                }
+
+                const data = await response.json();
+                return data.choices?.[0]?.message?.content || "";
+            } else {
+                if (!geminiKey || geminiKey.trim() === "") {
+                    throw new Error("NO_KEY: Silakan masukkan Google Gemini API Key di menu API Settings.");
+                }
+
+                const modelToUse = model || "gemini-2.5-flash";
+                const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${modelToUse}:generateContent?key=${geminiKey.trim()}`;
+
+                const requestBody = {
+                    contents: [{ role: "user", parts: [{ text: prompt }] }]
+                };
+
+                if (systemInstruction) {
+                    requestBody.systemInstruction = { parts: [{ text: systemInstruction }] };
+                }
+
+                const response = await fetch(endpoint, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(requestBody)
+                });
+
+                if (!response.ok) {
+                    const errData = await response.json().catch(() => ({}));
+                    if (response.status === 429 || errData.error?.message?.toLowerCase().includes("quota")) {
+                        throw new Error("QUOTA_EXCEEDED: Rate limit/kuota Gemini API tercapai.");
+                    }
+                    throw new Error(errData.error?.message || `Gemini API Request failed (${response.status})`);
+                }
+
+                const data = await response.json();
+                return data.candidates?.[0]?.content?.parts?.[0]?.text || "";
+            }
+        }
+
+        const exportAsFile = (content, filename, type) => {
+            const blob = new Blob([content], { type: type });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        };
+
+        function App() {
+            const [provider, setProvider] = useState(() => localStorage.getItem("AI_STUDIO_PROVIDER") || "openrouter");
+            const [openrouterKey, setOpenrouterKey] = useState(() => localStorage.getItem("OPENROUTER_API_KEY") || "");
+            const [geminiKey, setGeminiKey] = useState(() => localStorage.getItem("GEMINI_API_KEY") || "");
+            const [selectedModel, setSelectedModel] = useState(() => localStorage.getItem("AI_STUDIO_MODEL") || "openrouter/free");
+            
+            const [activeTab, setActiveTab] = useState('studio');
+            
+            const [animationStyle, setAnimationStyle] = useState('doraemon');
+            const [customStyleText, setCustomStyleText] = useState('');
+            const [storyTheme, setStoryTheme] = useState('A brave little brother saves his sister from a friendly stray dog in the neighborhood.');
+            const [duration, setDuration] = useState('60 sec');
+            const [language, setLanguage] = useState('Indonesian');
+            const [targetAudience, setTargetAudience] = useState('Kids');
+
+            const [titles, setTitles] = useState([]);
+            const [selectedTitle, setSelectedTitle] = useState('');
+            const [masterCharacter, setMasterCharacter] = useState(null);
+            const [story, setStory] = useState('');
+            const [storyAnalysis, setStoryAnalysis] = useState(null);
+            const [storyboards, setStoryboards] = useState([]); 
+            
+            const [thumbnailData, setThumbnailData] = useState(null);
+            const [seoData, setSeoData] = useState(null);
+
+            const [isGenerating, setIsGenerating] = useState(false);
+            const [isTestingKey, setIsTestingKey] = useState(false);
+            const [isRefreshingModels, setIsRefreshingModels] = useState(false);
+            const [loadingStepText, setLoadingStepText] = useState('');
+            const [toast, setToast] = useState(null);
+            const [showResetModal, setShowResetModal] = useState(false);
+            const [customModelList, setCustomModelList] = useState(OPENROUTER_FREE_MODELS);
+
+            useEffect(() => {
+                localStorage.setItem("AI_STUDIO_PROVIDER", provider);
+                localStorage.setItem("OPENROUTER_API_KEY", openrouterKey);
+                localStorage.setItem("GEMINI_API_KEY", geminiKey);
+                localStorage.setItem("AI_STUDIO_MODEL", selectedModel);
+            }, [provider, openrouterKey, geminiKey, selectedModel]);
+
+            const handleProviderChange = (newProvider) => {
+                setProvider(newProvider);
+                if (newProvider === 'openrouter') {
+                    setSelectedModel('openrouter/free');
+                } else {
+                    setSelectedModel('gemini-2.5-flash');
+                }
+            };
+
+            useEffect(() => {
+                const stateToSave = {
+                    animationStyle, customStyleText, storyTheme, duration, language, targetAudience,
+                    titles, selectedTitle, masterCharacter, story, storyAnalysis, storyboards,
+                    thumbnailData, seoData
+                };
+                localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(stateToSave));
+            }, [animationStyle, customStyleText, storyTheme, duration, language, targetAudience, titles, selectedTitle, masterCharacter, story, storyAnalysis, storyboards, thumbnailData, seoData]);
+
+            useEffect(() => {
+                try {
+                    const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
+                    if (saved) {
+                        const parsed = JSON.parse(saved);
+                        if (parsed.animationStyle) setAnimationStyle(parsed.animationStyle);
+                        if (parsed.customStyleText) setCustomStyleText(parsed.customStyleText);
+                        if (parsed.storyTheme) setStoryTheme(parsed.storyTheme);
+                        if (parsed.duration) setDuration(parsed.duration);
+                        if (parsed.language) setLanguage(parsed.language);
+                        if (parsed.targetAudience) setTargetAudience(parsed.targetAudience);
+                        if (parsed.titles) setTitles(parsed.titles);
+                        if (parsed.selectedTitle) setSelectedTitle(parsed.selectedTitle);
+                        if (parsed.masterCharacter) setMasterCharacter(parsed.masterCharacter);
+                        if (parsed.story) setStory(parsed.story);
+                        if (parsed.storyAnalysis) setStoryAnalysis(parsed.storyAnalysis);
+                        if (parsed.storyboards) setStoryboards(parsed.storyboards);
+                        if (parsed.thumbnailData) setThumbnailData(parsed.thumbnailData);
+                        if (parsed.seoData) setSeoData(parsed.seoData);
+                    }
+                } catch (e) {
+                    console.warn("Could not restore project state", e);
+                }
+            }, []);
+
+            const showToast = (msg, type = 'info') => {
+                setToast({ msg, type });
+                setTimeout(() => setToast(null), 3500);
+            };
+
+            const copyToClipboard = (text, label) => {
+                if (!text) return;
+                try {
+                    const textarea = document.createElement('textarea');
+                    textarea.value = text;
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textarea);
+                    showToast(`${label} copied to clipboard!`, 'success');
+                } catch (e) {
+                    showToast(`Failed to copy ${label}`, 'error');
+                }
+            };
+
+            const handleTestKey = async () => {
+                setIsTestingKey(true);
+                try {
+                    const testPrompt = "Reply with 'API Key Active OK'";
+                    const resp = await callUniversalAI(testPrompt, provider, selectedModel, openrouterKey, geminiKey);
+                    showToast(`Key Valid! Model ${selectedModel} responded: ${resp.substring(0, 30)}...`, "success");
+                } catch (err) {
+                    showToast(`Test Failed: ${err.message}`, "error");
+                } finally {
+                    setIsTestingKey(false);
+                }
+            };
+
+            const handleRefreshModels = async () => {
+                setIsRefreshingModels(true);
+                try {
+                    if (provider === 'openrouter') {
+                        const res = await fetch("https://openrouter.ai/api/v1/models");
+                        if (res.ok) {
+                            const data = await res.json();
+                            const freeOnly = data.data
+                                .filter(m => m.id.includes(':free') || m.id.includes('free'))
+                                .map(m => ({ id: m.id, name: `🧠 ${m.id}`, tag: 'Free' }));
+                            
+                            if (freeOnly.length > 0) {
+                                setCustomModelList(freeOnly);
+                                showToast(`Refreshed! Found ${freeOnly.length} active OpenRouter free models.`, "success");
+                            } else {
+                                setCustomModelList(OPENROUTER_FREE_MODELS);
+                                showToast("Models refreshed to default preset list.", "info");
+                            }
+                        }
+                    } else {
+                        showToast("Gemini models list refreshed.", "info");
+                    }
+                } catch (err) {
+                    showToast("Could not fetch online models. Using default free list.", "info");
+                } finally {
+                    setIsRefreshingModels(false);
+                }
+            };
+
+            const handleOpenGetKeyPage = () => {
+                if (provider === 'openrouter') {
+                    window.open("https://openrouter.ai/keys", "_blank");
+                } else {
+                    window.open("https://aistudio.google.com/app/apikey", "_blank");
+                }
+            };
+
+            const currentStyleLabel = animationStyle === 'custom' ? customStyleText : (ANIMATION_STYLES.find(s => s.id === animationStyle)?.label || 'Doraemon Style');
+            const targetDurationObj = DURATION_OPTIONS.find(d => d.value === duration) || DURATION_OPTIONS[1];
+
+            const handleGenerateTitles = async () => {
+                setIsGenerating(true);
+                setLoadingStepText(`STEP 1: Generating 10 Viral Titles in ${language}...`);
+                try {
+                    const prompt = `Generate exactly 10 high-CTR, highly engaging viral cartoon animation titles for kids/family based on:
+                Style: ${currentStyleLabel}
+                Theme: ${storyTheme}
+                CRITICAL LANGUAGE RULE: Must be written strictly in ${language}.
+                Target Audience: ${targetAudience}
+
+                Output MUST be a JSON array of 10 title strings ONLY in ${language}. Example: ["Title 1", "Title 2", ...]`;
+
+                    const text = await callUniversalAI(prompt, provider, selectedModel, openrouterKey, geminiKey);
+                    const parsed = extractJSON(text);
+
+                    if (Array.isArray(parsed) && parsed.length > 0) {
+                        setTitles(parsed);
+                        if (!selectedTitle || !parsed.includes(selectedTitle)) {
+                            setSelectedTitle(parsed[0]);
+                        }
+                        showToast("10 Viral Titles generated!", "success");
+                    } else {
+                        throw new Error("Format output bukan JSON array.");
+                    }
+                } catch (err) {
+                    const fallbackList = generateFallbackTitles(storyTheme, currentStyleLabel, language);
+                    setTitles(fallbackList);
+                    if (!selectedTitle || !fallbackList.includes(selectedTitle)) {
+                        setSelectedTitle(fallbackList[0]);
+                    }
+                    showToast(`Notice: ${err.message}. Used fallback engine.`, "info");
+                } finally {
+                    setIsGenerating(false);
+                }
+            };
+
+            const handleRunFullPipeline = async () => {
+                if (!selectedTitle) {
+                    showToast("Please select or generate a Title in Step 1 first!", "error");
+                    return;
+                }
+
+                setIsGenerating(true);
+                try {
+                    setLoadingStepText("STEP 7: Building Master Character Sheet...");
+                    let charParsed = null;
+                    try {
+                        const charPrompt = `Create one Master Character Sheet for the main character(s) in this story.
+                Title: "${selectedTitle}"
+                Style: ${currentStyleLabel}
+                Theme: ${storyTheme}
+                Language: ${language}
+
+                Define exact visual rules that NEVER change.
+                All text descriptions must be in ${language}.
+
+                Output MUST be JSON with fields:
+                {
+                  "characterName": "Name",
+                  "archetype": "Role",
+                  "face": "...",
+                  "hair": "...",
+                  "clothes": "...",
+                  "body": "...",
+                  "colors": "...",
+                  "accessories": "...",
+                  "age": "...",
+                  "expressionStyle": "...",
+                  "masterPromptSnippet": "Visual tag snippet for image generator"
+                }`;
+                        const charText = await callUniversalAI(charPrompt, provider, selectedModel, openrouterKey, geminiKey);
+                        charParsed = extractJSON(charText);
+                    } catch (e) {
+                        console.warn("Character AI fallback:", e);
+                    }
+                    
+                    if (!charParsed || !charParsed.characterName) {
+                        charParsed = generateFallbackCharacter(selectedTitle, storyTheme, currentStyleLabel);
+                    }
+                    setMasterCharacter(charParsed);
+
+                    setLoadingStepText(`STEP 2: Writing Story in ${language}...`);
+                    let generatedStory = "";
+                    try {
+                        const storyPrompt = `Write a complete, emotional, engaging cartoon animation story.
+                Title: "${selectedTitle}"
+                Style: ${currentStyleLabel}
+                Duration: ${duration}
+                CRITICAL LANGUAGE RULE: Entire script MUST be written strictly in ${language}.
+                Audience: ${targetAudience}
+                Main Character: "${charParsed.characterName}"
+
+                Requirements:
+                - Written purely in ${language}
+                - Natural emotional arc with good moral lesson
+                - Fits video duration ${duration}.`;
+
+                        generatedStory = await callUniversalAI(storyPrompt, provider, selectedModel, openrouterKey, geminiKey);
+                    } catch (e) {
+                        console.warn("Story AI fallback:", e);
+                    }
+                    
+                    if (!generatedStory || generatedStory.trim().length < 50) {
+                        generatedStory = generateFallbackScript(selectedTitle, currentStyleLabel, duration, storyTheme, charParsed);
+                    }
+                    setStory(generatedStory);
+
+                    setLoadingStepText(`STEPS 3-9: Generating ${targetDurationObj.storyboards} storyboards in ${language}...`);
+
+                    let pipelineParsed = null;
+                    try {
+                        const sysInstruction = `You are a Lead AI Animation Director. Split the provided story into EXACTLY ${targetDurationObj.storyboards} Storyboards.
+
+                CRITICAL LANGUAGE RULE:
+                1. Scene Title, Action descriptions, Continuity Notes, and Character Dialogues MUST be written strictly in ${language}.
+                2. Image Prompt and Video Prompt should be optimized in English for AI models (Midjourney/Omni Flash), but explicitly mention spoken dialogue in ${language} if applicable.
+
+                Story Title: "${selectedTitle}"
+                Character Name: ${charParsed.characterName}
+                Target Language: ${language}
+
+                Format output as pure JSON:
+                {
+                  "analysis": {
+                    "totalStoryboardsNeeded": ${targetDurationObj.storyboards},
+                    "pacingNotes": "...",
+                    "emotionalArc": "..."
+                  },
+                  "storyboards": [
+                    {
+                      "storyboardId": 1,
+                      "sceneTitle": "Scene Title in ${language}",
+                      "locationAndTime": "Location in ${language}",
+                      "continuityNotes": "Notes in ${language}",
+                      "panels": [
+                        {"panelNum": 1, "action": "Action in ${language}", "dialogue": "Dialogue in ${language}"},
+                        {"panelNum": 2, "action": "Action in ${language}", "dialogue": "Dialogue in ${language}"},
+                        {"panelNum": 3, "action": "Action in ${language}", "dialogue": "Dialogue in ${language}"},
+                        {"panelNum": 4, "action": "Action in ${language}", "dialogue": "Dialogue in ${language}"},
+                        {"panelNum": 5, "action": "Action in ${language}", "dialogue": "Dialogue in ${language}"},
+                        {"panelNum": 6, "action": "Action in ${language}", "dialogue": "Dialogue in ${language}"}
+                      ],
+                      "imagePrompt": "6-panel comic grid prompt in English specifying ${currentStyleLabel} and character snippet ${charParsed.masterPromptSnippet}",
+                      "videoPrompt": "Omni Flash / Sora prompt max 10s motion"
+                    }
+                  ]
+                }`;
+
+                        const pipelineUserPrompt = `Story Script (${language}):\n"${generatedStory}"`;
+                        const pipelineResp = await callUniversalAI(pipelineUserPrompt, provider, selectedModel, openrouterKey, geminiKey, sysInstruction);
+                        pipelineParsed = extractJSON(pipelineResp);
+                    } catch (e) {
+                        console.warn("Pipeline AI fallback:", e);
+                    }
+
+                    if (pipelineParsed && Array.isArray(pipelineParsed.storyboards) && pipelineParsed.storyboards.length > 0) {
+                        setStoryAnalysis(pipelineParsed.analysis || null);
+                        setStoryboards(pipelineParsed.storyboards);
+                    } else {
+                        setStoryAnalysis({ totalStoryboardsNeeded: targetDurationObj.storyboards, pacingNotes: "Pacing disesuaikan", emotionalArc: "Alur konsisten" });
+                        setStoryboards(generateFallbackStoryboards(targetDurationObj, currentStyleLabel, charParsed, selectedTitle, generatedStory, language));
+                    }
+
+                    setLoadingStepText(`STEP 10: Generating Thumbnail & SEO Metadata in ${language}...`);
+                    try {
+                        const seoPrompt = `Create a YouTube SEO & Thumbnail Package for this animated video:
+                Title: "${selectedTitle}"
+                Style: ${currentStyleLabel}
+                Theme: ${storyTheme}
+                Language: ${language}
+                Target Audience: ${targetAudience}
+
+                Output MUST be JSON:
+                {
+                  "thumbnail": {
+                    "ctrTextOptions": ["Text Option 1", "Text Option 2", "Text Option 3"],
+                    "visualConcept": "Visual description for thumbnail in ${language}",
+                    "readyPrompt": "High-CTR 16:9 thumbnail prompt for Midjourney/Imagen in English including character snippet ${charParsed.masterPromptSnippet}"
+                  },
+                  "seo": {
+                    "seoTitles": ["Title 1", "Title 2", "Title 3", "Title 4", "Title 5"],
+                    "videoDescription": "Full YouTube video description in ${language} with timestamps and Call to Action",
+                    "hashtags": "#Hashtag1 #Hashtag2 #Hashtag3",
+                    "youtubeTags": ["tag1", "tag2", "tag3", "tag4", "tag5"],
+                    "pinnedComment": "Engaging pinned comment question in ${language}"
+                  }
+                }`;
+                        const seoResp = await callUniversalAI(seoPrompt, provider, selectedModel, openrouterKey, geminiKey);
+                        const parsedSeo = extractJSON(seoResp);
+                        if (parsedSeo && parsedSeo.seo) {
+                            setThumbnailData(parsedSeo.thumbnail);
+                            setSeoData(parsedSeo.seo);
+                        } else {
+                            throw new Error("SEO JSON structure missing");
+                        }
+                    } catch (e) {
+                        setThumbnailData({
+                            ctrTextOptions: [`RAHASIA ${selectedTitle}!`, `JANGAN DITONTON SENDIRIAN!`, `TERNYATA BEGINI...`],
+                            visualConcept: `Karakter utama ${charParsed.characterName} menunjukkan ekspresi kaget dengan latar belakang animasi ${currentStyleLabel}.`,
+                            readyPrompt: `High-CTR 16:9 YouTube thumbnail, ${currentStyleLabel} style. Main character ${charParsed.masterPromptSnippet} with shocked reaction expression. Bold catchy headline text 'RAHASIA BIG!', vibrant gradient lighting, 8k resolution.`
+                        });
+                        setSeoData({
+                            seoTitles: [
+                                `${selectedTitle} (Kisah Lengkap Animasi)`,
+                                `Sisi Lain Dibalik ${selectedTitle}!`,
+                                `Kisah Mengharukan: ${selectedTitle}`,
+                                `Apa Yang Terjadi Pada ${selectedTitle}?`,
+                                `${selectedTitle} - Kartun Animasi Spesial`
+                            ],
+                            videoDescription: `Saksikan petualangan seru "${selectedTitle}"!\n\nDalam episode kali ini, kita menyaksikan kisah seru nan penuh pesan moral bersama ${charParsed.characterName}.\n\nJangan lupa Like, Subscribe, dan bagikan ke teman-temanmu!`,
+                            hashtags: `#AnimasiKids #${selectedTitle.replace(/[^a-zA-Z0-9]/g, '')} #KartunAnak #${language}`,
+                            youtubeTags: [selectedTitle, "kartun anak", "animasi viral", "cerita anak", "edukasi"],
+                            pinnedComment: `Bagian mana dari cerita "${selectedTitle}" yang paling kamu sukai? Tulis di kolom komentar ya! 👇`
+                        });
+                    }
+
+                    showToast("Full Production Package generated!", "success");
+                    setActiveTab('storyboards');
+
+                } catch (err) {
+                    showToast(err.message, "error");
+                } finally {
+                    setIsGenerating(false);
+                    setLoadingStepText('');
+                }
+            };
+
+            const generateFullPackageText = (format = 'md') => {
+                const isMd = format === 'md';
+                let txt = isMd ? `# 🎬 AI VIRAL KIDS ANIMATION STUDIO - PRODUCTION PACKAGE\n\n` : `AI VIRAL KIDS ANIMATION STUDIO - PRODUCTION PACKAGE\n\n`;
+                
+                txt += `Project Name: ${selectedTitle || 'Untitled Story'}\n`;
+                txt += `Animation Style: ${currentStyleLabel}\n`;
+                txt += `Story Theme: ${storyTheme}\n`;
+                txt += `Target Duration: ${duration}\n`;
+                txt += `Language: ${language} | Audience: ${targetAudience}\n`;
+                txt += `=======================================================\n\n`;
+
+                if (masterCharacter) {
+                    txt += isMd ? `## 👤 STEP 7: MASTER CHARACTER SHEET\n` : `STEP 7: MASTER CHARACTER SHEET\n`;
+                    txt += `Character Name: ${masterCharacter.characterName || 'Main Character'}\n`;
+                    txt += `Archetype: ${masterCharacter.archetype || 'Hero'}\n`;
+                    txt += `Face: ${masterCharacter.face}\n`;
+                    txt += `Hair: ${masterCharacter.hair}\n`;
+                    txt += `Outfit/Clothes: ${masterCharacter.clothes}\n`;
+                    txt += `Body: ${masterCharacter.body}\n`;
+                    txt += `Colors: ${masterCharacter.colors}\n`;
+                    txt += `Accessories: ${masterCharacter.accessories}\n`;
+                    txt += `Master Prompt Snippet: ${masterCharacter.masterPromptSnippet}\n\n`;
+                }
+
+                if (story) {
+                    txt += isMd ? `## 📖 STEP 2: COMPLETE ANIMATION STORY SCRIPT (${language})\n` : `STEP 2: COMPLETE ANIMATION STORY SCRIPT (${language})\n`;
+                    txt += `${story}\n\n`;
+                }
+
+                if (storyboards && storyboards.length > 0) {
+                    txt += isMd ? `## 🎨 STORYBOARD BREAKDOWN & AI PROMPTS (${storyboards.length} Storyboards x 6 Panels)\n\n` : `STORYBOARD BREAKDOWN & AI PROMPTS\n\n`;
+                    storyboards.forEach((sb) => {
+                        txt += `-------------------------------------------------------\n`;
+                        txt += `STORYBOARD #${sb.storyboardId}: ${sb.sceneTitle || 'Scene Cut'}\n`;
+                        txt += `Location/Time: ${sb.locationAndTime || 'Standard'}\n`;
+                        txt += `Continuity: ${sb.continuityNotes || 'Connected to previous'}\n\n`;
+                        
+                        txt += `6 Comic Panels:\n`;
+                        if (sb.panels && Array.isArray(sb.panels)) {
+                            sb.panels.forEach(p => {
+                                txt += `  [Panel ${p.panelNum}] Action: ${p.action} | Dialogue: "${p.dialogue || 'N/A'}"\n`;
+                            });
+                        }
+
+                        txt += `\n🖼️ IMAGE PROMPT (Midjourney / Imagen / DALL-E):\n${sb.imagePrompt}\n\n`;
+                        txt += `📹 VIDEO PROMPT (Omni Flash / Sora / Runway Gen-3):\n${sb.videoPrompt}\n\n`;
+                    });
+                }
+
+                if (thumbnailData) {
+                    txt += isMd ? `## 🖼️ THUMBNAIL STUDIO & CTR PROMPTS\n` : `THUMBNAIL STUDIO & CTR PROMPTS\n`;
+                    txt += `Visual Concept: ${thumbnailData.visualConcept}\n`;
+                    txt += `Headline Options: ${thumbnailData.ctrTextOptions?.join(' | ')}\n`;
+                    txt += `Thumbnail Prompt:\n${thumbnailData.readyPrompt}\n\n`;
+                }
+
+                if (seoData) {
+                    txt += isMd ? `## 🏷️ YOUTUBE SEO METADATA PACKAGE\n` : `YOUTUBE SEO METADATA PACKAGE\n`;
+                    txt += `SEO Titles:\n${seoData.seoTitles?.map((t, i) => `${i + 1}. ${t}`).join('\n')}\n\n`;
+                    txt += `Description:\n${seoData.videoDescription}\n\n`;
+                    txt += `Hashtags: ${seoData.hashtags}\n`;
+                    txt += `Tags: ${seoData.youtubeTags?.join(', ')}\n`;
+                    txt += `Pinned Comment: ${seoData.pinnedComment}\n\n`;
+                }
+
+                return txt;
+            };
+
+            // =============================================
+            // RENDER UI - TAMPILAN APLIKASI
+            // =============================================
+            return (
+                <div className="min-h-screen flex flex-col bg-[#090d16] text-slate-100 selection:bg-indigo-500 selection:text-white font-sans">
+                    
+                    {toast && (
+                        <div className={`fixed bottom-6 right-6 z-50 px-4 py-3 rounded-2xl shadow-2xl text-xs font-bold border flex items-center space-x-2 animate-bounce backdrop-blur-md ${
+                            toast.type === 'success' ? 'bg-emerald-950/90 border-emerald-500 text-emerald-200' :
+                            toast.type === 'error' ? 'bg-rose-950/90 border-rose-500 text-rose-200' :
+                            'bg-indigo-950/90 border-indigo-500 text-indigo-200'
+                        }`}>
+                            <span>{toast.type === 'success' ? '✓' : '⚠️'}</span>
+                            <span>{toast.msg}</span>
+                        </div>
+                    )}
+
+                    {showResetModal && (
+                        <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
+                            <div className="bg-slate-900 border border-slate-800 p-6 rounded-3xl max-w-sm w-full space-y-4 shadow-2xl">
+                                <h3 className="font-extrabold text-white text-base">Reset Studio Canvas?</h3>
+                                <p className="text-xs text-slate-400">This will clear your current titles, script, master character sheet, generated storyboards, and SEO metadata.</p>
+                                <div className="flex space-x-3 justify-end pt-2">
+                                    <button 
+                                        onClick={() => setShowResetModal(false)}
+                                        className="px-4 py-2 rounded-xl text-xs font-bold text-slate-400 hover:bg-slate-800 transition"
+                                    >
+                                        Cancel
+                                    </button>
+                                    <button 
+                                        onClick={() => {
+                                            localStorage.removeItem(LOCAL_STORAGE_KEY);
+                                            setTitles([]);
+                                            setSelectedTitle('');
+                                            setMasterCharacter(null);
+                                            setStory('');
+                                            setStoryboards([]);
+                                            setThumbnailData(null);
+                                            setSeoData(null);
+                                            setShowResetModal(false);
+                                            showToast("Studio canvas reset!", "info");
+                                        }}
+                                        className="px-4 py-2 rounded-xl text-xs font-bold bg-rose-600 hover:bg-rose-500 text-white transition shadow-lg shadow-rose-600/30"
+                                    >
+                                        Reset Canvas
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {isGenerating && (
+                        <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex flex-col items-center justify-center p-4">
+                            <div className="bg-slate-900/90 p-8 rounded-3xl flex flex-col items-center max-w-md text-center border border-indigo-500/30 shadow-2xl">
+                                <div className="relative w-16 h-16 mb-4">
+                                    <div className="absolute inset-0 rounded-full border-4 border-indigo-500/20"></div>
+                                    <div className="absolute inset-0 rounded-full border-4 border-indigo-500 border-t-transparent animate-spin"></div>
+                                    <div className="absolute inset-0 flex items-center justify-center text-xl">🎬</div>
+                                </div>
+                                <h3 className="text-base font-extrabold text-white tracking-tight">{loadingStepText || 'Processing Workflow...'}</h3>
+                                <p className="text-xs text-slate-400 mt-2 font-medium">Model: <strong className="text-indigo-400">{selectedModel}</strong> ({provider.toUpperCase()})</p>
+                            </div>
+                        </div>
+                    )}
+
+                    <header className="bg-slate-900/80 backdrop-blur border-b border-slate-800 sticky top-0 z-30 px-6 py-3.5 flex items-center justify-between">
+                        <div className="flex items-center space-x-3">
+                            <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-600 via-violet-600 to-pink-500 flex items-center justify-center text-white shadow-lg shadow-indigo-500/25 font-black text-xl">
+                                🚀
+                            </div>
+                            <div>
+                                <h1 className="font-black text-base sm:text-lg tracking-tight text-white flex items-center space-x-2">
+                                    <span>AI Viral Kids Animation Studio</span>
+                                    <span className="bg-indigo-500/10 text-indigo-400 text-[10px] font-bold px-2 py-0.5 rounded-full border border-indigo-500/20">v5.0 Multi-Lang</span>
+                                </h1>
+                                <p className="text-xs text-slate-400 font-medium">1 Ide → Storyboard 6-Panel → Master Character → Visual & Video Prompts → SEO</p>
+                            </div>
+                        </div>
+
+                        <div className="flex items-center space-x-3">
+                            <button 
+                                onClick={() => setActiveTab('settings')}
+                                className="flex items-center space-x-1.5 bg-amber-500/10 border border-amber-500/30 text-amber-300 text-[11px] font-bold px-3 py-1.5 rounded-xl hover:bg-amber-500/20 transition"
+                            >
+                                <span>⚡ API: {provider === 'openrouter' ? 'OpenRouter Free' : 'Google Gemini'}</span>
+                            </button>
+                            
+                            <button 
+                                onClick={() => setShowResetModal(true)}
+                                className="text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 px-3.5 py-1.5 rounded-xl transition"
+                            >
+                                Reset
+                            </button>
+                        </div>
+                    </header>
+
+                    <div className="flex flex-1 overflow-hidden">
+                        <aside className="w-64 bg-slate-900/50 border-r border-slate-800/80 p-4 space-y-2 hidden md:flex flex-col justify-between">
+                            <div className="space-y-1">
+                                <div className="text-[10px] font-extrabold text-slate-500 uppercase tracking-wider px-3 mb-3">Studio Pipeline</div>
+                                
+                                <button 
+                                    onClick={() => setActiveTab('studio')}
+                                    className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold transition flex items-center space-x-3 ${
+                                        activeTab === 'studio' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/30' : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+                                    }`}
+                                >
+                                    <span className="text-base">🎛️</span>
+                                    <span>1. Setup & Ideation</span>
+                                </button>
+
+                                <button 
+                                    onClick={() => setActiveTab('character')}
+                                    className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold transition flex items-center space-x-3 ${
+                                        activeTab === 'character' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/30' : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+                                    }`}
+                                >
+                                    <span className="text-base">👤</span>
+                                    <span>2. Master Character</span>
+                                </button>
+
+                                <button 
+                                    onClick={() => setActiveTab('storyboards')}
+                                    className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold transition flex items-center justify-between ${
+                                        activeTab === 'storyboards' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/30' : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+                                    }`}
+                                >
+                                    <div className="flex items-center space-x-3">
+                                        <span className="text-base">🎨</span>
+                                        <span>3. Storyboards</span>
+                                    </div>
+                                    {storyboards.length > 0 && (
+                                        <span className="bg-indigo-400/20 text-indigo-300 text-[10px] px-2 py-0.5 rounded-full font-bold">{storyboards.length}</span>
+                                    )}
+                                </button>
+
+                                <button 
+                                    onClick={() => setActiveTab('thumbnail_seo')}
+                                    className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold transition flex items-center space-x-3 ${
+                                        activeTab === 'thumbnail_seo' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/30' : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+                                    }`}
+                                >
+                                    <span className="text-base">🖼️</span>
+                                    <span>4. Thumbnail & SEO</span>
+                                </button>
+
+                                <button 
+                                    onClick={() => setActiveTab('export')}
+                                    className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold transition flex items-center space-x-3 ${
+                                        activeTab === 'export' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/30' : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+                                    }`}
+                                >
+                                    <span className="text-base">📦</span>
+                                    <span>5. Package Export</span>
+                                </button>
+
+                                <button 
+                                    onClick={() => setActiveTab('settings')}
+                                    className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold transition flex items-center space-x-3 ${
+                                        activeTab === 'settings' ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30 shadow-lg shadow-amber-500/10' : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+                                    }`}
+                                >
+                                    <span className="text-base">⚙️</span>
+                                    <span>API Settings</span>
+                                </button>
+                            </div>
+
+                            <div className="bg-slate-900/80 p-3.5 rounded-2xl border border-slate-800 space-y-2">
+                                <span className="text-[10px] font-extrabold text-indigo-400 uppercase tracking-wider block">Active Pipeline</span>
+                                <div className="text-xs font-bold text-slate-200 line-clamp-1">{currentStyleLabel}</div>
+                                <div className="text-[11px] text-slate-400">Duration: <strong className="text-indigo-300">{duration}</strong></div>
+                                <div className="text-[11px] text-slate-400">Language: <strong className="text-indigo-300">{language}</strong></div>
+                            </div>
+                        </aside>
+
+                        <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
+                            
+                            {activeTab === 'studio' && (
+                                <div className="max-w-4xl mx-auto space-y-8">
+                                    <div className="bg-slate-900/80 backdrop-blur p-6 rounded-3xl border border-indigo-500/20 relative overflow-hidden">
+                                        <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none"></div>
+                                        <span className="text-xs font-extrabold text-indigo-400 uppercase tracking-widest block mb-1">Production Input</span>
+                                        <h2 className="text-2xl font-black text-white">Create Animation Production Package</h2>
+                                        <p className="text-xs text-slate-400 mt-1 max-w-xl">From 1 simple idea to 10 viral titles, master character sheets, emotional storytelling, 6-panel storyboard cuts, and YouTube SEO metadata.</p>
+                                    </div>
+
+                                    <div className="bg-slate-900/80 backdrop-blur p-6 rounded-3xl border border-slate-800 space-y-6">
+                                        
+                                        <div className="space-y-3">
+                                            <label className="block text-xs font-extrabold text-slate-300 uppercase tracking-wider">1. Select Animation Style</label>
+                                            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5">
+                                                {ANIMATION_STYLES.map(st => {
+                                                    const isSel = animationStyle === st.id;
+                                                    return (
+                                                        <button
+                                                            key={st.id}
+                                                            onClick={() => setAnimationStyle(st.id)}
+                                                            className={`p-3 rounded-2xl text-left border transition flex flex-col justify-between ${
+                                                                isSel ? 'bg-indigo-600/20 border-indigo-500 text-white ring-2 ring-indigo-500/30' : 'bg-slate-950/60 border-slate-800 hover:border-slate-700 text-slate-400'
+                                                            }`}
+                                                        >
+                                                            <div className="flex items-center space-x-2">
+                                                                <span className="text-xl">{st.icon}</span>
+                                                                <span className="font-bold text-xs line-clamp-1">{st.label}</span>
+                                                            </div>
+                                                            <span className="text-[10px] text-slate-500 mt-2 line-clamp-1">{st.desc}</span>
+                                                        </button>
+                                                    );
+                                                })}
+                                            </div>
+                                            {animationStyle === 'custom' && (
+                                                <input
+                                                    type="text"
+                                                    placeholder="Describe your custom animation style..."
+                                                    value={customStyleText}
+                                                    onChange={e => setCustomStyleText(e.target.value)}
+                                                    className="w-full bg-slate-950 border border-indigo-500/50 rounded-xl p-3 text-xs text-white focus:outline-none"
+                                                />
+                                            )}
+                                        </div>
+
+                                        <div className="space-y-2">
+                                            <label className="block text-xs font-extrabold text-slate-300 uppercase tracking-wider">2. Story Idea / Theme</label>
+                                            <textarea
+                                                rows={3}
+                                                placeholder="e.g. Brother saves sister from a friendly stray dog in the neighborhood..."
+                                                value={storyTheme}
+                                                onChange={e => setStoryTheme(e.target.value)}
+                                                className="w-full bg-slate-950 border border-slate-800 rounded-2xl p-3.5 text-xs text-white focus:outline-none focus:border-indigo-500"
+                                            />
+                                        </div>
+
+                                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                            <div>
+                                                <label className="block text-xs font-extrabold text-slate-300 uppercase tracking-wider mb-2">Video Duration</label>
+                                                <select
+                                                    value={duration}
+                                                    onChange={e => setDuration(e.target.value)}
+                                                    className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-indigo-500 font-bold"
+                                                >
+                                                    {DURATION_OPTIONS.map(d => (
+                                                        <option key={d.value} value={d.value}>{d.label}</option>
+                                                    ))}
+                                                </select>
+                                            </div>
+
+                                            <div>
+                                                <label className="block text-xs font-extrabold text-slate-300 uppercase tracking-wider mb-2">Language</label>
+                                                <select
+                                                    value={language}
+                                                    onChange={e => setLanguage(e.target.value)}
+                                                    className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-indigo-500 font-bold"
+                                                >
+                                                    {LANGUAGES.map(l => (
+                                                        <option key={l} value={l}>{l}</option>
+                                                    ))}
+                                                </select>
+                                            </div>
+
+                                            <div>
+                                                <label className="block text-xs font-extrabold text-slate-300 uppercase tracking-wider mb-2">Target Audience</label>
+                                                <select
+                                                    value={targetAudience}
+                                                    onChange={e => setTargetAudience(e.target.value)}
+                                                    className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-indigo-500 font-bold"
+                                                >
+                                                    {TARGET_AUDIENCES.map(t => (
+                                                        <option key={t} value={t}>{t}</option>
+                                                    ))}
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div className="pt-2 border-t border-slate-800 flex justify-end">
+                                            <button
+                                                onClick={handleGenerateTitles}
+                                                disabled={isGenerating}
+                                                className="bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold text-xs px-6 py-3 rounded-2xl shadow-lg shadow-indigo-600/30 transition flex items-center space-x-2"
+                                            >
+                                                <span>✨ STEP 1: Generate 10 Viral Titles in {language}</span>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    {titles.length > 0 && (
+                                        <div className="bg-slate-900/80 backdrop-blur p-6 rounded-3xl border border-indigo-500/30 space-y-4">
+                                            <div className="flex justify-between items-center">
+                                                <div>
+                                                    <span className="text-[10px] font-extrabold text-indigo-400 uppercase tracking-wider">Step 1 Complete</span>
+                                                    <h3 className="text-base font-black text-white mt-0.5">Select Your Title ({language})</h3>
+                                                </div>
+                                                <button onClick={handleGenerateTitles} className="text-xs text-indigo-400 hover:text-indigo-300 font-bold">🔄 Regenerate Titles</button>
+                                            </div>
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
+                                                {titles.map((t, idx) => {
+                                                    const isSel = selectedTitle === t;
+                                                    return (
+                                                        <button
+                                                            key={idx}
+                                                            onClick={() => setSelectedTitle(t)}
+                                                            className={`p-3.5 rounded-2xl border text-left text-xs font-bold transition flex items-center justify-between ${
+                                                                isSel ? 'bg-indigo-600 text-white border-indigo-400 shadow-md' : 'bg-slate-950/80 border-slate-800 text-slate-300 hover:border-slate-700'
+                                                            }`}
+                                                        >
+                                                            <span className="pr-2">{idx + 1}. {t}</span>
+                                                            {isSel && <span className="text-white text-sm">✓</span>}
+                                                        </button>
+                                                    );
+                                                })}
+                                            </div>
+                                            <div className="pt-4 border-t border-slate-800/80 flex flex-col sm:flex-row justify-between items-center gap-3">
+                                                <div className="text-xs text-slate-400">Selected: <strong className="text-indigo-300 font-extrabold">{selectedTitle}</strong></div>
+                                                <button
+                                                    onClick={handleRunFullPipeline}
+                                                    disabled={isGenerating}
+                                                    className="w-full sm:w-auto bg-gradient-to-r from-indigo-600 via-violet-600 to-pink-600 hover:from-indigo-500 hover:to-pink-500 text-white font-black text-xs px-8 py-3.5 rounded-2xl shadow-xl shadow-indigo-600/30 transition flex items-center justify-center space-x-2"
+                                                >
+                                                    <span>🚀 RUN FULL ANIMATION PIPELINE</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            )}
+
+                            {activeTab === 'character' && (
+                                <div className="max-w-4xl mx-auto space-y-6">
+                                    <div className="flex justify-between items-center">
+                                        <div>
+                                            <span className="text-xs font-extrabold text-indigo-400 uppercase tracking-widest">Step 7 Engine</span>
+                                            <h2 className="text-2xl font-black text-white mt-0.5">Master Character Sheet</h2>
+                                            <p className="text-xs text-slate-400">Maintains absolute visual consistency across all storyboards & panels.</p>
+                                        </div>
+                                    </div>
+
+                                    {masterCharacter ? (
+                                        <div className="bg-slate-900/80 backdrop-blur p-6 rounded-3xl border border-indigo-500/30 space-y-6">
+                                            <div className="flex items-center space-x-4 border-b border-slate-800 pb-4">
+                                                <div className="w-16 h-16 rounded-2xl bg-indigo-600/20 border border-indigo-500/40 flex items-center justify-center text-3xl">👤</div>
+                                                <div>
+                                                    <h3 className="text-lg font-black text-white">{masterCharacter.characterName || 'Main Character'}</h3>
+                                                    <span className="bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 text-[10px] font-bold px-2.5 py-0.5 rounded-full">{masterCharacter.archetype || 'Hero'}</span>
+                                                </div>
+                                            </div>
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                                                <div className="bg-slate-950/60 p-4 rounded-2xl border border-slate-800 space-y-1">
+                                                    <span className="text-[10px] font-extrabold text-slate-500 uppercase">Face & Expression</span>
+                                                    <p className="text-slate-200 font-medium">{masterCharacter.face || 'Standard'}</p>
+                                                </div>
+                                                <div className="bg-slate-950/60 p-4 rounded-2xl border border-slate-800 space-y-1">
+                                                    <span className="text-[10px] font-extrabold text-slate-500 uppercase">Hair & Style</span>
+                                                    <p className="text-slate-200 font-medium">{masterCharacter.hair || 'Standard'}</p>
+                                                </div>
+                                                <div className="bg-slate-950/60 p-4 rounded-2xl border border-slate-800 space-y-1">
+                                                    <span className="text-[10px] font-extrabold text-slate-500 uppercase">Outfit & Clothes</span>
+                                                    <p className="text-slate-200 font-medium">{masterCharacter.clothes || 'Standard'}</p>
+                                                </div>
+                                                <div className="bg-slate-950/60 p-4 rounded-2xl border border-slate-800 space-y-1">
+                                                    <span className="text-[10px] font-extrabold text-slate-500 uppercase">Body & Colors</span>
+                                                    <p className="text-slate-200 font-medium">{masterCharacter.body} | Colors: {masterCharacter.colors}</p>
+                                                </div>
+                                            </div>
+                                            <div className="bg-indigo-950/40 border border-indigo-500/30 p-4 rounded-2xl space-y-2">
+                                                <div className="flex justify-between items-center">
+                                                    <span className="text-xs font-extrabold text-indigo-300 uppercase">Master Character Prompt Snippet</span>
+                                                    <button onClick={() => copyToClipboard(masterCharacter.masterPromptSnippet, "Character Prompt Snippet")} className="text-[11px] text-indigo-400 font-bold hover:underline">Copy Snippet</button>
+                                                </div>
+                                                <p className="text-xs font-mono text-slate-300 bg-slate-950 p-3 rounded-xl border border-slate-800">{masterCharacter.masterPromptSnippet || 'No snippet generated yet.'}</p>
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <div className="text-center py-16 bg-slate-900/80 backdrop-blur rounded-3xl border border-slate-800 text-slate-500 text-xs">No Master Character Sheet generated yet. Complete Step 1 and run the pipeline.</div>
+                                    )}
+
+                                    {story && (
+                                        <div className="bg-slate-900/80 backdrop-blur p-6 rounded-3xl border border-slate-800 space-y-3">
+                                            <div className="flex justify-between items-center">
+                                                <h3 className="text-sm font-black text-white uppercase tracking-wider">Step 2: Complete Animation Script ({language})</h3>
+                                                <button onClick={() => copyToClipboard(story, "Story Script")} className="text-xs text-indigo-400 font-bold hover:underline">Copy Story</button>
+                                            </div>
+                                            <div className="bg-slate-950 p-4 rounded-2xl border border-slate-800 text-xs text-slate-300 leading-relaxed font-sans whitespace-pre-line max-h-96 overflow-y-auto">{story}</div>
+                                        </div>
+                                    )}
+                                </div>
+                            )}
+
+                            {activeTab === 'storyboards' && (
+                                <div className="max-w-5xl mx-auto space-y-6">
+                                    <div className="bg-slate-900/90 border border-indigo-500/30 p-4 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
+                                        <div className="space-y-1">
+                                            <div className="flex items-center space-x-2">
+                                                <span className="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-bold px-2 py-0.5 rounded-full">✓ PIPELINE SYNCHRONIZED</span>
+                                                <span className="text-slate-400 font-medium">Language: <strong className="text-white">{language}</strong></span>
+                                            </div>
+                                            <div className="text-slate-300 font-bold line-clamp-1">Judul: "{selectedTitle || 'Petualangan Animasi'}"</div>
+                                        </div>
+                                        <button onClick={handleRunFullPipeline} disabled={isGenerating} className="bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold text-xs px-4 py-2 rounded-xl shadow-lg shadow-indigo-600/20 transition">🚀 Regenerate All Storyboards</button>
+                                    </div>
+
+                                    {storyboards.length === 0 ? (
+                                        <div className="text-center py-16 bg-slate-900/80 backdrop-blur rounded-3xl border border-slate-800 text-slate-500 text-xs">No storyboards generated yet. Go to <button onClick={() => setActiveTab('studio')} className="text-indigo-400 underline font-bold">Studio Ideation</button> and run pipeline.</div>
+                                    ) : (
+                                        <div className="space-y-6">
+                                            {storyboards.map((sb, idx) => (
+                                                <div key={idx} className="bg-slate-900/80 backdrop-blur p-6 rounded-3xl border border-slate-800 space-y-5">
+                                                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center pb-3 border-b border-slate-800 gap-2">
+                                                        <div className="flex items-center space-x-3">
+                                                            <span className="w-8 h-8 rounded-xl bg-indigo-600 text-white font-black text-xs flex items-center justify-center">#{sb.storyboardId}</span>
+                                                            <div>
+                                                                <h3 className="text-sm font-black text-white">{sb.sceneTitle || `Storyboard Cut #${sb.storyboardId}`}</h3>
+                                                                <span className="text-[10px] text-slate-400 font-medium">Location: {sb.locationAndTime}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="space-y-2">
+                                                        <span className="text-[10px] font-extrabold text-indigo-400 uppercase tracking-wider block">STEP 4: 6 Connected Comic Panels ({language})</span>
+                                                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                                                            {sb.panels && Array.isArray(sb.panels) && sb.panels.map((p, pIdx) => (
+                                                                <div key={pIdx} className="bg-slate-950 p-3.5 rounded-2xl border border-slate-800 space-y-1.5 text-xs">
+                                                                    <div className="flex justify-between items-center">
+                                                                        <span className="font-extrabold text-indigo-400 text-[10px]">PANEL {p.panelNum || pIdx + 1}</span>
+                                                                    </div>
+                                                                    <p className="text-slate-300 font-medium leading-snug">{p.action}</p>
+                                                                    {p.dialogue && p.dialogue !== 'N/A' && (
+                                                                        <p className="text-[11px] text-amber-300 font-semibold italic bg-amber-500/10 p-2 rounded-lg border border-amber-500/20">💬 "{p.dialogue}"</p>
+                                                                    )}
+                                                                </div>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                    <div className="bg-slate-950 p-4 rounded-2xl border border-indigo-500/20 space-y-2">
+                                                        <div className="flex justify-between items-center">
+                                                            <span className="text-xs font-extrabold text-indigo-300">🖼️ STEP 5: Image Prompt (6-Panel Grid Format)</span>
+                                                            <button onClick={() => copyToClipboard(sb.imagePrompt, `Image Prompt #${sb.storyboardId}`)} className="text-[11px] text-indigo-400 font-bold hover:underline">Copy Prompt</button>
+                                                        </div>
+                                                        <p className="text-xs font-mono text-slate-300 bg-slate-900 p-3 rounded-xl border border-slate-800">{sb.imagePrompt}</p>
+                                                    </div>
+                                                    <div className="bg-slate-950 p-4 rounded-2xl border border-violet-500/20 space-y-2">
+                                                        <div className="flex justify-between items-center">
+                                                            <span className="text-xs font-extrabold text-violet-300">📹 STEP 6: Video Prompt (Omni Flash / Sora)</span>
+                                                            <button onClick={() => copyToClipboard(sb.videoPrompt, `Video Prompt #${sb.storyboardId}`)} className="text-[11px] text-violet-400 font-bold hover:underline">Copy Prompt</button>
+                                                        </div>
+                                                        <p className="text-xs font-mono text-slate-300 bg-slate-900 p-3 rounded-xl border border-slate-800">{sb.videoPrompt}</p>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
+                            )}
+
+                            {activeTab === 'thumbnail_seo' && (
+                                <div className="max-w-4xl mx-auto space-y-6">
+                                    <div>
+                                        <span className="text-xs font-extrabold text-indigo-400 uppercase tracking-widest">Metadata Engine</span>
+                                        <h2 className="text-2xl font-black text-white mt-0.5">Thumbnail Studio & YouTube SEO</h2>
+                                        <p className="text-xs text-slate-400">High-CTR thumbnail prompts, video description, tags, and pinned comment in <strong className="text-indigo-300">{language}</strong>.</p>
+                                    </div>
+
+                                    {thumbnailData && (
+                                        <div className="bg-slate-900/80 backdrop-blur p-6 rounded-3xl border border-indigo-500/30 space-y-5">
+                                            <div className="flex items-center space-x-2 text-indigo-300 font-extrabold text-xs uppercase tracking-wider">
+                                                <span>🖼️ THUMBNAIL STUDIO & HIGH-CTR PROMPT</span>
+                                            </div>
+                                            <div className="space-y-3">
+                                                <label className="text-xs font-bold text-slate-300 block">Pilihan Teks Headline High-CTR</label>
+                                                <div className="flex flex-wrap gap-2">
+                                                    {thumbnailData.ctrTextOptions?.map((txt, i) => (
+                                                        <span key={i} className="bg-indigo-950/60 border border-indigo-500/40 text-indigo-200 text-xs px-3 py-1.5 rounded-xl font-extrabold">"{txt}"</span>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                            <div className="space-y-1 text-xs">
+                                                <span className="font-bold text-slate-400 block uppercase text-[10px]">Konsep Visual</span>
+                                                <p className="text-slate-200 bg-slate-950 p-3 rounded-xl border border-slate-800">{thumbnailData.visualConcept}</p>
+                                            </div>
+                                            <div className="space-y-2">
+                                                <div className="flex justify-between items-center">
+                                                    <span className="text-xs font-extrabold text-indigo-300">Prompt Thumbnail (Midjourney / Imagen)</span>
+                                                    <button onClick={() => copyToClipboard(thumbnailData.readyPrompt, "Prompt Thumbnail")} className="text-[11px] text-indigo-400 font-bold hover:underline">Salin Prompt</button>
+                                                </div>
+                                                <p className="text-xs font-mono text-slate-300 bg-slate-950 p-3 rounded-xl border border-slate-800">{thumbnailData.readyPrompt}</p>
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {seoData && (
+                                        <div className="bg-slate-900/80 backdrop-blur p-6 rounded-3xl border border-slate-800 space-y-5">
+                                            <div className="flex items-center space-x-2 text-emerald-400 font-extrabold text-xs uppercase tracking-wider">
+                                                <span>🏷️ YOUTUBE SEO METADATA PACKAGE ({language.toUpperCase()})</span>
+                                            </div>
+                                            <div className="space-y-2">
+                                                <label className="text-xs font-bold text-slate-300 block">5 Opsi Judul Video YouTube SEO High-CTR</label>
+                                                <div className="space-y-2">
+                                                    {seoData.seoTitles?.map((t, i) => (
+                                                        <div key={i} className="flex justify-between items-center bg-slate-950 p-3 rounded-xl border border-slate-800 text-xs text-slate-200">
+                                                            <span className="font-bold">{i + 1}. {t}</span>
+                                                            <button onClick={() => copyToClipboard(t, `Judul ${i + 1}`)} className="text-indigo-400 font-bold text-[11px] hover:underline">Salin</button>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                            <div className="space-y-2">
+                                                <div className="flex justify-between items-center">
+                                                    <label className="text-xs font-bold text-slate-300">Deskripsi Video YouTube</label>
+                                                    <button onClick={() => copyToClipboard(seoData.videoDescription, "Deskripsi Video")} className="text-indigo-400 font-bold text-[11px] hover:underline">Salin Deskripsi</button>
+                                                </div>
+                                                <textarea rows={5} readOnly value={seoData.videoDescription} className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-slate-300 focus:outline-none" />
+                                            </div>
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                                                <div className="space-y-1">
+                                                    <span className="font-bold text-slate-400 block uppercase text-[10px]">Hashtags & Tags</span>
+                                                    <p className="bg-slate-950 p-3 rounded-xl border border-slate-800 text-indigo-300 font-bold">{seoData.hashtags}</p>
+                                                    <p className="bg-slate-950 p-3 rounded-xl border border-slate-800 text-slate-400 mt-1">{seoData.youtubeTags?.join(', ')}</p>
+                                                </div>
+                                                <div className="space-y-1">
+                                                    <span className="font-bold text-slate-400 block uppercase text-[10px]">Komentar Tersemat (Pinned Comment)</span>
+                                                    <p className="bg-slate-950 p-3 rounded-xl border border-slate-800 text-amber-300 italic">{seoData.pinnedComment}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {!thumbnailData && !seoData && (
+                                        <div className="text-center py-16 bg-slate-900/80 backdrop-blur rounded-3xl border border-slate-800 text-slate-500 text-xs">Belum ada metadata SEO & Thumbnail. Jalankan pipeline produksi di menu <button onClick={() => setActiveTab('studio')} className="text-indigo-400 underline font-bold">Studio Setup</button>.</div>
+                                    )}
+                                </div>
+                            )}
+
+                            {activeTab === 'export' && (
+                                <div className="max-w-4xl mx-auto space-y-6">
+                                    <div className="flex justify-between items-center">
+                                        <div>
+                                            <span className="text-xs font-extrabold text-indigo-400 uppercase tracking-widest">Step 10 Output</span>
+                                            <h2 className="text-2xl font-black text-white mt-0.5">Production Package Export</h2>
+                                            <p className="text-xs text-slate-400">Download your synchronized animation package in TXT, Markdown, or DOCX formats.</p>
+                                        </div>
+                                        <button onClick={() => copyToClipboard(generateFullPackageText('md'), "Full Production Package")} className="bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold text-xs px-4 py-2 rounded-xl shadow-lg shadow-indigo-600/20 transition">📋 Copy Full Package</button>
+                                    </div>
+                                    <div className="bg-slate-900/80 backdrop-blur p-6 rounded-3xl border border-slate-800 space-y-4">
+                                        <span className="text-xs font-extrabold text-slate-300 uppercase tracking-wider block">Download Formats</span>
+                                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                                            <button onClick={() => exportAsFile(generateFullPackageText('txt'), `${selectedTitle || 'Animation_Package'}.txt`, 'text/plain')} className="p-4 rounded-2xl bg-slate-950 border border-slate-800 hover:border-indigo-500 text-left transition space-y-1">
+                                                <span className="text-xl">📄</span>
+                                                <div className="font-extrabold text-xs text-white">Export TXT</div>
+                                                <div className="text-[10px] text-slate-500">Plain text format</div>
+                                            </button>
+                                            <button onClick={() => exportAsFile(generateFullPackageText('md'), `${selectedTitle || 'Animation_Package'}.md`, 'text/markdown')} className="p-4 rounded-2xl bg-slate-950 border border-slate-800 hover:border-indigo-500 text-left transition space-y-1">
+                                                <span className="text-xl">📝</span>
+                                                <div className="font-extrabold text-xs text-white">Export Markdown</div>
+                                                <div className="text-[10px] text-slate-500">Formatted MD</div>
+                                            </button>
+                                            <button onClick={() => exportAsFile(generateFullPackageText('txt'), `${selectedTitle || 'Animation_Package'}.doc`, 'application/msword')} className="p-4 rounded-2xl bg-slate-950 border border-slate-800 hover:border-indigo-500 text-left transition space-y-1">
+                                                <span className="text-xl">📘</span>
+                                                <div className="font-extrabold text-xs text-white">Export DOCX</div>
+                                                <div className="text-[10px] text-slate-500">Word document</div>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div className="bg-slate-900/80 backdrop-blur p-6 rounded-3xl border border-slate-800 space-y-3">
+                                        <span className="text-xs font-extrabold text-slate-300 uppercase tracking-wider block">Package Preview</span>
+                                        <pre className="bg-slate-950 p-4 rounded-2xl border border-slate-800 text-xs font-mono text-slate-300 leading-relaxed overflow-x-auto max-h-96">{generateFullPackageText('md')}</pre>
+                                    </div>
+                                </div>
+                            )}
+
+                            {activeTab === 'settings' && (
+                                <div className="max-w-xl mx-auto space-y-6">
+                                    <div className="bg-amber-500/10 border border-amber-500/30 p-6 rounded-3xl space-y-5">
+                                        <div className="flex items-center space-x-2 text-amber-400 font-extrabold text-xs uppercase tracking-wider">
+                                            <span>⚡ API SETTINGS</span>
+                                        </div>
+                                        <div className="space-y-2">
+                                            <label className="text-xs font-bold text-slate-300 block">Pilih API Provider</label>
+                                            <select value={provider} onChange={e => handleProviderChange(e.target.value)} className="w-full bg-amber-950/40 border-2 border-amber-500/50 rounded-2xl p-3.5 text-xs font-extrabold text-amber-200 focus:outline-none focus:border-amber-400 cursor-pointer shadow-md">
+                                                <option value="openrouter">🌐 OpenRouter (FREE) - REKOMENDASI</option>
+                                                <option value="gemini">🔵 Google Gemini Direct API</option>
+                                            </select>
+                                        </div>
+                                        <div className="space-y-2">
+                                            <label className="text-xs font-bold text-slate-300 block">Pilih Model AI</label>
+                                            <select value={selectedModel} onChange={e => setSelectedModel(e.target.value)} className="w-full bg-slate-950 border border-slate-800 rounded-2xl p-3.5 text-xs font-mono text-slate-200 focus:outline-none focus:border-indigo-500 cursor-pointer">
+                                                {provider === 'openrouter' ? (
+                                                    customModelList.map(m => (
+                                                        <option key={m.id} value={m.id}>{m.name}</option>
+                                                    ))
+                                                ) : (
+                                                    GEMINI_DIRECT_MODELS.map(m => (
+                                                        <option key={m.id} value={m.id}>{m.name}</option>
+                                                    ))
+                                                )}
+                                            </select>
+                                        </div>
+                                        <div className="space-y-2">
+                                            <label className="text-xs font-bold text-slate-300 block">{provider === 'openrouter' ? 'OpenRouter API Key (sk-or-v1-...)' : 'Google Gemini API Key (AIzaSy...)'}</label>
+                                            <input type="password" placeholder={provider === 'openrouter' ? 'sk-or-v1-...' : 'AIzaSy...'} value={provider === 'openrouter' ? openrouterKey : geminiKey} onChange={e => { if (provider === 'openrouter') setOpenrouterKey(e.target.value); else setGeminiKey(e.target.value); }} className="w-full bg-slate-950 border border-slate-800 rounded-2xl p-3.5 text-xs font-mono text-white focus:outline-none focus:border-amber-500" />
+                                        </div>
+                                        <div className="grid grid-cols-3 gap-3 pt-2">
+                                            <button onClick={handleTestKey} disabled={isTestingKey} className="bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-200 p-3 rounded-2xl text-xs font-bold flex flex-col items-center justify-center space-y-1 transition">
+                                                <span className="text-base">🔑</span>
+                                                <span>{isTestingKey ? 'Testing...' : 'Test Key'}</span>
+                                            </button>
+                                            <button onClick={handleRefreshModels} disabled={isRefreshingModels} className="bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-200 p-3 rounded-2xl text-xs font-bold flex flex-col items-center justify-center space-y-1 transition text-center">
+                                                <span className="text-base">📦</span>
+                                                <span className="line-clamp-1">{isRefreshingModels ? 'Refreshing...' : 'Refresh Model'}</span>
+                                            </button>
+                                            <button onClick={handleOpenGetKeyPage} className="bg-amber-900/30 hover:bg-amber-900/50 border border-amber-500/40 text-amber-300 p-3 rounded-2xl text-xs font-bold flex flex-col items-center justify-center space-y-1 transition">
+                                                <span className="text-base">📋</span>
+                                                <span>Ambil Key</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+
+                        </main>
+                    </div>
+                </div>
+            );
+        }
+
+        // RENDER APLIKASI
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
