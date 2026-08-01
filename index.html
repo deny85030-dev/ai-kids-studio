@@ -4,34 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Viral Kids Studio</title>
+    
+    <!-- Tailwind CSS dari CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', system-ui, sans-serif; background: #090d16; }
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: #0f172a; }
         ::-webkit-scrollbar-thumb { background: #4f46e5; border-radius: 10px; }
-        
-        /* Anti-select text */
-        .no-select {
-            user-select: none;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-        }
     </style>
 </head>
 <body>
     <div id="root"></div>
 
-    <!-- React & ReactDOM dari CDN -->
+    <!-- ============================================= -->
+    <!-- REACT & REACTDOM DARI CDN -->
+    <!-- ============================================= -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/lucide-react@0.263.1/dist/umd/lucide-react.min.js"></script>
 
+    <!-- ============================================= -->
+    <!-- KODE APP - AI VIRAL KIDS STUDIO LENGKAP -->
+    <!-- ============================================= -->
     <script>
         // =============================================
-        // KODE APP LENGKAP - AI VIRAL KIDS STUDIO
+        // KODE APP - KONVERSI DARI TSX KE JAVASCRIPT
         // =============================================
         
         const { useState, useEffect } = React;
@@ -40,6 +40,9 @@
             AlertCircle, ChevronRight, Settings, Folder, Trash2, Eye, Download
         } = lucideReact;
 
+        // =============================================
+        // DATA STATIS
+        // =============================================
         const ANIMATION_STYLES = [
             { id: 'doraemon', label: 'Doraemon Style', icon: '🔔', desc: 'Japanese 3D/2D suburban gadget adventures' },
             { id: 'spongebob', label: 'SpongeBob Style', icon: '🧽', desc: 'Vibrant underwater cartoon comedy' },
@@ -89,6 +92,9 @@
         const LANGUAGES = ['Indonesian', 'English', 'Spanish', 'Japanese', 'Other'];
         const LOCAL_STORAGE_KEY = "AI_ANIMATION_STUDIO_PROJECT_V5";
 
+        // =============================================
+        // FUNGSI BANTUAN
+        // =============================================
         function extractJSON(text) {
             if (!text) return null;
             try { return JSON.parse(text); } catch (e) {}
@@ -121,7 +127,6 @@
             const words = theme ? theme.split(' ') : [];
             const charName = words.length > 0 && words[0].length > 2 ? words[0].replace(/[^a-zA-Z]/g, '') : "Kiki";
             const cleanTitle = title || theme || "Petualangan Animasi";
-            
             return {
                 characterName: charName,
                 archetype: "Pahlawan Utama Cerita",
@@ -141,42 +146,24 @@
             const name = charObj?.characterName || "Kiki";
             const cleanTitle = title || "Petualangan Ajaib";
             const cleanTheme = theme || "petualangan tak terlupakan";
-
-            return `Di sebuah tempat yang indah dan penuh warna, petualangan "${cleanTitle}" dimulai. Hari itu, ${name} sedang bersiap-siap dengan ransel jingga kesayangannya untuk menghadapi tantangan baru tentang ${cleanTheme}.
-
-        Ketika melangkah keluar, ${name} menemukan sebuah kejutan tak terduga yang mengubah suasana. Tantangan ini membutuhkan keberanian dan kecerdikan. Meskipun sempat ragu, ${name} mengingat janji untuk selalu pantang menyerah.
-
-        Dengan tekad yang kuat, ${name} mengambil langkah pertama. Momen puncak terjadi ketika situasi menjadi menegangkan, namun ${name} berhasil menyelesaikan masalah dengan penuh keberanian dan kebaikan hati.
-
-        Pada akhirnya, petualangan ini memberikan pelajaran berharga bagi ${name} dan semua teman-temannya. Keberanian sejati bukan tentang tidak memiliki rasa takut, melainkan tentang bertindak demi kebaikan.`;
+            return `Di sebuah tempat yang indah dan penuh warna, petualangan "${cleanTitle}" dimulai. Hari itu, ${name} sedang bersiap-siap dengan ransel jingga kesayangannya untuk menghadapi tantangan baru tentang ${cleanTheme}.\n\nKetika melangkah keluar, ${name} menemukan sebuah kejutan tak terduga yang mengubah suasana. Tantangan ini membutuhkan keberanian dan kecerdikan. Meskipun sempat ragu, ${name} mengingat janji untuk selalu pantang menyerah.\n\nDengan tekad yang kuat, ${name} mengambil langkah pertama. Momen puncak terjadi ketika situasi menjadi menegangkan, namun ${name} berhasil menyelesaikan masalah dengan penuh keberanian dan kebaikan hati.\n\nPada akhirnya, petualangan ini memberikan pelajaran berharga bagi ${name} dan semua teman-temannya. Keberanian sejati bukan tentang tidak memiliki rasa takut, melainkan tentang bertindak demi kebaikan.`;
         }
 
         function generateFallbackStoryboards(durationObj, style, charObj, title, storyText, lang) {
             const count = durationObj?.storyboards || 3;
             const charSnippet = charObj?.masterPromptSnippet || `Main character for ${title}, ${style}`;
             const charName = charObj?.characterName || "Kiki";
-            
-            const paragraphs = storyText
-                ? storyText.split(/\n+/).filter(p => p.trim().length > 10)
-                : [];
-
+            const paragraphs = storyText ? storyText.split(/\n+/).filter(p => p.trim().length > 10) : [];
             const boards = [];
             const totalParas = paragraphs.length;
-
             for (let i = 1; i <= count; i++) {
                 const paraIdx = totalParas > 0 ? Math.floor(((i - 1) / count) * totalParas) : 0;
                 const currentSectionText = paragraphs[paraIdx] || `Bagian adegan ${i} dari cerita "${title}".`;
-                
-                const prevBoardId = i > 1 ? i - 1 : null;
-                const continuityNote = prevBoardId 
-                    ? `🔗 Sambungan Visual: Melanjutkan transisi aksi dari Storyboard #${prevBoardId} Panel 6`
-                    : `🏁 Pembuka Cerita: Pengenalan karakter awal adegan`;
-
                 boards.push({
                     storyboardId: i,
                     sceneTitle: `Adegan ${i}: ${i === 1 ? 'Pengenalan & Awal Konflik' : i === count ? 'Klimaks & Penyelesaian' : 'Perkembangan Petualangan'} (${i}/${count})`,
                     locationAndTime: `Lokasi Utama Adegan #${i} - Siang Hari`,
-                    continuityNotes: continuityNote,
+                    continuityNotes: i > 1 ? `🔗 Sambungan Visual: Melanjutkan transisi aksi dari Storyboard #${i-1} Panel 6` : `🏁 Pembuka Cerita: Pengenalan karakter awal adegan`,
                     scriptSegment: currentSectionText,
                     panels: [
                         { panelNum: 1, action: `${charName} memasuki adegan sesuai alur cerita`, dialogue: `Awal mula adegan #${i}...` },
@@ -190,7 +177,6 @@
                     videoPrompt: `Omni Flash / Sora Video Prompt (Storyboard #${i}): Cinematic smooth camera pan, ${charSnippet}. Action: ${charName} taking heroic action in "${currentSectionText.substring(0, 80)}...". Dynamic cartoon motion, lighting matching ${style}, max 10s.`
                 });
             }
-
             return boards;
         }
 
@@ -199,14 +185,12 @@
                 if (!openrouterKey || openrouterKey.trim() === "") {
                     throw new Error("NO_KEY: Silakan masukkan OpenRouter API Key di menu API Settings.");
                 }
-
                 const endpoint = "https://openrouter.ai/api/v1/chat/completions";
                 const messages = [];
                 if (systemInstruction) {
                     messages.push({ role: "system", content: systemInstruction });
                 }
                 messages.push({ role: "user", content: prompt });
-
                 const response = await fetch(endpoint, {
                     method: "POST",
                     headers: {
@@ -221,36 +205,29 @@
                         temperature: 0.7
                     })
                 });
-
                 if (!response.ok) {
                     const errData = await response.json().catch(() => ({}));
                     throw new Error(errData.error?.message || `OpenRouter API Error (${response.status})`);
                 }
-
                 const data = await response.json();
                 return data.choices?.[0]?.message?.content || "";
             } else {
                 if (!geminiKey || geminiKey.trim() === "") {
-                    throw new Error("NO_KEY: Silakan masukkan Google Gemini API Key di menu API Settings.");
+                    throw new Error("NO_KEY: Silakan masukkan Google Gemini API Key di API Settings.");
                 }
-
                 const modelToUse = model || "gemini-2.5-flash";
                 const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${modelToUse}:generateContent?key=${geminiKey.trim()}`;
-
                 const requestBody = {
                     contents: [{ role: "user", parts: [{ text: prompt }] }]
                 };
-
                 if (systemInstruction) {
                     requestBody.systemInstruction = { parts: [{ text: systemInstruction }] };
                 }
-
                 const response = await fetch(endpoint, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(requestBody)
                 });
-
                 if (!response.ok) {
                     const errData = await response.json().catch(() => ({}));
                     if (response.status === 429 || errData.error?.message?.toLowerCase().includes("quota")) {
@@ -258,7 +235,6 @@
                     }
                     throw new Error(errData.error?.message || `Gemini API Request failed (${response.status})`);
                 }
-
                 const data = await response.json();
                 return data.candidates?.[0]?.content?.parts?.[0]?.text || "";
             }
@@ -276,31 +252,29 @@
             URL.revokeObjectURL(url);
         };
 
+        // =============================================
+        // COMPONENT APP
+        // =============================================
         function App() {
             const [provider, setProvider] = useState(() => localStorage.getItem("AI_STUDIO_PROVIDER") || "openrouter");
             const [openrouterKey, setOpenrouterKey] = useState(() => localStorage.getItem("OPENROUTER_API_KEY") || "");
             const [geminiKey, setGeminiKey] = useState(() => localStorage.getItem("GEMINI_API_KEY") || "");
             const [selectedModel, setSelectedModel] = useState(() => localStorage.getItem("AI_STUDIO_MODEL") || "openrouter/free");
-            
             const [activeTab, setActiveTab] = useState('studio');
-            
             const [animationStyle, setAnimationStyle] = useState('doraemon');
             const [customStyleText, setCustomStyleText] = useState('');
             const [storyTheme, setStoryTheme] = useState('A brave little brother saves his sister from a friendly stray dog in the neighborhood.');
             const [duration, setDuration] = useState('60 sec');
             const [language, setLanguage] = useState('Indonesian');
             const [targetAudience, setTargetAudience] = useState('Kids');
-
             const [titles, setTitles] = useState([]);
             const [selectedTitle, setSelectedTitle] = useState('');
             const [masterCharacter, setMasterCharacter] = useState(null);
             const [story, setStory] = useState('');
             const [storyAnalysis, setStoryAnalysis] = useState(null);
-            const [storyboards, setStoryboards] = useState([]); 
-            
+            const [storyboards, setStoryboards] = useState([]);
             const [thumbnailData, setThumbnailData] = useState(null);
             const [seoData, setSeoData] = useState(null);
-
             const [isGenerating, setIsGenerating] = useState(false);
             const [isTestingKey, setIsTestingKey] = useState(false);
             const [isRefreshingModels, setIsRefreshingModels] = useState(false);
@@ -402,7 +376,6 @@
                             const freeOnly = data.data
                                 .filter(m => m.id.includes(':free') || m.id.includes('free'))
                                 .map(m => ({ id: m.id, name: `🧠 ${m.id}`, tag: 'Free' }));
-                            
                             if (freeOnly.length > 0) {
                                 setCustomModelList(freeOnly);
                                 showToast(`Refreshed! Found ${freeOnly.length} active OpenRouter free models.`, "success");
@@ -728,7 +701,7 @@
             };
 
             // =============================================
-            // RENDER UI - TAMPILAN APLIKASI (DIPERCEPAT)
+            // RENDER UI (JSX)
             // =============================================
             return (
                 <div className="min-h-screen flex flex-col bg-[#090d16] text-slate-100 selection:bg-indigo-500 selection:text-white font-sans">
@@ -1348,7 +1321,9 @@
             );
         }
 
-        // RENDER APLIKASI
+        // =============================================
+        // RENDER
+        // =============================================
         const root = ReactDOM.createRoot(document.getElementById('root'));
         root.render(<App />);
     </script>
