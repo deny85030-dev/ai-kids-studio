@@ -1,2304 +1,1586 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="dark">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Studio Konten Pro - AI Viral Kids Studio</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Viral Kids Animation Studio - Multi-Language Studio</title>
   
-  <!-- Tailwind CSS -->
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <!-- React & React DOM UMD CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
   
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-  
-  <!-- ============================================================
-       ANTI COPY & RIGHT CLICK PROTECTION
-       ============================================================ -->
-  <script type="text/javascript">
-    // Anti Copy Paste & Right Click
-    function disableSelection(e) {
-      if (typeof e.onselectstart != "undefined") e.onselectstart = function() { return false };
-      else if (typeof e.style.MozUserSelect != "undefined") e.style.MozUserSelect = "none";
-      else e.onmousedown = function() { return false };
-      e.style.cursor = "default";
-    }
-    window.onload = function() {
-      disableSelection(document.body);
-    }
-  </script>
-  
-  <script type="text/javascript">
-    function mousedwn(e) {
-      try {
-        if (event.button == 2 || event.button == 3) return false;
-      } catch(e) {
-        if (e.which == 3) return false;
-      }
-    }
-    document.oncontextmenu = function() { return false };
-    document.ondragstart = function() { return false };
-    document.onmousedown = mousedwn;
-  </script>
-  
-  <style type="text/css">
-    * : (input, textarea) {
-      -webkit-touch-callout: none;
-      -webkit-user-select: none;
-    }
-  </style>
-  
-  <style type="text/css">
-    img {
-      -webkit-touch-callout: none;
-      -webkit-user-select: none;
-    }
-  </style>
-  
-  <script type="text/javascript">
-    document.onkeydown = function(e) {
-      e = e || window.event;
-      if (e.keyCode == 123 || e.keyCode == 18) {
-        return false;
-      }
-    }
-  </script>
-  
+  <!-- Babel Standalone for JSX compilation in browser -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+
   <style>
-    /* ============================================================
-       ANTI-PIRACY & CODE PROTECTION SYSTEM
-       ============================================================ */
-    
-    /* 1. Console Protection - Anti DevTools */
-    (function() {
-      let devtools = /./;
-      devtools.toString = function() {
-        if (window.outerWidth - window.innerWidth > 160 || window.outerHeight - window.innerHeight > 160) {
-          document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;background:#0a0e1a;color:#ff6b6b;font-family:monospace;text-align:center;padding:20px;flex-direction:column;"><h1 style="font-size:2rem;">🚫 ACCESS DENIED</h1><p style="color:#94a3b8;max-width:500px;">Developer tools are disabled for security reasons. This application is protected against unauthorized access and code theft.</p><p style="color:#475569;margin-top:10px;font-size:0.8rem;">🔒 Anti-Piracy System v3.0</p></div>';
-          document.documentElement.style.overflow = 'hidden';
-        }
-        return '';
-      };
-      setInterval(devtools, 1000);
-    })();
-
-    /* 2. Right Click Protection */
-    document.addEventListener('contextmenu', function(e) {
-      e.preventDefault();
-      return false;
-    });
-
-    /* 3. Keyboard Shortcuts Blocking */
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'F12' || 
-          (e.ctrlKey && e.key === 'u') || 
-          (e.ctrlKey && e.shiftKey && (e.key === 'i' || e.key === 'j' || e.key === 'c')) ||
-          (e.ctrlKey && e.key === 's')) {
-        e.preventDefault();
-        return false;
-      }
-    });
-
-    /* 4. Anti-Iframe */
-    if (window.top !== window.self) {
-      window.top.location = window.self.location;
-    }
-
-    /* 5. Watermark */
-    const watermark = document.createElement('div');
-    watermark.style.cssText = `
-      position: fixed;
-      bottom: 8px;
-      right: 12px;
-      font-size: 9px;
-      color: rgba(100, 116, 139, 0.12);
-      font-family: monospace;
-      pointer-events: none;
-      z-index: 9999;
-      letter-spacing: 0.5px;
-      user-select: none;
-    `;
-    watermark.textContent = '🔒 Studio Konten Pro v5.0 • Protected';
-    document.body.appendChild(watermark);
-
-    /* ============================================================
-       MAIN STYLES
-       ============================================================ */
-    
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
     
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #f1f5f9;
-      color: #0f172a;
-      min-height: 100vh;
-    }
-    
-    /* ============================================================
-       LOGIN PAGE STYLES
-       ============================================================ */
-    .login-page {
-      width: 100%;
-      max-width: 420px;
-      background: #0d1423;
-      border-radius: 24px;
-      padding: 36px 32px;
-      border: 1px solid #1a2a4a;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.8);
-      position: relative;
-      overflow: hidden;
-    }
-    .login-page::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, #6c5ce7, #a855f7, #6c5ce7);
-      background-size: 200% 100%;
-      animation: gradientMove 3s ease infinite;
-    }
-    @keyframes gradientMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+      font-family: 'Plus Jakarta Sans', sans-serif;
     }
 
-    .login-page .logo { text-align: center; margin-bottom: 28px; }
-    .login-page .logo .icon {
-      width: 56px;
-      height: 56px;
-      border-radius: 16px;
-      background: linear-gradient(135deg, #6c5ce7, #a855f7);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 26px;
-      margin: 0 auto 12px;
-      box-shadow: 0 8px 30px rgba(108, 92, 231, 0.3);
+    /* Custom Webkit Scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
     }
-    .login-page .logo h1 { font-size: 22px; font-weight: 800; color: #f0f4f8; }
-    .login-page .logo p { color: #667799; font-size: 13px; margin-top: 4px; }
-
-    .login-page .form-group { margin-bottom: 16px; }
-    .login-page .form-group label {
-      display: block;
-      font-size: 12px;
-      font-weight: 600;
-      color: #667799;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 6px;
+    ::-webkit-scrollbar-track {
+      background: #090d16;
     }
-    .login-page .form-group input {
-      width: 100%;
-      padding: 12px 16px;
-      background: #080c18;
-      border: 1px solid #1a2a4a;
-      border-radius: 12px;
-      color: #e8edf5;
-      font-size: 15px;
-      outline: none;
-      transition: border-color 0.3s;
-      font-family: inherit;
+    ::-webkit-scrollbar-thumb {
+      background: #1e293b;
+      border-radius: 9999px;
     }
-    .login-page .form-group input:focus {
-      border-color: #6c5ce7;
-      box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.15);
-    }
-    .login-page .form-group input::placeholder { color: #445566; }
-
-    .login-page .btn-login {
-      width: 100%;
-      padding: 14px;
-      background: linear-gradient(135deg, #6c5ce7, #a855f7);
-      border: none;
-      border-radius: 12px;
-      color: white;
-      font-size: 16px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.3s;
-      font-family: inherit;
-      margin-top: 8px;
-    }
-    .login-page .btn-login:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(108, 92, 231, 0.35);
-    }
-    .login-page .btn-login:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-      transform: none;
-    }
-
-    .login-page .error-msg {
-      background: rgba(239, 68, 68, 0.1);
-      border: 1px solid rgba(239, 68, 68, 0.2);
-      border-radius: 10px;
-      padding: 10px 14px;
-      font-size: 13px;
-      color: #ef4444;
-      display: none;
-      margin-bottom: 12px;
-      text-align: center;
-    }
-    .login-page .error-msg.show {
-      display: block;
-      animation: shake 0.4s ease;
-    }
-    @keyframes shake {
-      0%, 100% { transform: translateX(0); }
-      25% { transform: translateX(-8px); }
-      75% { transform: translateX(8px); }
-    }
-
-    .login-page .contact-info {
-      margin-top: 20px;
-      padding-top: 16px;
-      border-top: 1px solid #1a2a4a;
-      text-align: center;
-      font-size: 13px;
-      color: #667799;
-    }
-    .login-page .contact-info a {
-      color: #a855f7;
-      text-decoration: none;
-      font-weight: 600;
-    }
-    .login-page .contact-info a:hover { text-decoration: underline; }
-
-    .login-page .version {
-      text-align: center;
-      font-size: 11px;
-      color: #334455;
-      margin-top: 16px;
-      letter-spacing: 0.5px;
-    }
-
-    /* ============================================================
-       MAIN APP STYLES
-       ============================================================ */
-    .card-premium {
-      background: #ffffff;
-      border-radius: 20px;
-      border: 1px solid #eef2f6;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.02), 0 8px 24px rgba(0,0,0,0.04);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .card-premium:hover {
-      box-shadow: 0 4px 20px rgba(0,0,0,0.06), 0 12px 40px rgba(0,0,0,0.04);
-      transform: translateY(-2px);
-    }
-
-    .gradient-border {
-      position: relative;
-      background: white;
-      border-radius: 20px;
-    }
-    .gradient-border::before {
-      content: '';
-      position: absolute;
-      inset: -1.5px;
-      border-radius: 21px;
-      padding: 1.5px;
-      background: linear-gradient(135deg, #4f46e5, #7c3aed, #ec4899);
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      pointer-events: none;
-      opacity: 0.5;
-      transition: opacity 0.3s;
-    }
-    .gradient-border:hover::before { opacity: 1; }
-
-    .style-grid-premium {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-    }
-    .style-card-premium {
-      padding: 14px 16px;
-      border-radius: 14px;
-      border: 2px solid #eef2f6;
-      background: #fafcfd;
-      cursor: pointer;
-      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-      text-align: left;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      position: relative;
-      overflow: hidden;
-    }
-    .style-card-premium:hover {
-      border-color: #c7d2fe;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.06);
-    }
-    .style-card-premium.active {
-      border-color: #4f46e5;
-      background: #eef2ff;
-      box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.08);
-    }
-    .style-card-premium .icon-wrap { font-size: 1.3rem; line-height: 1; }
-    .style-card-premium .label { font-weight: 600; font-size: 0.78rem; color: #0f172a; }
-    .style-card-premium .desc { font-size: 0.65rem; color: #94a3b8; line-height: 1.3; }
-
-    .title-grid-premium {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 8px;
-    }
-    .title-item-premium {
-      padding: 10px 16px;
-      border-radius: 10px;
-      border: 2px solid #eef2f6;
-      background: #fafcfd;
-      cursor: pointer;
-      transition: all 0.2s;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-weight: 500;
-      font-size: 0.82rem;
-      color: #1e293b;
-    }
-    .title-item-premium:hover {
-      border-color: #c7d2fe;
-      background: #f8fafc;
-    }
-    .title-item-premium.active {
-      border-color: #4f46e5;
-      background: #eef2ff;
-    }
-    .title-item-premium .check { color: #4f46e5; font-size: 0.8rem; }
-
-    .sidebar-premium {
-      background: #ffffff;
-      border-right: 1px solid #eef2f6;
-      padding: 20px 16px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      min-height: calc(100vh - 68px);
-      width: 220px;
-      position: sticky;
-      top: 68px;
-      height: calc(100vh - 68px);
-      overflow-y: auto;
-    }
-    .sidebar-item-premium {
-      padding: 10px 14px;
-      border-radius: 10px;
-      border: none;
-      background: transparent;
-      cursor: pointer;
-      transition: all 0.2s;
-      font-weight: 600;
-      font-size: 0.78rem;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      width: 100%;
-      text-align: left;
-      color: #64748b;
-    }
-    .sidebar-item-premium:hover {
-      background: #f1f5f9;
-      color: #0f172a;
-    }
-    .sidebar-item-premium.active {
-      background: #eef2ff;
-      color: #4f46e5;
-    }
-    .sidebar-item-premium .icon { font-size: 1.1rem; width: 24px; text-align: center; }
-
-    .form-premium {
-      width: 100%;
-      padding: 10px 16px;
-      border: 2px solid #eef2f6;
-      border-radius: 12px;
-      font-size: 0.85rem;
-      font-family: 'Inter', sans-serif;
-      transition: all 0.2s;
-      background: #fafcfd;
-      color: #0f172a;
-      outline: none;
-    }
-    .form-premium:focus {
-      border-color: #4f46e5;
-      background: #ffffff;
-      box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.06);
-    }
-    select.form-premium {
-      appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748b' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 14px center;
-      padding-right: 36px;
-      cursor: pointer;
-    }
-    textarea.form-premium { resize: vertical; min-height: 70px; }
-
-    .btn-premium {
-      background: #4f46e5;
-      color: white;
-      font-weight: 600;
-      padding: 10px 24px;
-      border-radius: 12px;
-      border: none;
-      cursor: pointer;
-      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-      font-size: 0.8rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      box-shadow: 0 2px 12px rgba(79, 70, 229, 0.25);
-      position: relative;
-      overflow: hidden;
-    }
-    .btn-premium:hover {
-      background: #4338ca;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 20px rgba(79, 70, 229, 0.35);
-    }
-    .btn-premium:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
-
-    .btn-gradient-premium {
-      background: linear-gradient(135deg, #4f46e5, #7c3aed);
-      color: white;
-      font-weight: 600;
-      padding: 12px 32px;
-      border-radius: 14px;
-      border: none;
-      cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      font-size: 0.85rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      box-shadow: 0 4px 16px rgba(79, 70, 229, 0.3);
-    }
-    .btn-gradient-premium:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(79, 70, 229, 0.4);
-    }
-
-    .tab-content { display: none; }
-    .tab-content.active { display: block; animation: fadeIn 0.35s ease; }
-    @keyframes fadeIn {
-      0% { opacity: 0; transform: translateY(8px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-
-    .badge-premium {
-      background: #eef2ff;
-      color: #4f46e5;
-      font-size: 0.6rem;
-      font-weight: 700;
-      padding: 2px 12px;
-      border-radius: 999px;
-    }
-
-    .panel-premium {
-      background: #fafcfd;
-      border: 1px solid #eef2f6;
-      border-radius: 12px;
-      padding: 12px 14px;
-    }
-    .panel-premium .label {
-      font-weight: 700;
-      color: #4f46e5;
-      font-size: 0.65rem;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-
-    .story-scroll {
-      max-height: 260px;
-      overflow-y: auto;
-      font-size: 0.85rem;
-      line-height: 1.7;
-      color: #1e293b;
-      white-space: pre-line;
-    }
-    .story-scroll::-webkit-scrollbar { width: 4px; }
-    .story-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 8px; }
-
-    .header-premium {
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid #eef2f6;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    .header-gradient-line {
-      height: 3px;
-      background: linear-gradient(90deg, #4f46e5, #7c3aed, #ec4899, #f59e0b);
-      width: 100%;
-    }
-
-    .toast {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      z-index: 99999;
-      padding: 14px 22px;
-      border-radius: 12px;
-      font-weight: 600;
-      font-size: 0.82rem;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.12);
-      animation: slideUp 0.35s ease;
-      max-width: 420px;
-      backdrop-filter: blur(12px);
-    }
-    .toast-success { background: rgba(236, 253, 245, 0.95); color: #065f46; border: 1px solid #a7f3d0; }
-    .toast-error { background: rgba(254, 242, 242, 0.95); color: #991b1b; border: 1px solid #fca5a5; }
-    .toast-info { background: rgba(239, 246, 255, 0.95); color: #1e40af; border: 1px solid #93c5fd; }
-    @keyframes slideUp {
-      0% { opacity: 0; transform: translateY(16px) scale(0.96); }
-      100% { opacity: 1; transform: translateY(0) scale(1); }
-    }
-
-    .loading-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(255,255,255,0.85);
-      backdrop-filter: blur(12px);
-      z-index: 99999;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-    }
-    .spinner-premium {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      border: 4px solid #e2e8f0;
-      border-top-color: #4f46e5;
-      animation: spin 0.7s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(15, 23, 42, 0.5);
-      backdrop-filter: blur(8px);
-      z-index: 99999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-    .modal-box {
-      background: white;
-      border-radius: 24px;
-      padding: 28px 32px;
-      max-width: 420px;
-      width: 100%;
-      box-shadow: 0 24px 64px rgba(0,0,0,0.15);
-    }
-
-    @media (max-width: 1200px) {
-      .style-grid-premium { grid-template-columns: repeat(3, 1fr); }
-    }
-    @media (max-width: 992px) {
-      .style-grid-premium { grid-template-columns: repeat(2, 1fr); }
-      .sidebar-premium { display: none; }
-    }
-    @media (max-width: 640px) {
-      .style-grid-premium { grid-template-columns: repeat(2, 1fr); }
-      .title-grid-premium { grid-template-columns: 1fr; }
-      .modal-box { padding: 20px; }
-      .toast { bottom: 16px; right: 16px; left: 16px; max-width: none; }
-      .login-page { padding: 24px 20px; border-radius: 16px; }
-    }
-
-    .allow-copy {
-      user-select: text !important;
-      -webkit-user-select: text !important;
-    }
-    .allow-copy * {
-      user-select: text !important;
-      -webkit-user-select: text !important;
-    }
-
-    .watermark-text {
-      position: fixed;
-      bottom: 8px;
-      right: 12px;
-      font-size: 9px;
-      color: rgba(100, 116, 139, 0.12);
-      font-family: monospace;
-      pointer-events: none;
-      z-index: 9999;
-      letter-spacing: 0.5px;
-      user-select: none;
+    ::-webkit-scrollbar-thumb:hover {
+      background: #334155;
     }
   </style>
 </head>
-<body>
+<body class="bg-[#090d16] text-slate-100 selection:bg-indigo-500 selection:text-white font-sans antialiased min-h-screen">
+  
+  <div id="root"></div>
 
-<!-- WATERMARK -->
-<div class="watermark-text">🔒 Studio Konten Pro v5.0 • Protected</div>
+  <script type="text/babel">
+    const { useState, useEffect } = React;
 
-<!-- ============================================================
-     SPLASH SCREEN LOGIN
-     ============================================================ -->
-<div id="splashScreen" style="display:flex; justify-content:center; align-items:center; min-height:100vh; background:#05070f; padding:20px;">
-  <div class="login-page" id="loginPage">
-    <div class="logo">
-      <div class="icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
-      <h1>Studio Konten Pro</h1>
-      <p>Masuk untuk mengakses aplikasi</p>
-    </div>
+    // SVG Icons Components for lightweight standalone rendering
+    const Icons = {
+      Zap: () => <svg className="w-4 h-4 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>,
+      Sparkles: () => <svg className="w-4 h-4 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>,
+      Copy: () => <svg className="w-3.5 h-3.5 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>,
+      Check: () => <svg className="w-4 h-4 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"/></svg>,
+      Settings: () => <svg className="w-4 h-4 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>,
+      Refresh: () => <svg className="w-4 h-4 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>,
+      Download: () => <svg className="w-4 h-4 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+    };
 
-    <div class="error-msg" id="loginError">
-      <i class="fa-solid fa-circle-exclamation"></i>
-      <span id="errorText">Username atau password salah!</span>
-    </div>
+    const ANIMATION_STYLES = [
+      { id: 'doraemon', label: 'Doraemon Style', icon: '🔔', desc: 'Japanese 3D/2D suburban gadget adventures' },
+      { id: 'spongebob', label: 'SpongeBob Style', icon: '🧽', desc: 'Vibrant underwater cartoon comedy' },
+      { id: 'upin_ipin', label: 'Upin & Ipin Style', icon: '🇲🇾', desc: 'Tropical village 3D heartwarming stories' },
+      { id: 'roblox', label: 'Roblox Animation', icon: '🧱', desc: 'Blocky avatar gaming storytime' },
+      { id: 'stickman', label: 'Stickman Animation', icon: '✏️', desc: 'High-energy vector stick figure story' },
+      { id: 'talking_fruits', label: 'Talking Fruits', icon: '🍎', desc: 'Hyper-expressive animated fruit characters' },
+      { id: 'health_edu', label: 'Health Education', icon: '🩺', desc: 'Fun body biology & hygiene explainers' },
+      { id: 'animals', label: 'Cute Animals', icon: '🦊', desc: 'Wholesome animal kingdom adventures' },
+      { id: 'superheroes', label: 'Kids Superheroes', icon: '⚡', desc: 'Action-packed elemental powers' },
+      { id: 'fairy_tales', label: 'Fairy Tales', icon: '🏰', desc: 'Magical folklore & enchanted worlds' },
+      { id: 'school_stories', label: 'School Stories', icon: '🎒', desc: 'Relatable classroom & friendship tales' },
+      { id: 'family_stories', label: 'Family Stories', icon: '🏠', desc: 'Heartwarming home & sibling bonding' },
+      { id: 'fantasy', label: 'Epic Fantasy', icon: '🐉', desc: 'Dragons, magic spells & mythical quests' },
+      { id: 'horror_kids', label: 'Horror for Kids', icon: '👻', desc: 'Spooky-funny mystery tales' },
+      { id: 'educational', label: 'Educational Stories', icon: '🧠', desc: 'Fun science, math & moral lessons' },
+      { id: 'funny_stories', label: 'Funny Slapstick', icon: '🤡', desc: 'High-energy slapstick laugh-out-loud comedy' },
+      { id: 'custom', label: 'Custom Style', icon: '✨', desc: 'Define your own unique animation style' }
+    ];
 
-    <div class="form-group">
-      <label><i class="fa-regular fa-user"></i> Nama Pengguna</label>
-      <input type="text" id="usernameInput" placeholder="Masukkan username..." autocomplete="username">
-    </div>
+    const DURATION_OPTIONS = [
+      { value: '30 sec', storyboards: 2, label: '30 Sec (Shorts / Reel / TikTok)' },
+      { value: '60 sec', storyboards: 3, label: '60 Sec (1 Minute Story)' },
+      { value: '90 sec', storyboards: 4, label: '90 Sec (Extended Short)' },
+      { value: '2 min', storyboards: 5, label: '2 Minutes (Medium Story)' },
+      { value: '3 min', storyboards: 6, label: '3 Minutes (Full Episode)' },
+      { value: '5 min', storyboards: 8, label: '5 Minutes (Mini Movie)' },
+      { value: '10 min', storyboards: 12, label: '10 Minutes (Feature Special)' }
+    ];
 
-    <div class="form-group">
-      <label><i class="fa-solid fa-lock"></i> Kata Sandi</label>
-      <input type="password" id="passwordInput" placeholder="Masukkan password..." autocomplete="current-password">
-    </div>
+    const OPENROUTER_FREE_MODELS = [
+      { id: 'openrouter/free', name: '🧠 openrouter/free (Auto Best Free Router)', tag: 'Recommended' },
+      { id: 'google/gemma-2-9b-it:free', name: '🧠 google/gemma-2-9b-it (free)', tag: 'Fast' },
+      { id: 'meta-llama/llama-3.3-70b-instruct:free', name: '🧠 meta-llama/llama-3.3-70b-instruct (free)', tag: 'Smart' },
+      { id: 'deepseek/deepseek-r1:free', name: '🧠 deepseek/deepseek-r1 (free)', tag: 'Reasoning' },
+      { id: 'qwen/qwen-2.5-72b-instruct:free', name: '🧠 qwen/qwen-2.5-72b-instruct (free)', tag: 'Creative' },
+      { id: 'mistralai/mistral-small-24b-instruct-2501:free', name: '🧠 mistralai/mistral-small-24b (free)', tag: 'Balanced' }
+    ];
 
-    <button class="btn-login" id="loginBtn" onclick="handleLogin()">
-      <i class="fa-solid fa-arrow-right-to-bracket"></i> Masuk
-    </button>
+    const GEMINI_DIRECT_MODELS = [
+      { id: 'gemini-2.5-flash', name: '⚡ Gemini 2.5 Flash (Google AI)', tag: 'Latest' },
+      { id: 'gemini-2.0-flash', name: '⚡ Gemini 2.0 Flash (Google AI)', tag: 'Stable' },
+      { id: 'gemini-1.5-flash', name: '⚡ Gemini 1.5 Flash (Google AI)', tag: 'Standard' }
+    ];
 
-    <div class="contact-info">
-      <i class="fa-solid fa-headset"></i>
-      Belum punya akses? Hubungi Admin:
-      <a href="tel:085138718594"><strong>0851-3871-8594</strong></a>
-      <br>
-      <span style="font-size: 11px; color: #445566;">(WhatsApp / Telepon)</span>
-    </div>
+    const TARGET_AUDIENCES = ['Kids', 'Family', 'Educational', 'Comedy', 'Adventure'];
+    const LANGUAGES = ['Indonesian', 'English', 'Spanish', 'Japanese', 'Other'];
+    const LOCAL_STORAGE_KEY = "AI_ANIMATION_STUDIO_PROJECT_V5";
 
-    <div class="version">v2.0 • OpenRouter AI</div>
-  </div>
-</div>
+    function extractJSON(text) {
+      if (!text) return null;
+      try { return JSON.parse(text); } catch (e) {}
+      const cleaned = text.replace(/```json/gi, '').replace(/```/g, '').trim();
+      try { return JSON.parse(cleaned); } catch (e) {}
+      const matchObj = cleaned.match(/\{[\s\S]*\}/);
+      if (matchObj) { try { return JSON.parse(matchObj[0]); } catch (e) {} }
+      const matchArr = cleaned.match(/\[[\s\S]*\]/);
+      if (matchArr) { try { return JSON.parse(matchArr[0]); } catch (e) {} }
+      return null;
+    }
 
-<!-- ============================================================
-     MAIN APPLICATION (hidden until login success)
-     ============================================================ -->
-<div id="mainApp" style="display:none;">
+    function generateFallbackTitles(theme, style, lang) {
+      const cleanTheme = theme ? theme.trim() : "Petualangan Ajaib";
+      return [
+        `Rahasia Dibalik ${cleanTheme}!`,
+        `Kisah Nyata: ${cleanTheme} (Versi Animasi)`,
+        `Apa Yang Terjadi Ketika ${cleanTheme}?`,
+        `Petualangan Ajaib: ${cleanTheme}`,
+        `Misi Penyelamatan ${cleanTheme}`,
+        `Kejutan Tak Terduga Saat ${cleanTheme}`,
+        `Kisah Mengharukan ${cleanTheme}`,
+        `Ternyata Begini Rasanya ${cleanTheme}!`,
+        `Misteri Di Balik ${cleanTheme}`,
+        `Detik-Detik ${cleanTheme} Paling Mencekam!`
+      ];
+    }
 
-  <!-- TOAST -->
-  <div id="toastContainer"></div>
+    function generateFallbackCharacter(title, theme, style) {
+      const words = theme ? theme.split(' ') : [];
+      const charName = words.length > 0 && words[0].length > 2 ? words[0].replace(/[^a-zA-Z]/g, '') : "Kiki";
+      const cleanTitle = title || theme || "Petualangan Animasi";
+      
+      return {
+        characterName: charName,
+        archetype: "Pahlawan Utama Cerita",
+        face: "Wajah bulat ekspresif, mata besar bersinar ramah, ekspresi antusias khas animasi 3D/2D",
+        hair: "Rambut ikal warna cokelat terang potongan rapi",
+        clothes: "Jaket hoodie biru muda dengan kaos putih bertuliskan logo bintang, celana kargo pendek",
+        body: "Postur anak usia 8-10 tahun, lincah, proporsional",
+        colors: "#4EA8DE (Biru Hoodie), #F8F9FA (Kaos Putih), #6C757D (Celana Abu)",
+        accessories: "Ransel petualang warna jingga terang",
+        age: "8-10 Tahun",
+        expressionStyle: "Sangat ekspresif, ceria, berani, dan penyayang",
+        masterPromptSnippet: `Master Character: ${charName}, main hero of "${cleanTitle}", expressive face, big sparkling eyes, curly light brown hair, wearing light blue hoodie, white star t-shirt, grey cargo shorts, orange backpack, ${style} animation style`
+      };
+    }
 
-  <!-- MODAL RESET -->
-  <div id="resetModal" class="modal-overlay" style="display:none;">
-    <div class="modal-box">
-      <h3 class="font-bold text-lg text-slate-800 mb-2">Reset Studio?</h3>
-      <p class="text-sm text-slate-500 mb-5">This will clear all generated content: titles, character, storyboards, and SEO data.</p>
-      <div class="flex justify-end gap-3">
-        <button onclick="closeResetModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-sm px-5 py-2 rounded-xl border border-slate-200 transition">Cancel</button>
-        <button onclick="confirmReset()" class="bg-rose-500 hover:bg-rose-600 text-white font-semibold text-sm px-5 py-2 rounded-xl transition shadow-sm">Reset Canvas</button>
-      </div>
-    </div>
-  </div>
+    function generateFallbackScript(title, style, duration, theme, charObj) {
+      const name = charObj?.characterName || "Kiki";
+      const cleanTitle = title || "Petualangan Ajaib";
+      const cleanTheme = theme || "petualangan tak terlupakan";
 
-  <!-- LOADING -->
-  <div id="loadingOverlay" class="loading-overlay" style="display:none;">
-    <div class="spinner-premium"></div>
-    <div id="loadingText" class="text-slate-700 font-semibold text-base text-center max-w-md">Processing...</div>
-    <div class="text-sm text-slate-400">Model: <span id="loadingModel" class="font-medium text-indigo-600">openrouter/free</span></div>
-  </div>
+      return `Di sebuah tempat yang indah dan penuh warna, petualangan "${cleanTitle}" dimulai. Hari itu, ${name} sedang bersiap-siap dengan ransel jingga kesayangannya untuk menghadapi tantangan baru tentang ${cleanTheme}.
 
-  <!-- HEADER -->
-  <header class="header-premium">
-    <div class="header-gradient-line"></div>
-    <div class="px-4 sm:px-6 py-3 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center text-white shadow-sm font-bold text-xl">🎬</div>
-        <div>
-          <h1 class="font-bold text-base sm:text-lg text-slate-800 flex items-center gap-2 flex-wrap">
-            <span>AI Viral Kids Studio</span>
-            <span class="text-[10px] font-semibold bg-indigo-50 text-indigo-600 px-2 py-0.5 rounded-full border border-indigo-200">Pro v5.0</span>
-          </h1>
-          <p class="text-xs text-slate-400 hidden sm:block font-medium">1 Idea → Storyboards → Character → Prompts → SEO</p>
-        </div>
-      </div>
-      <div class="flex items-center gap-2 sm:gap-3">
-        <button onclick="switchTab('settings')" class="flex items-center gap-1.5 bg-amber-50 border border-amber-200 text-amber-700 text-[11px] font-semibold px-3 py-1.5 rounded-xl hover:bg-amber-100 transition">
-          <i class="fas fa-bolt"></i>
-          <span class="hidden sm:inline">API</span>
-        </button>
-        <button onclick="openResetModal()" class="text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-600 border border-slate-200 px-3 py-1.5 rounded-xl transition">Reset</button>
-        <button onclick="logout()" class="text-xs font-semibold bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-200 px-3 py-1.5 rounded-xl transition">
-          <i class="fa-solid fa-sign-out-alt"></i> Logout
-        </button>
-      </div>
-    </div>
-  </header>
+Ketika melangkah keluar, ${name} menemukan sebuah kejutan tak terduga yang mengubah suasana. Tantangan ini membutuhkan keberanian dan kecerdikan. Meskipun sempat ragu, ${name} mengingat janji untuk selalu pantang menyerah.
 
-  <!-- BODY -->
-  <div class="flex">
+Dengan tekad yang kuat, ${name} mengambil langkah pertama. Momen puncak terjadi ketika situasi menjadi menegangkan, namun ${name} berhasil menyelesaikan masalah dengan penuh keberanian dan kebaikan hati.
 
-    <!-- SIDEBAR -->
-    <aside class="sidebar-premium">
-      <div>
-        <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider px-2 mb-3">Pipeline</div>
+Pada akhirnya, petualangan ini memberikan pelajaran berharga bagi ${name} dan semua teman-temannya. Keberanian sejati bukan tentang tidak memiliki rasa takut, melainkan tentang bertindak demi kebaikan.`;
+    }
+
+    function generateFallbackStoryboards(durationObj, style, charObj, title, storyText, lang) {
+      const count = durationObj?.storyboards || 3;
+      const charSnippet = charObj?.masterPromptSnippet || `Main character for ${title}, ${style}`;
+      const charName = charObj?.characterName || "Kiki";
+      
+      const paragraphs = storyText
+        ? storyText.split(/\n+/).filter(p => p.trim().length > 10)
+        : [];
+
+      const boards = [];
+      const totalParas = paragraphs.length;
+
+      for (let i = 1; i <= count; i++) {
+        const paraIdx = totalParas > 0 ? Math.floor(((i - 1) / count) * totalParas) : 0;
+        const currentSectionText = paragraphs[paraIdx] || `Bagian adegan ${i} dari cerita "${title}".`;
         
-        <button class="sidebar-item-premium active" data-tab="studio" onclick="switchTab('studio')">
-          <span class="icon">🎛️</span> Setup & Ideation
-        </button>
-        <button class="sidebar-item-premium" data-tab="character" onclick="switchTab('character')">
-          <span class="icon">👤</span> Character
-        </button>
-        <button class="sidebar-item-premium" data-tab="storyboards" onclick="switchTab('storyboards')">
-          <span class="icon">🎨</span> Storyboards
-          <span id="sbBadge" class="badge-premium ml-auto hidden">0</span>
-        </button>
-        <button class="sidebar-item-premium" data-tab="thumbnail_seo" onclick="switchTab('thumbnail_seo')">
-          <span class="icon">🖼️</span> Thumbnail & SEO
-        </button>
-        <button class="sidebar-item-premium" data-tab="export" onclick="switchTab('export')">
-          <span class="icon">📦</span> Export
-        </button>
-        <button class="sidebar-item-premium" data-tab="settings" onclick="switchTab('settings')">
-          <span class="icon">⚙️</span> API Settings
-        </button>
-      </div>
+        const prevBoardId = i > 1 ? i - 1 : null;
+        const continuityNote = prevBoardId 
+          ? `🔗 Sambungan Visual: Melanjutkan transisi aksi dari Storyboard #${prevBoardId} Panel 6`
+          : `🏁 Pembuka Cerita: Pengenalan karakter awal adegan`;
 
-      <div class="bg-slate-50/80 border border-slate-200/80 rounded-xl p-3.5 space-y-1.5">
-        <span class="text-[10px] font-bold text-indigo-600 uppercase tracking-wider block">Active</span>
-        <div id="sidebarStyle" class="text-sm font-semibold text-slate-700 truncate">Doraemon Style</div>
-        <div class="text-xs text-slate-400 flex gap-3">
-          <span>⏱ <strong id="sidebarDuration" class="text-slate-600">60 sec</strong></span>
-          <span>🌐 <strong id="sidebarLang" class="text-slate-600">Indonesian</strong></span>
-        </div>
-        <div class="text-[10px] text-emerald-600 font-medium mt-1">
-          <i class="fa-solid fa-circle-check"></i> Login: <span id="loggedUser" class="font-bold">admin</span>
-        </div>
-      </div>
-    </aside>
-
-    <!-- MAIN CONTENT -->
-    <main class="flex-1 p-4 sm:p-6 lg:p-8 bg-slate-50/30">
-
-      <!-- ===== TAB: STUDIO ===== -->
-      <div id="tab-studio" class="tab-content active max-w-5xl mx-auto space-y-6">
-
-        <div class="card-premium p-6 gradient-border">
-          <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider block mb-1">Production Input</span>
-          <h2 class="text-2xl font-bold text-slate-800">Create Animation Package</h2>
-          <p class="text-sm text-slate-500 mt-1 max-w-xl">From 1 idea to viral titles, character sheets, storyboards, and YouTube SEO.</p>
-        </div>
-
-        <div class="card-premium p-6 space-y-6">
-
-          <!-- Style -->
-          <div>
-            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-3">1. Animation Style</label>
-            <div class="style-grid-premium" id="styleGrid"></div>
-            <div id="customStyleInput" class="mt-3 hidden">
-              <input type="text" id="customStyleText" placeholder="Describe your custom animation style..." class="form-premium" />
-            </div>
-          </div>
-
-          <!-- Theme - KOSONGKAN -->
-          <div>
-            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">2. Story Idea / Theme</label>
-            <textarea id="storyTheme" rows="3" placeholder="Tulis ide cerita Anda di sini..." class="form-premium"></textarea>
-          </div>
-
-          <!-- Controls -->
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div>
-              <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Duration</label>
-              <select id="durationSelect" class="form-premium">
-                <option value="30 sec">30 Sec (Shorts)</option>
-                <option value="60 sec" selected>60 Sec (1 Minute)</option>
-                <option value="90 sec">90 Sec (Extended)</option>
-                <option value="2 min">2 Minutes</option>
-                <option value="3 min">3 Minutes (Episode)</option>
-                <option value="5 min">5 Minutes (Mini Movie)</option>
-                <option value="10 min">10 Minutes (Feature)</option>
-              </select>
-            </div>
-            <div>
-              <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Language</label>
-              <select id="languageSelect" class="form-premium">
-                <option value="Indonesian">Indonesian</option>
-                <option value="English">English</option>
-                <option value="Spanish">Spanish</option>
-                <option value="Japanese">Japanese</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
-            <div>
-              <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Audience</label>
-              <select id="audienceSelect" class="form-premium">
-                <option value="Kids">Kids</option>
-                <option value="Family">Family</option>
-                <option value="Educational">Educational</option>
-                <option value="Comedy">Comedy</option>
-                <option value="Adventure">Adventure</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="pt-2 border-t border-slate-200 flex justify-end">
-            <button onclick="handleGenerateTitles()" id="btnGenerateTitles" class="btn-premium">
-              <i class="fas fa-sparkles"></i> Generate 10 Viral Titles
-            </button>
-          </div>
-
-        </div>
-
-        <!-- Titles -->
-        <div id="titlesContainer" class="card-premium p-6 border-indigo-200 border-2 space-y-4 hidden">
-          <div class="flex justify-between items-center">
-            <div>
-              <span class="text-[10px] font-bold text-indigo-600 uppercase tracking-wider">Step 1 Complete</span>
-              <h3 class="text-lg font-bold text-slate-800 mt-0.5">Select Your Title</h3>
-            </div>
-            <button onclick="handleGenerateTitles()" class="text-xs text-indigo-600 font-semibold hover:underline">🔄 Regenerate</button>
-          </div>
-          <div id="titleList" class="title-grid-premium"></div>
-          <div class="pt-4 border-t border-slate-200 flex flex-col sm:flex-row justify-between items-center gap-3">
-            <div class="text-sm text-slate-500">Selected: <strong id="selectedTitleDisplay" class="text-indigo-700 font-bold">-</strong></div>
-            <button onclick="handleRunFullPipeline()" id="btnRunPipeline" class="btn-gradient-premium">
-              <i class="fas fa-rocket"></i> Run Full Pipeline
-            </button>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- ===== TAB: CHARACTER ===== -->
-      <div id="tab-character" class="tab-content hidden max-w-4xl mx-auto space-y-6">
-        <div>
-          <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Character Engine</span>
-          <h2 class="text-2xl font-bold text-slate-800 mt-0.5">Master Character Sheet</h2>
-          <p class="text-sm text-slate-500">Maintains visual consistency across all storyboards.</p>
-        </div>
-
-        <div id="characterContainer" class="card-premium p-6 border-indigo-200 border-2 space-y-5 hidden">
-          <div class="flex items-center gap-4 border-b border-slate-200 pb-4">
-            <div class="w-14 h-14 rounded-xl bg-indigo-50 border border-indigo-200 flex items-center justify-center text-3xl">👤</div>
-            <div>
-              <h3 id="charName" class="text-xl font-bold text-slate-800">-</h3>
-              <span id="charArchetype" class="badge-premium">-</span>
-            </div>
-          </div>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
-            <div class="panel-premium"><span class="label">Face</span><p id="charFace" class="text-slate-700 font-medium mt-1">-</p></div>
-            <div class="panel-premium"><span class="label">Hair</span><p id="charHair" class="text-slate-700 font-medium mt-1">-</p></div>
-            <div class="panel-premium"><span class="label">Outfit</span><p id="charClothes" class="text-slate-700 font-medium mt-1">-</p></div>
-            <div class="panel-premium"><span class="label">Body & Colors</span><p id="charBody" class="text-slate-700 font-medium mt-1">-</p></div>
-          </div>
-          <div class="bg-indigo-50/70 border border-indigo-200 p-4 rounded-xl">
-            <div class="flex justify-between items-center">
-              <span class="text-xs font-bold text-indigo-700 uppercase">Prompt Snippet</span>
-              <button onclick="copyText(document.getElementById('charSnippet').textContent, 'Prompt Snippet')" class="text-xs text-indigo-600 font-semibold hover:underline">Copy</button>
-            </div>
-            <p id="charSnippet" class="text-xs font-mono text-slate-600 bg-white p-3 rounded-xl border border-slate-200 mt-2">-</p>
-          </div>
-        </div>
-
-        <div id="noCharacterMsg" class="card-premium p-12 text-center border-slate-200">
-          <p class="text-slate-400">No character sheet generated yet. Run the pipeline from Setup.</p>
-        </div>
-
-        <!-- Story -->
-        <div id="storyContainer" class="card-premium p-6 border-slate-200 space-y-3 hidden">
-          <div class="flex justify-between items-center">
-            <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wider">Complete Script</h3>
-            <button onclick="copyText(document.getElementById('storyText').textContent, 'Story Script')" class="text-xs text-indigo-600 font-semibold hover:underline">Copy Story</button>
-          </div>
-          <div id="storyText" class="bg-slate-50 p-4 rounded-xl border border-slate-200 text-sm text-slate-700 story-scroll">-</div>
-        </div>
-      </div>
-
-      <!-- ===== TAB: STORYBOARDS ===== -->
-      <div id="tab-storyboards" class="tab-content hidden max-w-5xl mx-auto space-y-6">
-        <div class="card-premium p-4 border-indigo-200 border-2 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-sm">
-          <div>
-            <div class="flex items-center gap-2 flex-wrap">
-              <span class="text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-0.5 rounded-full">✓ Synced</span>
-              <span class="text-slate-500">Language: <strong id="sbLang" class="text-slate-700">Indonesian</strong></span>
-            </div>
-            <div class="font-semibold text-slate-700 mt-0.5">"<span id="sbTitle">-</span>"</div>
-          </div>
-          <button onclick="handleRunFullPipeline()" class="btn-premium text-sm">🔄 Regenerate</button>
-        </div>
-
-        <div id="storyboardsContainer" class="space-y-5"></div>
-
-        <div id="noSbMsg" class="card-premium p-12 text-center border-slate-200">
-          <p class="text-slate-400">No storyboards yet. Run the pipeline from Setup.</p>
-        </div>
-      </div>
-
-      <!-- ===== TAB: THUMBNAIL & SEO ===== -->
-      <div id="tab-thumbnail_seo" class="tab-content hidden max-w-4xl mx-auto space-y-6">
-        <div>
-          <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Metadata Engine</span>
-          <h2 class="text-2xl font-bold text-slate-800 mt-0.5">Thumbnail & YouTube SEO</h2>
-          <p class="text-sm text-slate-500">High-CTR thumbnails, descriptions, tags, and pinned comments.</p>
-        </div>
-
-        <div id="thumbnailContainer" class="card-premium p-6 border-indigo-200 border-2 space-y-4 hidden">
-          <div class="flex items-center gap-2 text-indigo-700 font-bold text-xs uppercase tracking-wider"><span>🖼️ Thumbnail Studio</span></div>
-          <div>
-            <label class="text-sm font-semibold text-slate-600 block mb-2">CTR Headline Options</label>
-            <div id="ctrTexts" class="flex flex-wrap gap-2"></div>
-          </div>
-          <div>
-            <span class="text-sm font-semibold text-slate-600 block">Visual Concept</span>
-            <p id="visualConcept" class="text-sm text-slate-700 bg-slate-50 p-3 rounded-xl border border-slate-200 mt-1">-</p>
-          </div>
-          <div>
-            <div class="flex justify-between items-center">
-              <span class="text-sm font-semibold text-indigo-700">Thumbnail Prompt</span>
-              <button onclick="copyText(document.getElementById('thumbnailPrompt').textContent, 'Thumbnail Prompt')" class="text-xs text-indigo-600 font-semibold hover:underline">Copy</button>
-            </div>
-            <p id="thumbnailPrompt" class="text-xs font-mono text-slate-600 bg-slate-50 p-3 rounded-xl border border-slate-200 mt-1">-</p>
-          </div>
-        </div>
-
-        <div id="seoContainer" class="card-premium p-6 border-slate-200 space-y-4 hidden">
-          <div class="flex items-center gap-2 text-emerald-700 font-bold text-xs uppercase tracking-wider"><span>🏷️ YouTube SEO</span></div>
-          <div>
-            <label class="text-sm font-semibold text-slate-600 block mb-2">5 SEO Titles</label>
-            <div id="seoTitles" class="space-y-2"></div>
-          </div>
-          <div>
-            <div class="flex justify-between items-center">
-              <label class="text-sm font-semibold text-slate-600">Description</label>
-              <button onclick="copyText(document.getElementById('seoDescription').value, 'Description')" class="text-xs text-indigo-600 font-semibold hover:underline">Copy</button>
-            </div>
-            <textarea id="seoDescription" rows="4" readonly class="form-premium bg-slate-50 mt-1"></textarea>
-          </div>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-            <div>
-              <span class="font-bold text-slate-500 block text-xs uppercase">Hashtags & Tags</span>
-              <p id="seoHashtags" class="bg-slate-50 p-3 rounded-xl border border-slate-200 text-indigo-700 font-semibold mt-1">-</p>
-              <p id="seoTags" class="bg-slate-50 p-3 rounded-xl border border-slate-200 text-slate-600 mt-1">-</p>
-            </div>
-            <div>
-              <span class="font-bold text-slate-500 block text-xs uppercase">Pinned Comment</span>
-              <p id="seoPinned" class="bg-slate-50 p-3 rounded-xl border border-slate-200 text-amber-700 italic mt-1">-</p>
-            </div>
-          </div>
-        </div>
-
-        <div id="noSeoMsg" class="card-premium p-12 text-center border-slate-200">
-          <p class="text-slate-400">No SEO data yet. Run the pipeline from Setup.</p>
-        </div>
-      </div>
-
-      <!-- ===== TAB: EXPORT ===== -->
-      <div id="tab-export" class="tab-content hidden max-w-4xl mx-auto space-y-6">
-        <div class="flex justify-between items-center flex-wrap gap-3">
-          <div>
-            <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Export</span>
-            <h2 class="text-2xl font-bold text-slate-800 mt-0.5">Production Package</h2>
-            <p class="text-sm text-slate-500">Download your full package in TXT, Markdown, or DOCX.</p>
-          </div>
-          <button onclick="copyText(generateFullPackageText('md'), 'Full Package')" class="btn-premium">📋 Copy Package</button>
-        </div>
-
-        <div class="card-premium p-6 space-y-4">
-          <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Download Formats</span>
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            <button onclick="exportFile('txt')" class="p-4 rounded-xl bg-slate-50 border border-slate-200 hover:border-indigo-300 hover:bg-indigo-50/50 text-left transition">
-              <span class="text-xl">📄</span>
-              <div class="font-semibold text-sm text-slate-700">TXT</div>
-              <div class="text-xs text-slate-400">Plain text</div>
-            </button>
-            <button onclick="exportFile('md')" class="p-4 rounded-xl bg-slate-50 border border-slate-200 hover:border-indigo-300 hover:bg-indigo-50/50 text-left transition">
-              <span class="text-xl">📝</span>
-              <div class="font-semibold text-sm text-slate-700">Markdown</div>
-              <div class="text-xs text-slate-400">Formatted MD</div>
-            </button>
-            <button onclick="exportFile('doc')" class="p-4 rounded-xl bg-slate-50 border border-slate-200 hover:border-indigo-300 hover:bg-indigo-50/50 text-left transition">
-              <span class="text-xl">📘</span>
-              <div class="font-semibold text-sm text-slate-700">DOCX</div>
-              <div class="text-xs text-slate-400">Word document</div>
-            </button>
-          </div>
-        </div>
-
-        <div class="card-premium p-6 space-y-3">
-          <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Preview</span>
-          <pre id="exportPreview" class="bg-slate-50 p-4 rounded-xl border border-slate-200 text-xs font-mono text-slate-600 leading-relaxed overflow-x-auto max-h-96 whitespace-pre-wrap">-</pre>
-        </div>
-      </div>
-
-      <!-- ===== TAB: SETTINGS ===== -->
-      <div id="tab-settings" class="tab-content hidden max-w-xl mx-auto space-y-6">
-        <div class="card-premium p-6 border-amber-200 border-2 space-y-5">
-          <div class="flex items-center gap-2 text-amber-700 font-bold text-xs uppercase tracking-wider">
-            <i class="fas fa-bolt"></i> API Settings
-          </div>
-
-          <div>
-            <label class="text-sm font-semibold text-slate-600 block mb-2">Provider</label>
-            <select id="providerSelect" onchange="handleProviderChange()" class="form-premium border-amber-200 bg-amber-50/50 font-semibold">
-              <option value="openrouter">🌐 OpenRouter (FREE)</option>
-              <option value="gemini">🔵 Google Gemini</option>
-            </select>
-          </div>
-
-          <div>
-            <label class="text-sm font-semibold text-slate-600 block mb-2">Model</label>
-            <select id="modelSelect" class="form-premium font-mono"></select>
-          </div>
-
-          <div>
-            <label id="keyLabel" class="text-sm font-semibold text-slate-600 block mb-2">API Key</label>
-            <input type="password" id="apiKeyInput" placeholder="sk-or-v1-..." class="form-premium" />
-          </div>
-
-          <div class="grid grid-cols-3 gap-3 pt-1">
-            <button onclick="handleTestKey()" id="btnTestKey" class="bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 p-3 rounded-xl text-xs font-semibold flex flex-col items-center gap-1 transition">
-              <span class="text-base">🔑</span> Test Key
-            </button>
-            <button onclick="handleRefreshModels()" id="btnRefreshModels" class="bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 p-3 rounded-xl text-xs font-semibold flex flex-col items-center gap-1 transition">
-              <span class="text-base">📦</span> Refresh
-            </button>
-            <button onclick="handleOpenGetKeyPage()" class="bg-amber-50 hover:bg-amber-100 border border-amber-200 text-amber-700 p-3 rounded-xl text-xs font-semibold flex flex-col items-center gap-1 transition">
-              <span class="text-base">📋</span> Get Key
-            </button>
-          </div>
-        </div>
-      </div>
-
-    </main>
-  </div>
-</div>
-
-<!-- ============================================================
-     ANTI CTRL+U PROTECTION
-     ============================================================ -->
-<script type='text/javascript'>
-//<![CDATA[
-function redirectCU(e) {
-  if (e.ctrlKey && e.which == 85) {
-    window.location.replace("/");
-    return false;
-  }
-}
-document.onkeydown = redirectCU;
-//]]>
-</script>
-
-<!-- ============================================================
-     JAVASCRIPT - APPLICATION LOGIC
-     ============================================================ -->
-<script>
-// ===================================================================
-// ANTI-PIRACY: Protection Layer
-// ===================================================================
-
-console.log = function() {};
-console.warn = function() {};
-console.error = function(msg) {
-  if (msg && msg.includes('Critical')) {
-    window.console.error(msg);
-  }
-};
-
-// ===================================================================
-// LOGIN SYSTEM
-// ===================================================================
-
-// KREDENSIAL VALID - Ganti sesuai keinginan!
-const VALID_CREDENTIALS = {
-  username: 'admin',
-  password: '12345'
-};
-
-// ELEMEN
-const splashScreen = document.getElementById('splashScreen');
-const mainApp = document.getElementById('mainApp');
-const usernameInput = document.getElementById('usernameInput');
-const passwordInput = document.getElementById('passwordInput');
-const loginBtn = document.getElementById('loginBtn');
-const loginError = document.getElementById('loginError');
-const errorText = document.getElementById('errorText');
-
-// CEK SESSION
-function checkSession() {
-  const session = localStorage.getItem('studio_session');
-  if (session === 'logged_in') {
-    showApp();
-  }
-}
-
-// TAMPILKAN APLIKASI
-function showApp() {
-  splashScreen.style.display = 'none';
-  mainApp.style.display = 'block';
-  document.getElementById('loggedUser').textContent = VALID_CREDENTIALS.username;
-  // Initialize app after login
-  setTimeout(initApp, 100);
-}
-
-// HANDLE LOGIN
-function handleLogin() {
-  const username = usernameInput.value.trim();
-  const password = passwordInput.value.trim();
-
-  loginError.classList.remove('show');
-
-  if (!username || !password) {
-    errorText.textContent = 'Username dan password harus diisi!';
-    loginError.classList.add('show');
-    return;
-  }
-
-  if (username === VALID_CREDENTIALS.username && password === VALID_CREDENTIALS.password) {
-    localStorage.setItem('studio_session', 'logged_in');
-    showApp();
-  } else {
-    errorText.textContent = 'Username atau password salah! Hubungi admin jika lupa.';
-    loginError.classList.add('show');
-    passwordInput.value = '';
-    passwordInput.focus();
-    
-    // Tambahan: setelah 3 percobaan gagal, lock selama 30 detik
-    const attempts = parseInt(localStorage.getItem('login_attempts') || '0') + 1;
-    localStorage.setItem('login_attempts', attempts.toString());
-    if (attempts >= 3) {
-      loginBtn.disabled = true;
-      loginBtn.innerHTML = '<i class="fa-solid fa-clock"></i> Coba lagi nanti...';
-      setTimeout(() => {
-        loginBtn.disabled = false;
-        loginBtn.innerHTML = '<i class="fa-solid fa-arrow-right-to-bracket"></i> Masuk';
-        localStorage.setItem('login_attempts', '0');
-      }, 30000);
-    }
-  }
-}
-
-// ENTER KEY
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') {
-    const active = document.activeElement;
-    if (active === usernameInput || active === passwordInput) {
-      handleLogin();
-    }
-  }
-});
-
-// LOGOUT
-function logout() {
-  localStorage.removeItem('studio_session');
-  location.reload();
-}
-
-// ===================================================================
-// MAIN APP LOGIC
-// ===================================================================
-
-const ANIMATION_STYLES = [
-  { id: 'doraemon', label: 'Doraemon Style', icon: '🔔', desc: 'Japanese 3D/2D suburban gadget adventures' },
-  { id: 'spongebob', label: 'SpongeBob Style', icon: '🧽', desc: 'Vibrant underwater cartoon comedy' },
-  { id: 'upin_ipin', label: 'Upin & Ipin Style', icon: '🇲🇾', desc: 'Tropical village 3D heartwarming stories' },
-  { id: 'roblox', label: 'Roblox Animation', icon: '🧱', desc: 'Blocky avatar gaming storytime' },
-  { id: 'stickman', label: 'Stickman Animation', icon: '✏️', desc: 'High-energy vector stick figure story' },
-  { id: 'talking_fruits', label: 'Talking Fruits', icon: '🍎', desc: 'Hyper-expressive animated fruit characters' },
-  { id: 'health_edu', label: 'Health Education', icon: '🩺', desc: 'Fun body biology & hygiene explainers' },
-  { id: 'animals', label: 'Cute Animals', icon: '🦊', desc: 'Wholesome animal kingdom adventures' },
-  { id: 'superheroes', label: 'Kids Superheroes', icon: '⚡', desc: 'Action-packed elemental powers' },
-  { id: 'fairy_tales', label: 'Fairy Tales', icon: '🏰', desc: 'Magical folklore & enchanted worlds' },
-  { id: 'school_stories', label: 'School Stories', icon: '🎒', desc: 'Relatable classroom & friendship tales' },
-  { id: 'family_stories', label: 'Family Stories', icon: '🏠', desc: 'Heartwarming home & sibling bonding' },
-  { id: 'fantasy', label: 'Epic Fantasy', icon: '🐉', desc: 'Dragons, magic spells & mythical quests' },
-  { id: 'horror_kids', label: 'Horror for Kids', icon: '👻', desc: 'Spooky-funny mystery tales' },
-  { id: 'educational', label: 'Educational Stories', icon: '🧠', desc: 'Fun science, math & moral lessons' },
-  { id: 'funny_stories', label: 'Funny Slapstick', icon: '🤡', desc: 'High-energy slapstick laugh-out-loud comedy' },
-  { id: 'custom', label: 'Custom Style', icon: '✨', desc: 'Define your own unique animation style' }
-];
-
-const DURATION_OPTIONS = [
-  { value: '30 sec', storyboards: 2 },
-  { value: '60 sec', storyboards: 3 },
-  { value: '90 sec', storyboards: 4 },
-  { value: '2 min', storyboards: 5 },
-  { value: '3 min', storyboards: 6 },
-  { value: '5 min', storyboards: 8 },
-  { value: '10 min', storyboards: 12 }
-];
-
-const OPENROUTER_FREE_MODELS = [
-  { id: 'openrouter/free', name: '🧠 openrouter/free', tag: 'Recommended' },
-  { id: 'google/gemma-2-9b-it:free', name: '🧠 google/gemma-2-9b-it', tag: 'Fast' },
-  { id: 'meta-llama/llama-3.3-70b-instruct:free', name: '🧠 meta-llama/llama-3.3-70b', tag: 'Smart' },
-  { id: 'deepseek/deepseek-r1:free', name: '🧠 deepseek/deepseek-r1', tag: 'Reasoning' },
-  { id: 'qwen/qwen-2.5-72b-instruct:free', name: '🧠 qwen/qwen-2.5-72b', tag: 'Creative' },
-  { id: 'mistralai/mistral-small-24b-instruct-2501:free', name: '🧠 mistralai/mistral-small-24b', tag: 'Balanced' }
-];
-
-const GEMINI_DIRECT_MODELS = [
-  { id: 'gemini-2.5-flash', name: '⚡ Gemini 2.5 Flash', tag: 'Latest' },
-  { id: 'gemini-2.0-flash', name: '⚡ Gemini 2.0 Flash', tag: 'Stable' },
-  { id: 'gemini-1.5-flash', name: '⚡ Gemini 1.5 Flash', tag: 'Standard' }
-];
-
-const LOCAL_STORAGE_KEY = "AI_ANIMATION_STUDIO_PROJECT_V5";
-
-// STATE
-let state = {
-  provider: 'openrouter',
-  openrouterKey: '',
-  geminiKey: '',
-  selectedModel: 'openrouter/free',
-  activeTab: 'studio',
-  animationStyle: 'doraemon',
-  customStyleText: '',
-  storyTheme: '', // KOSONGKAN
-  duration: '60 sec',
-  language: 'Indonesian',
-  targetAudience: 'Kids',
-  titles: [],
-  selectedTitle: '',
-  masterCharacter: null,
-  story: '',
-  storyboards: [],
-  thumbnailData: null,
-  seoData: null,
-  isGenerating: false,
-  isTestingKey: false,
-  isRefreshingModels: false,
-  customModelList: [...OPENROUTER_FREE_MODELS]
-};
-
-// DOM HELPERS
-function $(id) { return document.getElementById(id); }
-
-function showToast(msg, type = 'info') {
-  const container = $('toastContainer');
-  if (!container) return;
-  const div = document.createElement('div');
-  div.className = `toast toast-${type}`;
-  div.innerHTML = `<span>${type === 'success' ? '✓' : type === 'error' ? '✕' : 'ℹ'}</span><span>${msg}</span>`;
-  container.appendChild(div);
-  setTimeout(() => { if (div.parentNode) div.remove(); }, 3500);
-}
-
-function extractJSON(text) {
-  if (!text) return null;
-  try { return JSON.parse(text); } catch(e) {}
-  const cleaned = text.replace(/```json/gi, '').replace(/```/g, '').trim();
-  try { return JSON.parse(cleaned); } catch(e) {}
-  const matchObj = cleaned.match(/\{[\s\S]*\}/);
-  if (matchObj) { try { return JSON.parse(matchObj[0]); } catch(e) {} }
-  const matchArr = cleaned.match(/\[[\s\S]*\]/);
-  if (matchArr) { try { return JSON.parse(matchArr[0]); } catch(e) {} }
-  return null;
-}
-
-function copyText(text, label) {
-  if (!text) return;
-  navigator.clipboard?.writeText(text).then(() => {
-    showToast(`${label} copied!`, 'success');
-  }).catch(() => {
-    const ta = document.createElement('textarea');
-    ta.value = text;
-    document.body.appendChild(ta);
-    ta.select();
-    document.execCommand('copy');
-    document.body.removeChild(ta);
-    showToast(`${label} copied!`, 'success');
-  });
-}
-
-function getSelectedStyleLabel() {
-  if (state.animationStyle === 'custom') return state.customStyleText || 'Custom Style';
-  const found = ANIMATION_STYLES.find(s => s.id === state.animationStyle);
-  return found ? found.label : 'Doraemon Style';
-}
-
-function getDurationObj() {
-  return DURATION_OPTIONS.find(d => d.value === state.duration) || DURATION_OPTIONS[1];
-}
-
-// API CALL
-async function callUniversalAI(prompt, provider, model, openrouterKey, geminiKey, systemInstruction = "") {
-  if (provider === 'openrouter') {
-    if (!openrouterKey || openrouterKey.trim() === "") {
-      throw new Error("NO_KEY: Please enter OpenRouter API Key.");
-    }
-    const endpoint = "https://openrouter.ai/api/v1/chat/completions";
-    const messages = [];
-    if (systemInstruction) messages.push({ role: "system", content: systemInstruction });
-    messages.push({ role: "user", content: prompt });
-    const resp = await fetch(endpoint, {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${openrouterKey.trim()}`,
-        "Content-Type": "application/json",
-        "HTTP-Referer": window.location.origin || "https://example.com",
-        "X-Title": "Studio Konten Pro"
-      },
-      body: JSON.stringify({
-        model: model || "openrouter/free",
-        messages: messages,
-        temperature: 0.7
-      })
-    });
-    if (!resp.ok) {
-      const errData = await resp.json().catch(() => ({}));
-      throw new Error(errData.error?.message || `API Error (${resp.status})`);
-    }
-    const data = await resp.json();
-    return data.choices?.[0]?.message?.content || "";
-  } else {
-    if (!geminiKey || geminiKey.trim() === "") {
-      throw new Error("NO_KEY: Please enter Google Gemini API Key.");
-    }
-    const modelToUse = model || "gemini-2.5-flash";
-    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${modelToUse}:generateContent?key=${geminiKey.trim()}`;
-    const requestBody = { contents: [{ role: "user", parts: [{ text: prompt }] }] };
-    if (systemInstruction) requestBody.systemInstruction = { parts: [{ text: systemInstruction }] };
-    const resp = await fetch(endpoint, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(requestBody)
-    });
-    if (!resp.ok) {
-      const errData = await resp.json().catch(() => ({}));
-      if (resp.status === 429 || errData.error?.message?.toLowerCase().includes("quota")) {
-        throw new Error("QUOTA_EXCEEDED: Gemini API quota reached.");
+        boards.push({
+          storyboardId: i,
+          sceneTitle: `Adegan ${i}: ${i === 1 ? 'Pengenalan & Awal Konflik' : i === count ? 'Klimaks & Penyelesaian' : 'Perkembangan Petualangan'} (${i}/${count})`,
+          locationAndTime: `Lokasi Utama Adegan #${i} - Siang Hari`,
+          continuityNotes: continuityNote,
+          scriptSegment: currentSectionText,
+          panels: [
+            { panelNum: 1, action: `${charName} memasuki adegan sesuai alur cerita`, dialogue: `Awal mula adegan #${i}...` },
+            { panelNum: 2, action: `${charName} mengamati situasi di sekitarnya dengan ekspresi fokus`, dialogue: `Apa yang terjadi selanjutnya?` },
+            { panelNum: 3, action: `Kejadian penting terjadi memicu reaksi ${charName}`, dialogue: `Aku harus bertindak!` },
+            { panelNum: 4, action: `${charName} mengambil aksi utama untuk mengatasi tantangan`, dialogue: `Ayo kita lakukan sekarang!` },
+            { panelNum: 5, action: `Hasil dari aksi terlihat dengan ekspresi lega dan gembira`, dialogue: `Berhasil!` },
+            { panelNum: 6, action: `${charName} bersiap melangkah ke adegan berikutnya`, dialogue: `Petualangan berlanjut...` }
+          ],
+          imagePrompt: `A 6-panel comic grid layout, ${style} art style. ${charSnippet}. Scene context: "${currentSectionText.substring(0, 100)}...". Panel 1 to 6 progression: character entering, observing, reacting, taking action, achieving result, transitioning to next board. Vibrant cartoon lighting, high continuity, 6-panel comic book format. Spoken dialogue in ${lang}.`,
+          videoPrompt: `Omni Flash / Sora Video Prompt (Storyboard #${i}): Cinematic smooth camera pan, ${charSnippet}. Action: ${charName} taking heroic action in "${currentSectionText.substring(0, 80)}...". Dynamic cartoon motion, lighting matching ${style}, max 10s.`
+        });
       }
-      throw new Error(errData.error?.message || `Gemini API Error (${resp.status})`);
+
+      return boards;
     }
-    const data = await resp.json();
-    return data.candidates?.[0]?.content?.parts?.[0]?.text || "";
-  }
-}
 
-// FALLBACK FUNCTIONS
-function generateFallbackTitles(theme, style, lang) {
-  const cleanTheme = theme ? theme.trim() : "Petualangan Ajaib";
-  return [
-    `Rahasia Dibalik ${cleanTheme}!`,
-    `Kisah Nyata: ${cleanTheme}`,
-    `Apa Yang Terjadi Ketika ${cleanTheme}?`,
-    `Petualangan Ajaib: ${cleanTheme}`,
-    `Misi Penyelamatan ${cleanTheme}`,
-    `Kejutan Tak Terduga Saat ${cleanTheme}`,
-    `Kisah Mengharukan ${cleanTheme}`,
-    `Ternyata Begini Rasanya ${cleanTheme}!`,
-    `Misteri Di Balik ${cleanTheme}`,
-    `Detik-Detik ${cleanTheme} Paling Mencekam!`
-  ];
-}
+    async function callUniversalAI(prompt, provider, model, openrouterKey, geminiKey, systemInstruction = "") {
+      if (provider === 'openrouter') {
+        if (!openrouterKey || openrouterKey.trim() === "") {
+          throw new Error("NO_KEY: Silakan masukkan OpenRouter API Key di menu API Settings.");
+        }
 
-function generateFallbackCharacter(title, theme, style) {
-  const words = theme ? theme.split(' ') : [];
-  const charName = words.length > 0 && words[0].length > 2 ? words[0].replace(/[^a-zA-Z]/g, '') : "Kiki";
-  const cleanTitle = title || theme || "Petualangan Animasi";
-  return {
-    characterName: charName,
-    archetype: "Pahlawan Utama",
-    face: "Wajah bulat ekspresif, mata besar bersinar ramah",
-    hair: "Rambut ikal warna cokelat terang",
-    clothes: "Jaket hoodie biru muda, kaos putih, celana kargo pendek",
-    body: "Postur anak usia 8-10 tahun, lincah",
-    colors: "#4EA8DE, #F8F9FA, #6C757D",
-    accessories: "Ransel petualang warna jingga",
-    age: "8-10 Tahun",
-    expressionStyle: "Sangat ekspresif, ceria, berani",
-    masterPromptSnippet: `Master Character: ${charName}, main hero, expressive face, big sparkling eyes, curly light brown hair, light blue hoodie, white t-shirt, grey cargo shorts, orange backpack, ${style} style`
-  };
-}
+        const endpoint = "https://openrouter.ai/api/v1/chat/completions";
+        const messages = [];
+        if (systemInstruction) {
+          messages.push({ role: "system", content: systemInstruction });
+        }
+        messages.push({ role: "user", content: prompt });
 
-function generateFallbackStoryboards(durationObj, style, charObj, title, storyText, lang) {
-  const count = durationObj?.storyboards || 3;
-  const charSnippet = charObj?.masterPromptSnippet || `Main character for ${title}`;
-  const charName = charObj?.characterName || "Kiki";
-  const paragraphs = storyText ? storyText.split(/\n+/).filter(p => p.trim().length > 10) : [];
-  const boards = [];
-  const totalParas = paragraphs.length;
-  for (let i = 1; i <= count; i++) {
-    const paraIdx = totalParas > 0 ? Math.floor(((i - 1) / count) * totalParas) : 0;
-    const currentSectionText = paragraphs[paraIdx] || `Scene ${i} from "${title}".`;
-    boards.push({
-      storyboardId: i,
-      sceneTitle: `Scene ${i}: ${i === 1 ? 'Introduction' : i === count ? 'Climax & Resolution' : 'Development'} (${i}/${count})`,
-      locationAndTime: `Main Location #${i} - Daytime`,
-      continuityNotes: i > 1 ? `Continues from Storyboard #${i-1}` : `Opening scene`,
-      panels: [
-        { panelNum: 1, action: `${charName} enters the scene`, dialogue: `Start of scene ${i}` },
-        { panelNum: 2, action: `${charName} observes surroundings`, dialogue: `What's happening?` },
-        { panelNum: 3, action: `Key event triggers reaction`, dialogue: `I must act!` },
-        { panelNum: 4, action: `${charName} takes action`, dialogue: `Let's do it!` },
-        { panelNum: 5, action: `Result is shown with relief`, dialogue: `Success!` },
-        { panelNum: 6, action: `${charName} prepares for next scene`, dialogue: `The adventure continues...` }
-      ],
-      imagePrompt: `6-panel comic grid, ${style} style. ${charSnippet}. Scene: "${currentSectionText.substring(0, 80)}...". Vibrant colors, 6-panel comic format.`,
-      videoPrompt: `Cinematic pan, ${charSnippet}. Action: ${charName} in "${currentSectionText.substring(0, 60)}...". Dynamic motion, ${style} style, max 10s.`
-    });
-  }
-  return boards;
-}
+        const response = await fetch(endpoint, {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${openrouterKey.trim()}`,
+            "Content-Type": "application/json",
+            "HTTP-Referer": window.location.href || "https://github.com",
+            "X-Title": "AI Viral Kids Studio"
+          },
+          body: JSON.stringify({
+            model: model || "openrouter/free",
+            messages: messages,
+            temperature: 0.7
+          })
+        });
 
-// ===================================================================
-// APP FUNCTIONS
-// ===================================================================
+        if (!response.ok) {
+          const errData = await response.json().catch(() => ({}));
+          throw new Error(errData.error?.message || `OpenRouter API Error (${response.status})`);
+        }
 
-function switchTab(tabId) {
-  state.activeTab = tabId;
-  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-  const target = $(`tab-${tabId}`);
-  if (target) target.classList.add('active');
-  
-  document.querySelectorAll('.sidebar-item-premium').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.tab === tabId);
-  });
-  
-  if (tabId === 'export') {
-    const preview = $('exportPreview');
-    if (preview) preview.textContent = generateFullPackageText('md');
-  }
-  updateSidebarInfo();
-}
+        const data = await response.json();
+        return data.choices?.[0]?.message?.content || "";
+      } else {
+        if (!geminiKey || geminiKey.trim() === "") {
+          throw new Error("NO_KEY: Silakan masukkan Google Gemini API Key di API Settings.");
+        }
 
-function updateSidebarInfo() {
-  const styleEl = $('sidebarStyle');
-  const durationEl = $('sidebarDuration');
-  const langEl = $('sidebarLang');
-  const badge = $('sbBadge');
-  
-  if (styleEl) styleEl.textContent = getSelectedStyleLabel();
-  if (durationEl) durationEl.textContent = state.duration;
-  if (langEl) langEl.textContent = state.language;
-  
-  if (badge) {
-    if (state.storyboards.length > 0) {
-      badge.textContent = state.storyboards.length;
-      badge.classList.remove('hidden');
-    } else {
-      badge.classList.add('hidden');
-    }
-  }
-}
+        const modelToUse = model || "gemini-2.5-flash";
+        const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${modelToUse}:generateContent?key=${geminiKey.trim()}`;
 
-function renderStyleGrid() {
-  const grid = $('styleGrid');
-  if (!grid) return;
-  grid.innerHTML = '';
-  ANIMATION_STYLES.forEach(st => {
-    const btn = document.createElement('button');
-    btn.className = `style-card-premium ${state.animationStyle === st.id ? 'active' : ''}`;
-    btn.innerHTML = `
-      <div class="flex items-center gap-2">
-        <span class="icon-wrap">${st.icon}</span>
-        <span class="label">${st.label}</span>
-      </div>
-      <span class="desc">${st.desc}</span>
-    `;
-    btn.onclick = () => {
-      state.animationStyle = st.id;
-      renderStyleGrid();
-      const customInput = $('customStyleInput');
-      if (customInput) customInput.classList.toggle('hidden', st.id !== 'custom');
-      updateSidebarInfo();
-    };
-    grid.appendChild(btn);
-  });
-  const customInput = $('customStyleInput');
-  if (customInput) {
-    customInput.classList.toggle('hidden', state.animationStyle !== 'custom');
-  }
-  const customText = $('customStyleText');
-  if (customText) customText.value = state.customStyleText || '';
-}
+        const requestBody = {
+          contents: [{ role: "user", parts: [{ text: prompt }] }]
+        };
 
-// ===================================================================
-// TITLES GENERATION
-// ===================================================================
+        if (systemInstruction) {
+          requestBody.systemInstruction = { parts: [{ text: systemInstruction }] };
+        }
 
-async function handleGenerateTitles() {
-  if (state.isGenerating) return;
-  state.isGenerating = true;
-  const btn = $('btnGenerateTitles');
-  if (btn) btn.disabled = true;
-  showLoading('Generating 10 Viral Titles...');
-  
-  try {
-    const styleLabel = getSelectedStyleLabel();
-    const lang = state.language;
-    const prompt = `Generate exactly 10 high-CTR viral cartoon animation titles for kids/family based on:
-Style: ${styleLabel}
-Theme: ${state.storyTheme || 'Petualangan'}
-CRITICAL: Must be written strictly in ${lang}.
-Target Audience: ${state.targetAudience}
+        const response = await fetch(endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(requestBody)
+        });
 
-Output MUST be a JSON array of 10 title strings ONLY. Example: ["Title 1", "Title 2", ...]`;
+        if (!response.ok) {
+          const errData = await response.json().catch(() => ({}));
+          if (response.status === 429 || errData.error?.message?.toLowerCase().includes("quota")) {
+            throw new Error("QUOTA_EXCEEDED: Rate limit/kuota Gemini API tercapai.");
+          }
+          throw new Error(errData.error?.message || `Gemini API Request failed (${response.status})`);
+        }
 
-    const text = await callUniversalAI(prompt, state.provider, state.selectedModel, state.openrouterKey, state.geminiKey);
-    const parsed = extractJSON(text);
-    if (Array.isArray(parsed) && parsed.length > 0) {
-      state.titles = parsed;
-      if (!state.selectedTitle || !parsed.includes(state.selectedTitle)) {
-        state.selectedTitle = parsed[0];
+        const data = await response.json();
+        return data.candidates?.[0]?.content?.parts?.[0]?.text || "";
       }
-      showToast("10 Viral Titles generated!", "success");
-    } else {
-      throw new Error("Invalid JSON format");
     }
-  } catch (err) {
-    const fallback = generateFallbackTitles(state.storyTheme || 'Petualangan', getSelectedStyleLabel(), state.language);
-    state.titles = fallback;
-    if (!state.selectedTitle || !fallback.includes(state.selectedTitle)) {
-      state.selectedTitle = fallback[0];
-    }
-    showToast(`Fallback: ${err.message}`, "info");
-  }
-  
-  hideLoading();
-  state.isGenerating = false;
-  if (btn) btn.disabled = false;
-  renderTitles();
-}
 
-function renderTitles() {
-  const container = $('titlesContainer');
-  const list = $('titleList');
-  const display = $('selectedTitleDisplay');
-  
-  if (!container || !list || !display) return;
-  
-  if (state.titles.length === 0) {
-    container.classList.add('hidden');
-    return;
-  }
-  container.classList.remove('hidden');
-  list.innerHTML = '';
-  state.titles.forEach((t, idx) => {
-    const btn = document.createElement('button');
-    btn.className = `title-item-premium ${state.selectedTitle === t ? 'active' : ''}`;
-    btn.innerHTML = `<span>${idx + 1}. ${t}</span>${state.selectedTitle === t ? '<span class="check"><i class="fas fa-check-circle"></i></span>' : ''}`;
-    btn.onclick = () => {
-      state.selectedTitle = t;
-      renderTitles();
+    const exportAsFile = (content, filename, type) => {
+      const blob = new Blob([content], { type: type });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
     };
-    list.appendChild(btn);
-  });
-  display.textContent = state.selectedTitle || '-';
-  updateSidebarInfo();
-}
 
-// ===================================================================
-// FULL PIPELINE
-// ===================================================================
+    function App() {
+      const [provider, setProvider] = useState(() => localStorage.getItem("AI_STUDIO_PROVIDER") || "openrouter");
+      const [openrouterKey, setOpenrouterKey] = useState(() => localStorage.getItem("OPENROUTER_API_KEY") || "");
+      const [geminiKey, setGeminiKey] = useState(() => localStorage.getItem("GEMINI_API_KEY") || "");
+      const [selectedModel, setSelectedModel] = useState(() => localStorage.getItem("AI_STUDIO_MODEL") || "openrouter/free");
+      
+      const [activeTab, setActiveTab] = useState('studio');
+      
+      const [animationStyle, setAnimationStyle] = useState('doraemon');
+      const [customStyleText, setCustomStyleText] = useState('');
+      const [storyTheme, setStoryTheme] = useState('A brave little brother saves his sister from a friendly stray dog in the neighborhood.');
+      const [duration, setDuration] = useState('60 sec');
+      const [language, setLanguage] = useState('Indonesian');
+      const [targetAudience, setTargetAudience] = useState('Kids');
 
-async function handleRunFullPipeline() {
-  if (!state.selectedTitle) {
-    showToast("Please generate and select a title first!", "error");
-    return;
-  }
-  if (state.isGenerating) return;
-  state.isGenerating = true;
-  const btn = $('btnRunPipeline');
-  if (btn) btn.disabled = true;
-  
-  try {
-    const styleLabel = getSelectedStyleLabel();
-    const lang = state.language;
-    const durationObj = getDurationObj();
-    
-    // Character
-    showLoading("Building Master Character...");
-    let charParsed = null;
-    try {
-      const charPrompt = `Create a Master Character Sheet for the main character.
-Title: "${state.selectedTitle}"
-Style: ${styleLabel}
-Theme: ${state.storyTheme || 'Petualangan'}
-Language: ${lang}
+      const [titles, setTitles] = useState([]);
+      const [selectedTitle, setSelectedTitle] = useState('');
+      const [masterCharacter, setMasterCharacter] = useState(null);
+      const [story, setStory] = useState('');
+      const [storyAnalysis, setStoryAnalysis] = useState(null);
+      const [storyboards, setStoryboards] = useState([]); 
+      
+      const [thumbnailData, setThumbnailData] = useState(null);
+      const [seoData, setSeoData] = useState(null);
 
-Output JSON with fields: characterName, archetype, face, hair, clothes, body, colors, accessories, age, expressionStyle, masterPromptSnippet`;
-      const charText = await callUniversalAI(charPrompt, state.provider, state.selectedModel, state.openrouterKey, state.geminiKey);
-      charParsed = extractJSON(charText);
-    } catch(e) { console.warn(e); }
-    
-    if (!charParsed || !charParsed.characterName) {
-      charParsed = generateFallbackCharacter(state.selectedTitle, state.storyTheme || 'Petualangan', styleLabel);
-    }
-    state.masterCharacter = charParsed;
-    renderCharacter();
+      const [isGenerating, setIsGenerating] = useState(false);
+      const [isTestingKey, setIsTestingKey] = useState(false);
+      const [isRefreshingModels, setIsRefreshingModels] = useState(false);
+      const [loadingStepText, setLoadingStepText] = useState('');
+      const [toast, setToast] = useState(null);
+      const [showResetModal, setShowResetModal] = useState(false);
+      const [customModelList, setCustomModelList] = useState(OPENROUTER_FREE_MODELS);
 
-    // Story
-    showLoading("Writing Story...");
-    let generatedStory = "";
-    try {
-      const storyPrompt = `Write a complete, emotional, engaging cartoon animation story.
-Title: "${state.selectedTitle}"
-Style: ${styleLabel}
-Duration: ${state.duration}
-CRITICAL: Must be written strictly in ${lang}.
-Audience: ${state.targetAudience}
-Main Character: "${charParsed.characterName}"
-Theme: ${state.storyTheme || 'Petualangan'}`;
-      generatedStory = await callUniversalAI(storyPrompt, state.provider, state.selectedModel, state.openrouterKey, state.geminiKey);
-    } catch(e) { console.warn(e); }
-    
-    if (!generatedStory || generatedStory.trim().length < 50) {
-      generatedStory = `Petualangan seru "${state.selectedTitle}" bersama ${charParsed.characterName}. Cerita penuh makna dan petualangan.`;
-    }
-    state.story = generatedStory;
-    renderStory();
+      useEffect(() => {
+        localStorage.setItem("AI_STUDIO_PROVIDER", provider);
+        localStorage.setItem("OPENROUTER_API_KEY", openrouterKey);
+        localStorage.setItem("GEMINI_API_KEY", geminiKey);
+        localStorage.setItem("AI_STUDIO_MODEL", selectedModel);
+      }, [provider, openrouterKey, geminiKey, selectedModel]);
 
-    // Storyboards
-    showLoading(`Generating ${durationObj.storyboards} Storyboards...`);
-    let pipelineParsed = null;
-    try {
-      const sysInstruction = `Split the story into EXACTLY ${durationObj.storyboards} Storyboards.
-CRITICAL: Scene titles, actions, and dialogues MUST be in ${lang}.
-Image and Video prompts should be in English.
+      const handleProviderChange = (newProvider) => {
+        setProvider(newProvider);
+        if (newProvider === 'openrouter') {
+          setSelectedModel('openrouter/free');
+        } else {
+          setSelectedModel('gemini-2.5-flash');
+        }
+      };
 
-Format output as JSON:
+      useEffect(() => {
+        const stateToSave = {
+          animationStyle, customStyleText, storyTheme, duration, language, targetAudience,
+          titles, selectedTitle, masterCharacter, story, storyAnalysis, storyboards,
+          thumbnailData, seoData
+        };
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(stateToSave));
+      }, [animationStyle, customStyleText, storyTheme, duration, language, targetAudience, titles, selectedTitle, masterCharacter, story, storyAnalysis, storyboards, thumbnailData, seoData]);
+
+      useEffect(() => {
+        try {
+          const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
+          if (saved) {
+            const parsed = JSON.parse(saved);
+            if (parsed.animationStyle) setAnimationStyle(parsed.animationStyle);
+            if (parsed.customStyleText) setCustomStyleText(parsed.customStyleText);
+            if (parsed.storyTheme) setStoryTheme(parsed.storyTheme);
+            if (parsed.duration) setDuration(parsed.duration);
+            if (parsed.language) setLanguage(parsed.language);
+            if (parsed.targetAudience) setTargetAudience(parsed.targetAudience);
+            if (parsed.titles) setTitles(parsed.titles);
+            if (parsed.selectedTitle) setSelectedTitle(parsed.selectedTitle);
+            if (parsed.masterCharacter) setMasterCharacter(parsed.masterCharacter);
+            if (parsed.story) setStory(parsed.story);
+            if (parsed.storyAnalysis) setStoryAnalysis(parsed.storyAnalysis);
+            if (parsed.storyboards) setStoryboards(parsed.storyboards);
+            if (parsed.thumbnailData) setThumbnailData(parsed.thumbnailData);
+            if (parsed.seoData) setSeoData(parsed.seoData);
+          }
+        } catch (e) {
+          console.warn("Could not restore project state", e);
+        }
+      }, []);
+
+      const showToast = (msg, type = 'info') => {
+        setToast({ msg, type });
+        setTimeout(() => setToast(null), 3500);
+      };
+
+      const copyToClipboard = (text, label) => {
+        if (!text) return;
+        try {
+          const textarea = document.createElement('textarea');
+          textarea.value = text;
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textarea);
+          showToast(`${label} copied to clipboard!`, 'success');
+        } catch (e) {
+          showToast(`Failed to copy ${label}`, 'error');
+        }
+      };
+
+      const handleTestKey = async () => {
+        setIsTestingKey(true);
+        try {
+          const testPrompt = "Reply with 'API Key Active OK'";
+          const resp = await callUniversalAI(testPrompt, provider, selectedModel, openrouterKey, geminiKey);
+          showToast(`Key Valid! Model ${selectedModel} responded: ${resp.substring(0, 30)}...`, "success");
+        } catch (err) {
+          showToast(`Test Failed: ${err.message}`, "error");
+        } finally {
+          setIsTestingKey(false);
+        }
+      };
+
+      const handleRefreshModels = async () => {
+        setIsRefreshingModels(true);
+        try {
+          if (provider === 'openrouter') {
+            const res = await fetch("https://openrouter.ai/api/v1/models");
+            if (res.ok) {
+              const data = await res.json();
+              const freeOnly = data.data
+                .filter(m => m.id.includes(':free') || m.id.includes('free'))
+                .map(m => ({ id: m.id, name: `🧠 ${m.id}`, tag: 'Free' }));
+              
+              if (freeOnly.length > 0) {
+                setCustomModelList(freeOnly);
+                showToast(`Refreshed! Found ${freeOnly.length} active OpenRouter free models.`, "success");
+              } else {
+                setCustomModelList(OPENROUTER_FREE_MODELS);
+                showToast("Models refreshed to default preset list.", "info");
+              }
+            }
+          } else {
+            showToast("Gemini models list refreshed.", "info");
+          }
+        } catch (err) {
+          showToast("Could not fetch online models. Using default free list.", "info");
+        } finally {
+          setIsRefreshingModels(false);
+        }
+      };
+
+      const handleOpenGetKeyPage = () => {
+        if (provider === 'openrouter') {
+          window.open("https://openrouter.ai/keys", "_blank");
+        } else {
+          window.open("https://aistudio.google.com/app/apikey", "_blank");
+        }
+      };
+
+      const currentStyleLabel = animationStyle === 'custom' ? customStyleText : (ANIMATION_STYLES.find(s => s.id === animationStyle)?.label || 'Doraemon Style');
+      const targetDurationObj = DURATION_OPTIONS.find(d => d.value === duration) || DURATION_OPTIONS[1];
+
+      const handleGenerateTitles = async () => {
+        setIsGenerating(true);
+        setLoadingStepText(`STEP 1: Generating 10 Viral Titles in ${language}...`);
+        try {
+          const prompt = `Generate exactly 10 high-CTR, highly engaging viral cartoon animation titles for kids/family based on:
+Style: ${currentStyleLabel}
+Theme: ${storyTheme}
+CRITICAL LANGUAGE RULE: Must be written strictly in ${language}.
+Target Audience: ${targetAudience}
+
+Output MUST be a JSON array of 10 title strings ONLY in ${language}. Example: ["Title 1", "Title 2", ...]`;
+
+          const text = await callUniversalAI(prompt, provider, selectedModel, openrouterKey, geminiKey);
+          const parsed = extractJSON(text);
+
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            setTitles(parsed);
+            if (!selectedTitle || !parsed.includes(selectedTitle)) {
+              setSelectedTitle(parsed[0]);
+            }
+            showToast("10 Viral Titles generated!", "success");
+          } else {
+            throw new Error("Format output bukan JSON array.");
+          }
+        } catch (err) {
+          const fallbackList = generateFallbackTitles(storyTheme, currentStyleLabel, language);
+          setTitles(fallbackList);
+          if (!selectedTitle || !fallbackList.includes(selectedTitle)) {
+            setSelectedTitle(fallbackList[0]);
+          }
+          showToast(`Notice: ${err.message}. Used fallback engine.`, "info");
+        } finally {
+          setIsGenerating(false);
+        }
+      };
+
+      const handleRunFullPipeline = async () => {
+        if (!selectedTitle) {
+          showToast("Please select or generate a Title in Step 1 first!", "error");
+          return;
+        }
+
+        setIsGenerating(true);
+        try {
+          setLoadingStepText("STEP 7: Building Master Character Sheet...");
+          let charParsed = null;
+          try {
+            const charPrompt = `Create one Master Character Sheet for the main character(s) in this story.
+Title: "${selectedTitle}"
+Style: ${currentStyleLabel}
+Theme: ${storyTheme}
+Language: ${language}
+
+Define exact visual rules that NEVER change.
+All text descriptions must be in ${language}.
+
+Output MUST be JSON with fields:
 {
-  "analysis": { "totalStoryboardsNeeded": ${durationObj.storyboards} },
+  "characterName": "Name",
+  "archetype": "Role",
+  "face": "...",
+  "hair": "...",
+  "clothes": "...",
+  "body": "...",
+  "colors": "...",
+  "accessories": "...",
+  "age": "...",
+  "expressionStyle": "...",
+  "masterPromptSnippet": "Visual tag snippet for image generator"
+}`;
+            const charText = await callUniversalAI(charPrompt, provider, selectedModel, openrouterKey, geminiKey);
+            charParsed = extractJSON(charText);
+          } catch (e) {
+            console.warn("Character AI fallback:", e);
+          }
+          
+          if (!charParsed || !charParsed.characterName) {
+            charParsed = generateFallbackCharacter(selectedTitle, storyTheme, currentStyleLabel);
+          }
+          setMasterCharacter(charParsed);
+
+          setLoadingStepText(`STEP 2: Writing Story in ${language}...`);
+          let generatedStory = "";
+          try {
+            const storyPrompt = `Write a complete, emotional, engaging cartoon animation story.
+Title: "${selectedTitle}"
+Style: ${currentStyleLabel}
+Duration: ${duration}
+CRITICAL LANGUAGE RULE: Entire script MUST be written strictly in ${language}.
+Audience: ${targetAudience}
+Main Character: "${charParsed.characterName}"
+
+Requirements:
+- Written purely in ${language}
+- Natural emotional arc with good moral lesson
+- Fits video duration ${duration}.`;
+
+            generatedStory = await callUniversalAI(storyPrompt, provider, selectedModel, openrouterKey, geminiKey);
+          } catch (e) {
+            console.warn("Story AI fallback:", e);
+          }
+          
+          if (!generatedStory || generatedStory.trim().length < 50) {
+            generatedStory = generateFallbackScript(selectedTitle, currentStyleLabel, duration, storyTheme, charParsed);
+          }
+          setStory(generatedStory);
+
+          setLoadingStepText(`STEPS 3-9: Generating ${targetDurationObj.storyboards} storyboards in ${language}...`);
+
+          let pipelineParsed = null;
+          try {
+            const sysInstruction = `You are a Lead AI Animation Director. Split the provided story into EXACTLY ${targetDurationObj.storyboards} Storyboards.
+
+CRITICAL LANGUAGE RULE:
+1. Scene Title, Action descriptions, Continuity Notes, and Character Dialogues MUST be written strictly in ${language}.
+2. Image Prompt and Video Prompt should be optimized in English for AI models (Midjourney/Omni Flash), but explicitly mention spoken dialogue in ${language} if applicable.
+
+Story Title: "${selectedTitle}"
+Character Name: ${charParsed.characterName}
+Target Language: ${language}
+
+Format output as pure JSON:
+{
+  "analysis": {
+    "totalStoryboardsNeeded": ${targetDurationObj.storyboards},
+    "pacingNotes": "...",
+    "emotionalArc": "..."
+  },
   "storyboards": [
     {
       "storyboardId": 1,
-      "sceneTitle": "Title in ${lang}",
-      "locationAndTime": "Location in ${lang}",
-      "continuityNotes": "Notes in ${lang}",
+      "sceneTitle": "Scene Title in ${language}",
+      "locationAndTime": "Location in ${language}",
+      "continuityNotes": "Notes in ${language}",
       "panels": [
-        {"panelNum": 1, "action": "Action in ${lang}", "dialogue": "Dialogue in ${lang}"},
-        {"panelNum": 2, "action": "Action in ${lang}", "dialogue": "Dialogue in ${lang}"},
-        {"panelNum": 3, "action": "Action in ${lang}", "dialogue": "Dialogue in ${lang}"},
-        {"panelNum": 4, "action": "Action in ${lang}", "dialogue": "Dialogue in ${lang}"},
-        {"panelNum": 5, "action": "Action in ${lang}", "dialogue": "Dialogue in ${lang}"},
-        {"panelNum": 6, "action": "Action in ${lang}", "dialogue": "Dialogue in ${lang}"}
+        {"panelNum": 1, "action": "Action in ${language}", "dialogue": "Dialogue in ${language}"},
+        {"panelNum": 2, "action": "Action in ${language}", "dialogue": "Dialogue in ${language}"},
+        {"panelNum": 3, "action": "Action in ${language}", "dialogue": "Dialogue in ${language}"},
+        {"panelNum": 4, "action": "Action in ${language}", "dialogue": "Dialogue in ${language}"},
+        {"panelNum": 5, "action": "Action in ${language}", "dialogue": "Dialogue in ${language}"},
+        {"panelNum": 6, "action": "Action in ${language}", "dialogue": "Dialogue in ${language}"}
       ],
-      "imagePrompt": "6-panel comic prompt in English",
-      "videoPrompt": "Video prompt in English"
+      "imagePrompt": "6-panel comic grid prompt in English specifying ${currentStyleLabel} and character snippet ${charParsed.masterPromptSnippet}",
+      "videoPrompt": "Omni Flash / Sora prompt max 10s motion"
     }
   ]
 }`;
-      const pipelineResp = await callUniversalAI(state.story, state.provider, state.selectedModel, state.openrouterKey, state.geminiKey, sysInstruction);
-      pipelineParsed = extractJSON(pipelineResp);
-    } catch(e) { console.warn(e); }
 
-    if (pipelineParsed && Array.isArray(pipelineParsed.storyboards) && pipelineParsed.storyboards.length > 0) {
-      state.storyboards = pipelineParsed.storyboards;
-    } else {
-      state.storyboards = generateFallbackStoryboards(durationObj, styleLabel, charParsed, state.selectedTitle, generatedStory, lang);
-    }
-    renderStoryboards();
+            const pipelineUserPrompt = `Story Script (${language}):\n"${generatedStory}"`;
+            const pipelineResp = await callUniversalAI(pipelineUserPrompt, provider, selectedModel, openrouterKey, geminiKey, sysInstruction);
+            pipelineParsed = extractJSON(pipelineResp);
+          } catch (e) {
+            console.warn("Pipeline AI fallback:", e);
+          }
 
-    // SEO & Thumbnail
-    showLoading("Generating SEO & Thumbnail...");
-    try {
-      const seoPrompt = `Create YouTube SEO & Thumbnail Package:
-Title: "${state.selectedTitle}"
-Style: ${styleLabel}
-Theme: ${state.storyTheme || 'Petualangan'}
-Language: ${lang}
-Audience: ${state.targetAudience}
+          if (pipelineParsed && Array.isArray(pipelineParsed.storyboards) && pipelineParsed.storyboards.length > 0) {
+            setStoryAnalysis(pipelineParsed.analysis || null);
+            setStoryboards(pipelineParsed.storyboards);
+          } else {
+            setStoryAnalysis({ totalStoryboardsNeeded: targetDurationObj.storyboards, pacingNotes: "Pacing disesuaikan", emotionalArc: "Alur konsisten" });
+            setStoryboards(generateFallbackStoryboards(targetDurationObj, currentStyleLabel, charParsed, selectedTitle, generatedStory, language));
+          }
 
-Output JSON:
+          setLoadingStepText(`STEP 10: Generating Thumbnail & SEO Metadata in ${language}...`);
+          try {
+            const seoPrompt = `Create a YouTube SEO & Thumbnail Package for this animated video:
+Title: "${selectedTitle}"
+Style: ${currentStyleLabel}
+Theme: ${storyTheme}
+Language: ${language}
+Target Audience: ${targetAudience}
+
+Output MUST be JSON:
 {
   "thumbnail": {
-    "ctrTextOptions": ["Option 1", "Option 2", "Option 3"],
-    "visualConcept": "Visual description in ${lang}",
-    "readyPrompt": "16:9 thumbnail prompt in English"
+    "ctrTextOptions": ["Text Option 1", "Text Option 2", "Text Option 3"],
+    "visualConcept": "Visual description for thumbnail in ${language}",
+    "readyPrompt": "High-CTR 16:9 thumbnail prompt for Midjourney/Imagen in English including character snippet ${charParsed.masterPromptSnippet}"
   },
   "seo": {
     "seoTitles": ["Title 1", "Title 2", "Title 3", "Title 4", "Title 5"],
-    "videoDescription": "Full description in ${lang}",
-    "hashtags": "#Tag1 #Tag2 #Tag3",
-    "youtubeTags": ["tag1", "tag2", "tag3"],
-    "pinnedComment": "Pinned comment in ${lang}"
+    "videoDescription": "Full YouTube video description in ${language} with timestamps and Call to Action",
+    "hashtags": "#Hashtag1 #Hashtag2 #Hashtag3",
+    "youtubeTags": ["tag1", "tag2", "tag3", "tag4", "tag5"],
+    "pinnedComment": "Engaging pinned comment question in ${language}"
   }
 }`;
-      const seoResp = await callUniversalAI(seoPrompt, state.provider, state.selectedModel, state.openrouterKey, state.geminiKey);
-      const parsedSeo = extractJSON(seoResp);
-      if (parsedSeo && parsedSeo.seo) {
-        state.thumbnailData = parsedSeo.thumbnail;
-        state.seoData = parsedSeo.seo;
-      } else {
-        throw new Error("Invalid SEO data");
-      }
-    } catch(e) {
-      state.thumbnailData = {
-        ctrTextOptions: [`RAHASIA ${state.selectedTitle}!`, `JANGAN LEWATKAN!`, `TERNYATA BEGINI...`],
-        visualConcept: `Karakter utama ${charParsed.characterName} dengan ekspresi kaget.`,
-        readyPrompt: `YouTube thumbnail, ${styleLabel} style. ${charParsed.masterPromptSnippet} with shocked expression. Bold text.`
-      };
-      state.seoData = {
-        seoTitles: [
-          `${state.selectedTitle} (Animasi)`,
-          `Kisah ${state.selectedTitle}`,
-          `Petualangan ${state.selectedTitle}`,
-          `${state.selectedTitle} - Full Episode`,
-          `${state.selectedTitle} (Kartun Anak)`
-        ],
-        videoDescription: `Saksikan petualangan "${state.selectedTitle}"!\n\nJangan lupa Like & Subscribe!`,
-        hashtags: `#Animasi #Kartun #${state.selectedTitle.replace(/[^a-zA-Z]/g, '')}`,
-        youtubeTags: [state.selectedTitle, "animasi", "kartun anak", "cerita", "edukasi"],
-        pinnedComment: `Bagian favoritmu? Tulis di komentar! 👇`
-      };
-    }
-    renderSeo();
+            const seoResp = await callUniversalAI(seoPrompt, provider, selectedModel, openrouterKey, geminiKey);
+            const parsedSeo = extractJSON(seoResp);
+            if (parsedSeo && parsedSeo.seo) {
+              setThumbnailData(parsedSeo.thumbnail);
+              setSeoData(parsedSeo.seo);
+            } else {
+              throw new Error("SEO JSON structure missing");
+            }
+          } catch (e) {
+            setThumbnailData({
+              ctrTextOptions: [`RAHASIA ${selectedTitle}!`, `JANGAN DITONTON SENDIRIAN!`, `TERNYATA BEGINI...`],
+              visualConcept: `Karakter utama ${charParsed.characterName} menunjukkan ekspresi kaget dengan latar belakang animasi ${currentStyleLabel}.`,
+              readyPrompt: `High-CTR 16:9 YouTube thumbnail, ${currentStyleLabel} style. Main character ${charParsed.masterPromptSnippet} with shocked reaction expression. Bold catchy headline text 'RAHASIA BIG!', vibrant gradient lighting, 8k resolution.`
+            });
+            setSeoData({
+              seoTitles: [
+                `${selectedTitle} (Kisah Lengkap Animasi)`,
+                `Sisi Lain Dibalik ${selectedTitle}!`,
+                `Kisah Mengharukan: ${selectedTitle}`,
+                `Apa Yang Terjadi Pada ${selectedTitle}?`,
+                `${selectedTitle} - Kartun Animasi Spesial`
+              ],
+              videoDescription: `Saksikan petualangan seru "${selectedTitle}"!\n\nDalam episode kali ini, kita menyaksikan kisah seru nan penuh pesan moral bersama ${charParsed.characterName}.\n\nJangan lupa Like, Subscribe, dan bagikan ke teman-temanmu!`,
+              hashtags: `#AnimasiKids #${selectedTitle.replace(/[^a-zA-Z0-9]/g, '')} #KartunAnak #${language}`,
+              youtubeTags: [selectedTitle, "kartun anak", "animasi viral", "cerita anak", "edukasi"],
+              pinnedComment: `Bagian mana dari cerita "${selectedTitle}" yang paling kamu sukai? Tulis di kolom komentar ya! 👇`
+            });
+          }
 
-    showToast("Full Production Package generated!", "success");
-    switchTab('storyboards');
+          showToast("Full Production Package generated!", "success");
+          setActiveTab('storyboards');
 
-  } catch (err) {
-    showToast(err.message, "error");
-  }
-  
-  state.isGenerating = false;
-  if (btn) btn.disabled = false;
-  hideLoading();
-  updateSidebarInfo();
-}
-
-// ===================================================================
-// RENDER FUNCTIONS
-// ===================================================================
-
-function renderCharacter() {
-  const container = $('characterContainer');
-  const noMsg = $('noCharacterMsg');
-  if (!container || !noMsg) return;
-  if (!state.masterCharacter) {
-    container.classList.add('hidden');
-    noMsg.classList.remove('hidden');
-    return;
-  }
-  container.classList.remove('hidden');
-  noMsg.classList.add('hidden');
-  const c = state.masterCharacter;
-  const nameEl = $('charName');
-  const archetypeEl = $('charArchetype');
-  const faceEl = $('charFace');
-  const hairEl = $('charHair');
-  const clothesEl = $('charClothes');
-  const bodyEl = $('charBody');
-  const snippetEl = $('charSnippet');
-  
-  if (nameEl) nameEl.textContent = c.characterName || '-';
-  if (archetypeEl) archetypeEl.textContent = c.archetype || '-';
-  if (faceEl) faceEl.textContent = c.face || '-';
-  if (hairEl) hairEl.textContent = c.hair || '-';
-  if (clothesEl) clothesEl.textContent = c.clothes || '-';
-  if (bodyEl) bodyEl.textContent = (c.body || '') + ' | ' + (c.colors || '');
-  if (snippetEl) snippetEl.textContent = c.masterPromptSnippet || '-';
-}
-
-function renderStory() {
-  const container = $('storyContainer');
-  const textEl = $('storyText');
-  if (!container || !textEl) return;
-  if (!state.story) {
-    container.classList.add('hidden');
-    return;
-  }
-  container.classList.remove('hidden');
-  textEl.textContent = state.story;
-}
-
-function renderStoryboards() {
-  const container = $('storyboardsContainer');
-  const noMsg = $('noSbMsg');
-  const badge = $('sbBadge');
-  
-  if (!container || !noMsg || !badge) return;
-  
-  if (!state.storyboards || state.storyboards.length === 0) {
-    container.innerHTML = '';
-    noMsg.classList.remove('hidden');
-    badge.classList.add('hidden');
-    return;
-  }
-  noMsg.classList.add('hidden');
-  badge.textContent = state.storyboards.length;
-  badge.classList.remove('hidden');
-  
-  const langEl = $('sbLang');
-  const titleEl = $('sbTitle');
-  if (langEl) langEl.textContent = state.language;
-  if (titleEl) titleEl.textContent = state.selectedTitle || '-';
-  
-  let html = '';
-  state.storyboards.forEach((sb) => {
-    html += `
-      <div class="card-premium p-6 space-y-5">
-        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center pb-3 border-b border-slate-200 gap-2">
-          <div class="flex items-center gap-3">
-            <span class="w-8 h-8 rounded-lg bg-indigo-600 text-white font-bold text-xs flex items-center justify-center">#${sb.storyboardId}</span>
-            <div>
-              <h3 class="text-base font-bold text-slate-800">${sb.sceneTitle || `Storyboard #${sb.storyboardId}`}</h3>
-              <span class="text-xs text-slate-500">${sb.locationAndTime || ''}</span>
-            </div>
-          </div>
-        </div>
-        <div>
-          <span class="text-[10px] font-bold text-indigo-600 uppercase tracking-wider block">6 Panels</span>
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mt-2">
-            ${(sb.panels || []).map(p => `
-              <div class="panel-premium">
-                <div class="label">PANEL ${p.panelNum || '?'}</div>
-                <p class="text-sm text-slate-700 font-medium mt-1">${p.action || '-'}</p>
-                ${p.dialogue && p.dialogue !== 'N/A' ? `<p class="text-xs text-amber-700 font-medium bg-amber-50 p-2 rounded-lg border border-amber-200 mt-1.5">💬 "${p.dialogue}"</p>` : ''}
-              </div>
-            `).join('')}
-          </div>
-        </div>
-        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
-          <div class="flex justify-between items-center">
-            <span class="text-xs font-bold text-indigo-700">🖼️ Image Prompt</span>
-            <button onclick="copyText(\`${sb.imagePrompt || ''}\`, 'Image Prompt')" class="text-xs text-indigo-600 font-semibold hover:underline">Copy</button>
-          </div>
-          <p class="text-xs font-mono text-slate-600 bg-white p-3 rounded-lg border border-slate-200">${sb.imagePrompt || '-'}</p>
-        </div>
-        <div class="bg-slate-50 p-4 rounded-xl border border-violet-200 space-y-2">
-          <div class="flex justify-between items-center">
-            <span class="text-xs font-bold text-violet-700">📹 Video Prompt</span>
-            <button onclick="copyText(\`${sb.videoPrompt || ''}\`, 'Video Prompt')" class="text-xs text-indigo-600 font-semibold hover:underline">Copy</button>
-          </div>
-          <p class="text-xs font-mono text-slate-600 bg-white p-3 rounded-lg border border-slate-200">${sb.videoPrompt || '-'}</p>
-        </div>
-      </div>
-    `;
-  });
-  container.innerHTML = html;
-}
-
-function renderSeo() {
-  const thumbContainer = $('thumbnailContainer');
-  const seoContainer = $('seoContainer');
-  const noMsg = $('noSeoMsg');
-  
-  if (!thumbContainer || !seoContainer || !noMsg) return;
-  
-  if (!state.thumbnailData || !state.seoData) {
-    thumbContainer.classList.add('hidden');
-    seoContainer.classList.add('hidden');
-    noMsg.classList.remove('hidden');
-    return;
-  }
-  thumbContainer.classList.remove('hidden');
-  seoContainer.classList.remove('hidden');
-  noMsg.classList.add('hidden');
-  
-  const td = state.thumbnailData;
-  const ctrEl = $('ctrTexts');
-  if (ctrEl) {
-    ctrEl.innerHTML = (td.ctrTextOptions || []).map(t => `<span class="bg-indigo-50 border border-indigo-200 text-indigo-700 text-sm px-3 py-1.5 rounded-lg font-semibold">${t}</span>`).join('');
-  }
-  const visualEl = $('visualConcept');
-  if (visualEl) visualEl.textContent = td.visualConcept || '-';
-  const promptEl = $('thumbnailPrompt');
-  if (promptEl) promptEl.textContent = td.readyPrompt || '-';
-  
-  const sd = state.seoData;
-  const titlesEl = $('seoTitles');
-  if (titlesEl) {
-    titlesEl.innerHTML = (sd.seoTitles || []).map((t, i) => `
-      <div class="flex justify-between items-center bg-slate-50 p-3 rounded-lg border border-slate-200 text-sm">
-        <span class="font-medium text-slate-700">${i + 1}. ${t}</span>
-        <button onclick="copyText('${t.replace(/'/g, "\\'")}', 'Title ${i+1}')" class="text-indigo-600 font-semibold text-xs hover:underline">Copy</button>
-      </div>
-    `).join('');
-  }
-  const descEl = $('seoDescription');
-  if (descEl) descEl.value = sd.videoDescription || '';
-  const hashEl = $('seoHashtags');
-  if (hashEl) hashEl.textContent = sd.hashtags || '-';
-  const tagsEl = $('seoTags');
-  if (tagsEl) tagsEl.textContent = (sd.youtubeTags || []).join(', ');
-  const pinnedEl = $('seoPinned');
-  if (pinnedEl) pinnedEl.textContent = sd.pinnedComment || '-';
-}
-
-// ===================================================================
-// EXPORT
-// ===================================================================
-
-function generateFullPackageText(format = 'md') {
-  const isMd = format === 'md';
-  let txt = isMd ? `# 🎬 Studio Konten Pro - Production Package\n\n` : `STUDIO KONTEN PRO - PRODUCTION PACKAGE\n\n`;
-  txt += `Project: ${state.selectedTitle || 'Untitled'}\n`;
-  txt += `Style: ${getSelectedStyleLabel()}\n`;
-  txt += `Theme: ${state.storyTheme || 'Petualangan'}\n`;
-  txt += `Duration: ${state.duration} | Language: ${state.language}\n`;
-  txt += `========================================\n\n`;
-
-  if (state.masterCharacter) {
-    const c = state.masterCharacter;
-    txt += isMd ? `## 👤 MASTER CHARACTER\n` : `MASTER CHARACTER\n`;
-    txt += `Name: ${c.characterName}\nArchetype: ${c.archetype}\nFace: ${c.face}\nHair: ${c.hair}\nOutfit: ${c.clothes}\nBody: ${c.body}\nColors: ${c.colors}\nPrompt: ${c.masterPromptSnippet}\n\n`;
-  }
-
-  if (state.story) {
-    txt += isMd ? `## 📖 STORY SCRIPT\n` : `STORY SCRIPT\n`;
-    txt += `${state.story}\n\n`;
-  }
-
-  if (state.storyboards && state.storyboards.length > 0) {
-    txt += isMd ? `## 🎨 STORYBOARDS (${state.storyboards.length})\n\n` : `STORYBOARDS\n\n`;
-    state.storyboards.forEach(sb => {
-      txt += `--- STORYBOARD #${sb.storyboardId}: ${sb.sceneTitle} ---\n`;
-      txt += `Location: ${sb.locationAndTime}\nContinuity: ${sb.continuityNotes}\n`;
-      if (sb.panels) {
-        sb.panels.forEach(p => {
-          txt += `  [Panel ${p.panelNum}] ${p.action} | "${p.dialogue}"\n`;
-        });
-      }
-      txt += `\nIMAGE PROMPT:\n${sb.imagePrompt}\n\n`;
-      txt += `VIDEO PROMPT:\n${sb.videoPrompt}\n\n`;
-    });
-  }
-
-  if (state.thumbnailData) {
-    const td = state.thumbnailData;
-    txt += isMd ? `## 🖼️ THUMBNAIL\n` : `THUMBNAIL\n`;
-    txt += `Concepts: ${(td.ctrTextOptions || []).join(' | ')}\n`;
-    txt += `Prompt: ${td.readyPrompt}\n\n`;
-  }
-
-  if (state.seoData) {
-    const sd = state.seoData;
-    txt += isMd ? `## 🏷️ SEO\n` : `SEO\n`;
-    txt += `Titles:\n${(sd.seoTitles || []).map((t,i) => `${i+1}. ${t}`).join('\n')}\n\n`;
-    txt += `Description:\n${sd.videoDescription}\n\n`;
-    txt += `Hashtags: ${sd.hashtags}\nTags: ${(sd.youtubeTags || []).join(', ')}\n`;
-    txt += `Pinned: ${sd.pinnedComment}\n`;
-  }
-  return txt;
-}
-
-function exportFile(format) {
-  let content = generateFullPackageText(format === 'md' ? 'md' : 'txt');
-  let filename = `${state.selectedTitle || 'Animation_Package'}`;
-  if (format === 'md') filename += '.md';
-  else if (format === 'doc') filename += '.doc';
-  else filename += '.txt';
-  
-  const blob = new Blob([content], { type: 'text/plain' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = filename;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-  showToast(`Exported ${filename}`, 'success');
-}
-
-// ===================================================================
-// LOADING / MODAL
-// ===================================================================
-
-function showLoading(text) {
-  const overlay = $('loadingOverlay');
-  const textEl = $('loadingText');
-  const modelEl = $('loadingModel');
-  if (overlay) overlay.style.display = 'flex';
-  if (textEl) textEl.textContent = text || 'Processing...';
-  if (modelEl) modelEl.textContent = state.selectedModel;
-}
-
-function hideLoading() {
-  const overlay = $('loadingOverlay');
-  if (overlay) overlay.style.display = 'none';
-}
-
-function openResetModal() {
-  const modal = $('resetModal');
-  if (modal) modal.style.display = 'flex';
-}
-
-function closeResetModal() {
-  const modal = $('resetModal');
-  if (modal) modal.style.display = 'none';
-}
-
-function confirmReset() {
-  localStorage.removeItem(LOCAL_STORAGE_KEY);
-  state.titles = [];
-  state.selectedTitle = '';
-  state.masterCharacter = null;
-  state.story = '';
-  state.storyboards = [];
-  state.thumbnailData = null;
-  state.seoData = null;
-  closeResetModal();
-  renderTitles();
-  renderCharacter();
-  renderStory();
-  renderStoryboards();
-  renderSeo();
-  updateSidebarInfo();
-  showToast("Studio reset!", "info");
-}
-
-// ===================================================================
-// API SETTINGS
-// ===================================================================
-
-function handleProviderChange() {
-  const prov = $('providerSelect');
-  if (!prov) return;
-  state.provider = prov.value;
-  if (state.provider === 'openrouter') {
-    state.selectedModel = 'openrouter/free';
-  } else {
-    state.selectedModel = 'gemini-2.5-flash';
-  }
-  renderModelSelect();
-  updateKeyFields();
-  localStorage.setItem("AI_STUDIO_PROVIDER", state.provider);
-  localStorage.setItem("AI_STUDIO_MODEL", state.selectedModel);
-}
-
-function renderModelSelect() {
-  const sel = $('modelSelect');
-  if (!sel) return;
-  const models = state.provider === 'openrouter' ? state.customModelList : GEMINI_DIRECT_MODELS;
-  sel.innerHTML = models.map(m => `<option value="${m.id}" ${m.id === state.selectedModel ? 'selected' : ''}>${m.name}</option>`).join('');
-}
-
-function updateKeyFields() {
-  const isOpenRouter = state.provider === 'openrouter';
-  const label = $('keyLabel');
-  const input = $('apiKeyInput');
-  if (label) label.textContent = isOpenRouter ? 'OpenRouter API Key' : 'Google Gemini API Key';
-  if (input) {
-    input.placeholder = isOpenRouter ? 'sk-or-v1-...' : 'AIzaSy...';
-    input.value = isOpenRouter ? state.openrouterKey : state.geminiKey;
-  }
-}
-
-async function handleTestKey() {
-  if (state.isTestingKey) return;
-  state.isTestingKey = true;
-  const btn = $('btnTestKey');
-  if (btn) btn.innerHTML = '<span class="text-base">⏳</span> Testing...';
-  try {
-    const key = state.provider === 'openrouter' ? state.openrouterKey : state.geminiKey;
-    if (!key || key.trim() === '') throw new Error("Enter API key first.");
-    const resp = await callUniversalAI("Reply with 'OK'", state.provider, state.selectedModel, state.openrouterKey, state.geminiKey);
-    showToast(`✅ Key valid! Response: ${resp.substring(0, 20)}`, "success");
-  } catch (err) {
-    showToast(`❌ ${err.message}`, "error");
-  }
-  state.isTestingKey = false;
-  if (btn) btn.innerHTML = '<span class="text-base">🔑</span> Test Key';
-}
-
-async function handleRefreshModels() {
-  if (state.isRefreshingModels) return;
-  state.isRefreshingModels = true;
-  const btn = $('btnRefreshModels');
-  if (btn) btn.innerHTML = '<span class="text-base">⏳</span> Loading...';
-  try {
-    if (state.provider === 'openrouter') {
-      const res = await fetch("https://openrouter.ai/api/v1/models");
-      if (res.ok) {
-        const data = await res.json();
-        const freeOnly = data.data
-          .filter(m => m.id.includes(':free') || m.id.includes('free'))
-          .map(m => ({ id: m.id, name: `🧠 ${m.id}`, tag: 'Free' }));
-        if (freeOnly.length > 0) {
-          state.customModelList = freeOnly;
-          showToast(`Found ${freeOnly.length} free models`, "success");
-        } else {
-          state.customModelList = OPENROUTER_FREE_MODELS;
-          showToast("Using default models", "info");
+        } catch (err) {
+          showToast(err.message, "error");
+        } finally {
+          setIsGenerating(false);
+          setLoadingStepText('');
         }
-      } else {
-        state.customModelList = OPENROUTER_FREE_MODELS;
-        showToast("Using default models", "info");
-      }
+      };
+
+      const generateFullPackageText = (format = 'md') => {
+        const isMd = format === 'md';
+        let txt = isMd ? `# 🎬 AI VIRAL KIDS ANIMATION STUDIO - PRODUCTION PACKAGE\n\n` : `AI VIRAL KIDS ANIMATION STUDIO - PRODUCTION PACKAGE\n\n`;
+        
+        txt += `Project Name: ${selectedTitle || 'Untitled Story'}\n`;
+        txt += `Animation Style: ${currentStyleLabel}\n`;
+        txt += `Story Theme: ${storyTheme}\n`;
+        txt += `Target Duration: ${duration}\n`;
+        txt += `Language: ${language} | Audience: ${targetAudience}\n`;
+        txt += `=======================================================\n\n`;
+
+        if (masterCharacter) {
+          txt += isMd ? `## 👤 STEP 7: MASTER CHARACTER SHEET\n` : `STEP 7: MASTER CHARACTER SHEET\n`;
+          txt += `Character Name: ${masterCharacter.characterName || 'Main Character'}\n`;
+          txt += `Archetype: ${masterCharacter.archetype || 'Hero'}\n`;
+          txt += `Face: ${masterCharacter.face}\n`;
+          txt += `Hair: ${masterCharacter.hair}\n`;
+          txt += `Outfit/Clothes: ${masterCharacter.clothes}\n`;
+          txt += `Body: ${masterCharacter.body}\n`;
+          txt += `Colors: ${masterCharacter.colors}\n`;
+          txt += `Accessories: ${masterCharacter.accessories}\n`;
+          txt += `Master Prompt Snippet: ${masterCharacter.masterPromptSnippet}\n\n`;
+        }
+
+        if (story) {
+          txt += isMd ? `## 📖 STEP 2: COMPLETE ANIMATION STORY SCRIPT (${language})\n` : `STEP 2: COMPLETE ANIMATION STORY SCRIPT (${language})\n`;
+          txt += `${story}\n\n`;
+        }
+
+        if (storyboards && storyboards.length > 0) {
+          txt += isMd ? `## 🎨 STORYBOARD BREAKDOWN & AI PROMPTS (${storyboards.length} Storyboards x 6 Panels)\n\n` : `STORYBOARD BREAKDOWN & AI PROMPTS\n\n`;
+          storyboards.forEach((sb) => {
+            txt += `-------------------------------------------------------\n`;
+            txt += `STORYBOARD #${sb.storyboardId}: ${sb.sceneTitle || 'Scene Cut'}\n`;
+            txt += `Location/Time: ${sb.locationAndTime || 'Standard'}\n`;
+            txt += `Continuity: ${sb.continuityNotes || 'Connected to previous'}\n\n`;
+            
+            txt += `6 Comic Panels:\n`;
+            if (sb.panels && Array.isArray(sb.panels)) {
+              sb.panels.forEach(p => {
+                txt += `  [Panel ${p.panelNum}] Action: ${p.action} | Dialogue: "${p.dialogue || 'N/A'}"\n`;
+              });
+            }
+
+            txt += `\n🖼️ IMAGE PROMPT (Midjourney / Imagen / DALL-E):\n${sb.imagePrompt}\n\n`;
+            txt += `📹 VIDEO PROMPT (Omni Flash / Sora / Runway Gen-3):\n${sb.videoPrompt}\n\n`;
+          });
+        }
+
+        if (thumbnailData) {
+          txt += isMd ? `## 🖼️ THUMBNAIL STUDIO & CTR PROMPTS\n` : `THUMBNAIL STUDIO & CTR PROMPTS\n`;
+          txt += `Visual Concept: ${thumbnailData.visualConcept}\n`;
+          txt += `Headline Options: ${thumbnailData.ctrTextOptions?.join(' | ')}\n`;
+          txt += `Thumbnail Prompt:\n${thumbnailData.readyPrompt}\n\n`;
+        }
+
+        if (seoData) {
+          txt += isMd ? `## 🏷️ YOUTUBE SEO METADATA PACKAGE\n` : `YOUTUBE SEO METADATA PACKAGE\n`;
+          txt += `SEO Titles:\n${seoData.seoTitles?.map((t, i) => `${i + 1}. ${t}`).join('\n')}\n\n`;
+          txt += `Description:\n${seoData.videoDescription}\n\n`;
+          txt += `Hashtags: ${seoData.hashtags}\n`;
+          txt += `Tags: ${seoData.youtubeTags?.join(', ')}\n`;
+          txt += `Pinned Comment: ${seoData.pinnedComment}\n\n`;
+        }
+
+        return txt;
+      };
+
+      return (
+        <div className="min-h-screen flex flex-col bg-[#090d16] text-slate-100 font-sans">
+          
+          {/* Toast Notification */}
+          {toast && (
+            <div className={`fixed bottom-6 right-6 z-50 px-4 py-3 rounded-2xl shadow-2xl text-xs font-bold border flex items-center space-x-2 animate-bounce backdrop-blur-md ${
+              toast.type === 'success' ? 'bg-emerald-950/90 border-emerald-500 text-emerald-200' :
+              toast.type === 'error' ? 'bg-rose-950/90 border-rose-500 text-rose-200' :
+              'bg-indigo-950/90 border-indigo-500 text-indigo-200'
+            }`}>
+              <span>{toast.type === 'success' ? '✓' : '⚠️'}</span>
+              <span>{toast.msg}</span>
+            </div>
+          )}
+
+          {/* Reset Modal */}
+          {showResetModal && (
+            <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
+              <div className="bg-slate-900 border border-slate-800 p-6 rounded-3xl max-w-sm w-full space-y-4 shadow-2xl">
+                <h3 className="font-extrabold text-white text-base">Reset Studio Canvas?</h3>
+                <p className="text-xs text-slate-400">This will clear your current titles, script, master character sheet, generated storyboards, and SEO metadata.</p>
+                <div className="flex space-x-3 justify-end pt-2">
+                  <button 
+                    onClick={() => setShowResetModal(false)}
+                    className="px-4 py-2 rounded-xl text-xs font-bold text-slate-400 hover:bg-slate-800 transition"
+                  >
+                    Cancel
+                  </button>
+                  <button 
+                    onClick={() => {
+                      localStorage.removeItem(LOCAL_STORAGE_KEY);
+                      setTitles([]);
+                      setSelectedTitle('');
+                      setMasterCharacter(null);
+                      setStory('');
+                      setStoryboards([]);
+                      setThumbnailData(null);
+                      setSeoData(null);
+                      setShowResetModal(false);
+                      showToast("Studio canvas reset!", "info");
+                    }}
+                    className="px-4 py-2 rounded-xl text-xs font-bold bg-rose-600 hover:bg-rose-500 text-white transition shadow-lg shadow-rose-600/30"
+                  >
+                    Reset Canvas
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Loading Overlay */}
+          {isGenerating && (
+            <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex flex-col items-center justify-center p-4">
+              <div className="bg-slate-900/90 p-8 rounded-3xl flex flex-col items-center max-w-md text-center border border-indigo-500/30 shadow-2xl">
+                <div className="relative w-16 h-16 mb-4">
+                  <div className="absolute inset-0 rounded-full border-4 border-indigo-500/20"></div>
+                  <div className="absolute inset-0 rounded-full border-4 border-indigo-500 border-t-transparent animate-spin"></div>
+                  <div className="absolute inset-0 flex items-center justify-center text-xl">🎬</div>
+                </div>
+                <h3 className="text-base font-extrabold text-white tracking-tight">{loadingStepText || 'Processing Workflow...'}</h3>
+                <p className="text-xs text-slate-400 mt-2 font-medium">Model: <strong className="text-indigo-400">{selectedModel}</strong> ({provider.toUpperCase()})</p>
+              </div>
+            </div>
+          )}
+
+          {/* Main Header */}
+          <header className="bg-slate-900/80 backdrop-blur border-b border-slate-800 sticky top-0 z-30 px-6 py-3.5 flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-600 via-violet-600 to-pink-500 flex items-center justify-center text-white shadow-lg shadow-indigo-500/25 font-black text-xl">
+                🚀
+              </div>
+              <div>
+                <h1 className="font-black text-base sm:text-lg tracking-tight text-white flex items-center space-x-2">
+                  <span>AI Viral Kids Animation Studio</span>
+                  <span className="bg-indigo-500/10 text-indigo-400 text-[10px] font-bold px-2 py-0.5 rounded-full border border-indigo-500/20">v5.0 Multi-Lang</span>
+                </h1>
+                <p className="text-xs text-slate-400 font-medium">1 Ide → Storyboard 6-Panel → Master Character → Visual & Video Prompts → SEO</p>
+              </div>
+            </div>
+
+            <div className="flex items-center space-x-3">
+              <button 
+                onClick={() => setActiveTab('settings')}
+                className="flex items-center space-x-1.5 bg-amber-500/10 border border-amber-500/30 text-amber-300 text-[11px] font-bold px-3 py-1.5 rounded-xl hover:bg-amber-500/20 transition"
+              >
+                <span>⚡ API: {provider === 'openrouter' ? 'OpenRouter Free' : 'Google Gemini'}</span>
+              </button>
+              
+              <button 
+                onClick={() => setShowResetModal(true)}
+                className="text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 px-3.5 py-1.5 rounded-xl transition"
+              >
+                Reset
+              </button>
+            </div>
+          </header>
+
+          {/* Body Container */}
+          <div className="flex flex-1 overflow-hidden">
+            {/* Sidebar */}
+            <aside className="w-64 bg-slate-900/50 border-r border-slate-800/80 p-4 space-y-2 hidden md:flex flex-col justify-between">
+              <div className="space-y-1">
+                <div className="text-[10px] font-extrabold text-slate-500 uppercase tracking-wider px-3 mb-3">Studio Pipeline</div>
+                
+                <button 
+                  onClick={() => setActiveTab('studio')}
+                  className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold transition flex items-center space-x-3 ${
+                    activeTab === 'studio' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/30' : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+                  }`}
+                >
+                  <span className="text-base">🎛️</span>
+                  <span>1. Setup & Ideation</span>
+                </button>
+
+                <button 
+                  onClick={() => setActiveTab('character')}
+                  className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold transition flex items-center space-x-3 ${
+                    activeTab === 'character' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/30' : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+                  }`}
+                >
+                  <span className="text-base">👤</span>
+                  <span>2. Master Character</span>
+                </button>
+
+                <button 
+                  onClick={() => setActiveTab('storyboards')}
+                  className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold transition flex items-center justify-between ${
+                    activeTab === 'storyboards' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/30' : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+                  }`}
+                >
+                  <div className="flex items-center space-x-3">
+                    <span className="text-base">🎨</span>
+                    <span>3. Storyboards</span>
+                  </div>
+                  {storyboards.length > 0 && (
+                    <span className="bg-indigo-400/20 text-indigo-300 text-[10px] px-2 py-0.5 rounded-full font-bold">{storyboards.length}</span>
+                  )}
+                </button>
+
+                <button 
+                  onClick={() => setActiveTab('thumbnail_seo')}
+                  className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold transition flex items-center space-x-3 ${
+                    activeTab === 'thumbnail_seo' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/30' : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+                  }`}
+                >
+                  <span className="text-base">🖼️</span>
+                  <span>4. Thumbnail & SEO</span>
+                </button>
+
+                <button 
+                  onClick={() => setActiveTab('export')}
+                  className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold transition flex items-center space-x-3 ${
+                    activeTab === 'export' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/30' : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+                  }`}
+                >
+                  <span className="text-base">📦</span>
+                  <span>5. Package Export</span>
+                </button>
+
+                <button 
+                  onClick={() => setActiveTab('settings')}
+                  className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold transition flex items-center space-x-3 ${
+                    activeTab === 'settings' ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30 shadow-lg shadow-amber-500/10' : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+                  }`}
+                >
+                  <span className="text-base">⚙️</span>
+                  <span>API Settings</span>
+                </button>
+              </div>
+
+              <div className="bg-slate-900/80 p-3.5 rounded-2xl border border-slate-800 space-y-2">
+                <span className="text-[10px] font-extrabold text-indigo-400 uppercase tracking-wider block">Active Pipeline</span>
+                <div className="text-xs font-bold text-slate-200 line-clamp-1">{currentStyleLabel}</div>
+                <div className="text-[11px] text-slate-400">Duration: <strong className="text-indigo-300">{duration}</strong></div>
+                <div className="text-[11px] text-slate-400">Language: <strong className="text-indigo-300">{language}</strong></div>
+              </div>
+            </aside>
+
+            {/* Main Content Workspace Pane */}
+            <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
+              
+              {/* TAB 1: STUDIO SETUP & IDEATION */}
+              {activeTab === 'studio' && (
+                <div className="max-w-4xl mx-auto space-y-8">
+                  
+                  <div className="bg-slate-900/80 backdrop-blur p-6 rounded-3xl border border-indigo-500/20 relative overflow-hidden">
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none"></div>
+                    <span className="text-xs font-extrabold text-indigo-400 uppercase tracking-widest block mb-1">Production Input</span>
+                    <h2 className="text-2xl font-black text-white">Create Animation Production Package</h2>
+                    <p className="text-xs text-slate-400 mt-1 max-w-xl">From 1 simple idea to 10 viral titles, master character sheets, emotional storytelling, 6-panel storyboard cuts, and YouTube SEO metadata.</p>
+                  </div>
+
+                  <div className="bg-slate-900/80 backdrop-blur p-6 rounded-3xl border border-slate-800 space-y-6">
+                    
+                    {/* 1. Animation Style Selection */}
+                    <div className="space-y-3">
+                      <label className="block text-xs font-extrabold text-slate-300 uppercase tracking-wider">
+                        1. Select Animation Style
+                      </label>
+                      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5">
+                        {ANIMATION_STYLES.map(st => {
+                          const isSel = animationStyle === st.id;
+                          return (
+                            <button
+                              key={st.id}
+                              onClick={() => setAnimationStyle(st.id)}
+                              className={`p-3 rounded-2xl text-left border transition flex flex-col justify-between ${
+                                isSel 
+                                  ? 'bg-indigo-600/20 border-indigo-500 text-white ring-2 ring-indigo-500/30' 
+                                  : 'bg-slate-950/60 border-slate-800 hover:border-slate-700 text-slate-400'
+                              }`}
+                            >
+                              <div className="flex items-center space-x-2">
+                                <span className="text-xl">{st.icon}</span>
+                                <span className="font-bold text-xs line-clamp-1">{st.label}</span>
+                              </div>
+                              <span className="text-[10px] text-slate-500 mt-2 line-clamp-1">{st.desc}</span>
+                            </button>
+                          );
+                        })}
+                      </div>
+
+                      {animationStyle === 'custom' && (
+                        <input
+                          type="text"
+                          placeholder="Describe your custom animation style..."
+                          value={customStyleText}
+                          onChange={e => setCustomStyleText(e.target.value)}
+                          className="w-full bg-slate-950 border border-indigo-500/50 rounded-xl p-3 text-xs text-white focus:outline-none"
+                        />
+                      )}
+                    </div>
+
+                    {/* 2. Story Theme */}
+                    <div className="space-y-2">
+                      <label className="block text-xs font-extrabold text-slate-300 uppercase tracking-wider">
+                        2. Story Idea / Theme
+                      </label>
+                      <textarea
+                        rows={3}
+                        placeholder="e.g. Brother saves sister from a friendly stray dog in the neighborhood..."
+                        value={storyTheme}
+                        onChange={e => setStoryTheme(e.target.value)}
+                        className="w-full bg-slate-950 border border-slate-800 rounded-2xl p-3.5 text-xs text-white focus:outline-none focus:border-indigo-500"
+                      />
+                    </div>
+
+                    {/* 3. Duration, Language & Audience Controls */}
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                      
+                      <div>
+                        <label className="block text-xs font-extrabold text-slate-300 uppercase tracking-wider mb-2">
+                          Video Duration
+                        </label>
+                        <select
+                          value={duration}
+                          onChange={e => setDuration(e.target.value)}
+                          className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-indigo-500 font-bold"
+                        >
+                          {DURATION_OPTIONS.map(d => (
+                            <option key={d.value} value={d.value}>{d.label}</option>
+                          ))}
+                        </select>
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-extrabold text-slate-300 uppercase tracking-wider mb-2">
+                          Language
+                        </label>
+                        <select
+                          value={language}
+                          onChange={e => setLanguage(e.target.value)}
+                          className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-indigo-500 font-bold"
+                        >
+                          {LANGUAGES.map(l => (
+                            <option key={l} value={l}>{l}</option>
+                          ))}
+                        </select>
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-extrabold text-slate-300 uppercase tracking-wider mb-2">
+                          Target Audience
+                        </label>
+                        <select
+                          value={targetAudience}
+                          onChange={e => setTargetAudience(e.target.value)}
+                          className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-indigo-500 font-bold"
+                        >
+                          {TARGET_AUDIENCES.map(t => (
+                            <option key={t} value={t}>{t}</option>
+                          ))}
+                        </select>
+                      </div>
+
+                    </div>
+
+                    {/* Step 1 Action Button */}
+                    <div className="pt-2 border-t border-slate-800 flex justify-end">
+                      <button
+                        onClick={handleGenerateTitles}
+                        disabled={isGenerating}
+                        className="bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold text-xs px-6 py-3 rounded-2xl shadow-lg shadow-indigo-600/30 transition flex items-center space-x-2"
+                      >
+                        <span>✨ STEP 1: Generate 10 Viral Titles in {language}</span>
+                      </button>
+                    </div>
+
+                  </div>
+
+                  {/* Step 1 Output: 10 Viral Titles Selection */}
+                  {titles.length > 0 && (
+                    <div className="bg-slate-900/80 backdrop-blur p-6 rounded-3xl border border-indigo-500/30 space-y-4">
+                      <div className="flex justify-between items-center">
+                        <div>
+                          <span className="text-[10px] font-extrabold text-indigo-400 uppercase tracking-wider">Step 1 Complete</span>
+                          <h3 className="text-base font-black text-white mt-0.5">Select Your Title ({language})</h3>
+                        </div>
+                        <button
+                          onClick={handleGenerateTitles}
+                          className="text-xs text-indigo-400 hover:text-indigo-300 font-bold"
+                        >
+                          🔄 Regenerate Titles
+                        </button>
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5">
+                        {titles.map((t, idx) => {
+                          const isSel = selectedTitle === t;
+                          return (
+                            <button
+                              key={idx}
+                              onClick={() => setSelectedTitle(t)}
+                              className={`p-3.5 rounded-2xl border text-left text-xs font-bold transition flex items-center justify-between ${
+                                isSel
+                                  ? 'bg-indigo-600 text-white border-indigo-400 shadow-md'
+                                  : 'bg-slate-950/80 border-slate-800 text-slate-300 hover:border-slate-700'
+                              }`}
+                            >
+                              <span className="pr-2">{idx + 1}. {t}</span>
+                              {isSel && <span className="text-white text-sm">✓</span>}
+                            </button>
+                          );
+                        })}
+                      </div>
+
+                      <div className="pt-4 border-t border-slate-800/80 flex flex-col sm:flex-row justify-between items-center gap-3">
+                        <div className="text-xs text-slate-400">
+                          Selected: <strong className="text-indigo-300 font-extrabold">{selectedTitle}</strong>
+                        </div>
+
+                        <button
+                          onClick={handleRunFullPipeline}
+                          disabled={isGenerating}
+                          className="w-full sm:w-auto bg-gradient-to-r from-indigo-600 via-violet-600 to-pink-600 hover:from-indigo-500 hover:to-pink-500 text-white font-black text-xs px-8 py-3.5 rounded-2xl shadow-xl shadow-indigo-600/30 transition flex items-center justify-center space-x-2"
+                        >
+                          <span>🚀 RUN FULL ANIMATION PIPELINE</span>
+                        </button>
+                      </div>
+                    </div>
+                  )}
+
+                </div>
+              )}
+
+              {/* TAB 2: MASTER CHARACTER SHEET ENGINE */}
+              {activeTab === 'character' && (
+                <div className="max-w-4xl mx-auto space-y-6">
+                  <div className="flex justify-between items-center">
+                    <div>
+                      <span className="text-xs font-extrabold text-indigo-400 uppercase tracking-widest">Step 7 Engine</span>
+                      <h2 className="text-2xl font-black text-white mt-0.5">Master Character Sheet</h2>
+                      <p className="text-xs text-slate-400">Maintains absolute visual consistency across all storyboards & panels.</p>
+                    </div>
+                  </div>
+
+                  {masterCharacter ? (
+                    <div className="bg-slate-900/80 backdrop-blur p-6 rounded-3xl border border-indigo-500/30 space-y-6">
+                      
+                      <div className="flex items-center space-x-4 border-b border-slate-800 pb-4">
+                        <div className="w-16 h-16 rounded-2xl bg-indigo-600/20 border border-indigo-500/40 flex items-center justify-center text-3xl">
+                          👤
+                        </div>
+                        <div>
+                          <h3 className="text-lg font-black text-white">{masterCharacter.characterName || 'Main Character'}</h3>
+                          <span className="bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 text-[10px] font-bold px-2.5 py-0.5 rounded-full">
+                            {masterCharacter.archetype || 'Hero'}
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                        <div className="bg-slate-950/60 p-4 rounded-2xl border border-slate-800 space-y-1">
+                          <span className="text-[10px] font-extrabold text-slate-500 uppercase">Face & Expression</span>
+                          <p className="text-slate-200 font-medium">{masterCharacter.face || 'Standard'}</p>
+                        </div>
+                        
+                        <div className="bg-slate-950/60 p-4 rounded-2xl border border-slate-800 space-y-1">
+                          <span className="text-[10px] font-extrabold text-slate-500 uppercase">Hair & Style</span>
+                          <p className="text-slate-200 font-medium">{masterCharacter.hair || 'Standard'}</p>
+                        </div>
+
+                        <div className="bg-slate-950/60 p-4 rounded-2xl border border-slate-800 space-y-1">
+                          <span className="text-[10px] font-extrabold text-slate-500 uppercase">Outfit & Clothes</span>
+                          <p className="text-slate-200 font-medium">{masterCharacter.clothes || 'Standard'}</p>
+                        </div>
+
+                        <div className="bg-slate-950/60 p-4 rounded-2xl border border-slate-800 space-y-1">
+                          <span className="text-[10px] font-extrabold text-slate-500 uppercase">Body & Colors</span>
+                          <p className="text-slate-200 font-medium">{masterCharacter.body} | Colors: {masterCharacter.colors}</p>
+                        </div>
+                      </div>
+
+                      <div className="bg-indigo-950/40 border border-indigo-500/30 p-4 rounded-2xl space-y-2">
+                        <div className="flex justify-between items-center">
+                          <span className="text-xs font-extrabold text-indigo-300 uppercase">Master Character Prompt Snippet</span>
+                          <button
+                            onClick={() => copyToClipboard(masterCharacter.masterPromptSnippet, "Character Prompt Snippet")}
+                            className="text-[11px] text-indigo-400 font-bold hover:underline flex items-center space-x-1"
+                          >
+                            <Icons.Copy />
+                            <span>Copy Snippet</span>
+                          </button>
+                        </div>
+                        <p className="text-xs font-mono text-slate-300 bg-slate-950 p-3 rounded-xl border border-slate-800">
+                          {masterCharacter.masterPromptSnippet || 'No snippet generated yet.'}
+                        </p>
+                      </div>
+
+                    </div>
+                  ) : (
+                    <div className="text-center py-16 bg-slate-900/80 backdrop-blur rounded-3xl border border-slate-800 text-slate-500 text-xs">
+                      No Master Character Sheet generated yet. Complete Step 1 and run the pipeline.
+                    </div>
+                  )}
+
+                  {/* Story Script Section */}
+                  {story && (
+                    <div className="bg-slate-900/80 backdrop-blur p-6 rounded-3xl border border-slate-800 space-y-3">
+                      <div className="flex justify-between items-center">
+                        <h3 className="text-sm font-black text-white uppercase tracking-wider">Step 2: Complete Animation Script ({language})</h3>
+                        <button onClick={() => copyToClipboard(story, "Story Script")} className="text-xs text-indigo-400 font-bold hover:underline flex items-center space-x-1">
+                          <Icons.Copy />
+                          <span>Copy Story</span>
+                        </button>
+                      </div>
+                      <div className="bg-slate-950 p-4 rounded-2xl border border-slate-800 text-xs text-slate-300 leading-relaxed font-sans whitespace-pre-line max-h-96 overflow-y-auto">
+                        {story}
+                      </div>
+                    </div>
+                  )}
+
+                </div>
+              )}
+
+              {/* TAB 3: STORYBOARDS */}
+              {activeTab === 'storyboards' && (
+                <div className="max-w-5xl mx-auto space-y-6">
+                  
+                  <div className="bg-slate-900/90 border border-indigo-500/30 p-4 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
+                    <div className="space-y-1">
+                      <div className="flex items-center space-x-2">
+                        <span className="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-bold px-2 py-0.5 rounded-full">
+                          ✓ PIPELINE SYNCHRONIZED
+                        </span>
+                        <span className="text-slate-400 font-medium">Language: <strong className="text-white">{language}</strong></span>
+                      </div>
+                      <div className="text-slate-300 font-bold line-clamp-1">
+                        Judul: "{selectedTitle || 'Petualangan Animasi'}"
+                      </div>
+                    </div>
+
+                    <button
+                      onClick={handleRunFullPipeline}
+                      disabled={isGenerating}
+                      className="bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold text-xs px-4 py-2 rounded-xl shadow-lg shadow-indigo-600/20 transition"
+                    >
+                      🚀 Regenerate All Storyboards
+                    </button>
+                  </div>
+
+                  {storyboards.length === 0 ? (
+                    <div className="text-center py-16 bg-slate-900/80 backdrop-blur rounded-3xl border border-slate-800 text-slate-500 text-xs">
+                      No storyboards generated yet. Go to <button onClick={() => setActiveTab('studio')} className="text-indigo-400 underline font-bold">Studio Ideation</button> and run pipeline.
+                    </div>
+                  ) : (
+                    <div className="space-y-6">
+                      {storyboards.map((sb, idx) => (
+                        <div key={idx} className="bg-slate-900/80 backdrop-blur p-6 rounded-3xl border border-slate-800 space-y-5">
+                          
+                          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center pb-3 border-b border-slate-800 gap-2">
+                            <div className="flex items-center space-x-3">
+                              <span className="w-8 h-8 rounded-xl bg-indigo-600 text-white font-black text-xs flex items-center justify-center">
+                                #{sb.storyboardId}
+                              </span>
+                              <div>
+                                <h3 className="text-sm font-black text-white">{sb.sceneTitle || `Storyboard Cut #${sb.storyboardId}`}</h3>
+                                <span className="text-[10px] text-slate-400 font-medium">Location: {sb.locationAndTime}</span>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="space-y-2">
+                            <span className="text-[10px] font-extrabold text-indigo-400 uppercase tracking-wider block">
+                              STEP 4: 6 Connected Comic Panels ({language})
+                            </span>
+                            
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                              {sb.panels && Array.isArray(sb.panels) && sb.panels.map((p, pIdx) => (
+                                <div key={pIdx} className="bg-slate-950 p-3.5 rounded-2xl border border-slate-800 space-y-1.5 text-xs">
+                                  <div className="flex justify-between items-center">
+                                    <span className="font-extrabold text-indigo-400 text-[10px]">PANEL {p.panelNum || pIdx + 1}</span>
+                                  </div>
+                                  <p className="text-slate-300 font-medium leading-snug">{p.action}</p>
+                                  {p.dialogue && p.dialogue !== 'N/A' && (
+                                    <p className="text-[11px] text-amber-300 font-semibold italic bg-amber-500/10 p-2 rounded-lg border border-amber-500/20">
+                                      💬 "{p.dialogue}"
+                                    </p>
+                                  )}
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+
+                          <div className="bg-slate-950 p-4 rounded-2xl border border-indigo-500/20 space-y-2">
+                            <div className="flex justify-between items-center">
+                              <span className="text-xs font-extrabold text-indigo-300">🖼️ STEP 5: Image Prompt (6-Panel Grid Format)</span>
+                              <button
+                                onClick={() => copyToClipboard(sb.imagePrompt, `Image Prompt #${sb.storyboardId}`)}
+                                className="text-[11px] text-indigo-400 font-bold hover:underline flex items-center space-x-1"
+                              >
+                                <Icons.Copy />
+                                <span>Copy Prompt</span>
+                              </button>
+                            </div>
+                            <p className="text-xs font-mono text-slate-300 bg-slate-900 p-3 rounded-xl border border-slate-800">
+                              {sb.imagePrompt}
+                            </p>
+                          </div>
+
+                          <div className="bg-slate-950 p-4 rounded-2xl border border-violet-500/20 space-y-2">
+                            <div className="flex justify-between items-center">
+                              <span className="text-xs font-extrabold text-violet-300">📹 STEP 6: Video Prompt (Omni Flash / Sora)</span>
+                              <button
+                                onClick={() => copyToClipboard(sb.videoPrompt, `Video Prompt #${sb.storyboardId}`)}
+                                className="text-[11px] text-violet-400 font-bold hover:underline flex items-center space-x-1"
+                              >
+                                <Icons.Copy />
+                                <span>Copy Prompt</span>
+                              </button>
+                            </div>
+                            <p className="text-xs font-mono text-slate-300 bg-slate-900 p-3 rounded-xl border border-slate-800">
+                              {sb.videoPrompt}
+                            </p>
+                          </div>
+
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                </div>
+              )}
+
+              {/* TAB 4: THUMBNAIL & SEO */}
+              {activeTab === 'thumbnail_seo' && (
+                <div className="max-w-4xl mx-auto space-y-6">
+                  
+                  <div>
+                    <span className="text-xs font-extrabold text-indigo-400 uppercase tracking-widest">Metadata Engine</span>
+                    <h2 className="text-2xl font-black text-white mt-0.5">Thumbnail Studio & YouTube SEO</h2>
+                    <p className="text-xs text-slate-400">High-CTR thumbnail prompts, video description, tags, and pinned comment in <strong className="text-indigo-300">{language}</strong>.</p>
+                  </div>
+
+                  {thumbnailData && (
+                    <div className="bg-slate-900/80 backdrop-blur p-6 rounded-3xl border border-indigo-500/30 space-y-5">
+                      <div className="flex items-center space-x-2 text-indigo-300 font-extrabold text-xs uppercase tracking-wider">
+                        <span>🖼️ THUMBNAIL STUDIO & HIGH-CTR PROMPT</span>
+                      </div>
+
+                      <div className="space-y-3">
+                        <label className="text-xs font-bold text-slate-300 block">Pilihan Teks Headline High-CTR</label>
+                        <div className="flex flex-wrap gap-2">
+                          {thumbnailData.ctrTextOptions?.map((txt, i) => (
+                            <span key={i} className="bg-indigo-950/60 border border-indigo-500/40 text-indigo-200 text-xs px-3 py-1.5 rounded-xl font-extrabold">
+                              "{txt}"
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="space-y-1 text-xs">
+                        <span className="font-bold text-slate-400 block uppercase text-[10px]">Konsep Visual</span>
+                        <p className="text-slate-200 bg-slate-950 p-3 rounded-xl border border-slate-800">{thumbnailData.visualConcept}</p>
+                      </div>
+
+                      <div className="space-y-2">
+                        <div className="flex justify-between items-center">
+                          <span className="text-xs font-extrabold text-indigo-300">Prompt Thumbnail (Midjourney / Imagen)</span>
+                          <button
+                            onClick={() => copyToClipboard(thumbnailData.readyPrompt, "Prompt Thumbnail")}
+                            className="text-[11px] text-indigo-400 font-bold hover:underline flex items-center space-x-1"
+                          >
+                            <Icons.Copy />
+                            <span>Salin Prompt</span>
+                          </button>
+                        </div>
+                        <p className="text-xs font-mono text-slate-300 bg-slate-950 p-3 rounded-xl border border-slate-800">
+                          {thumbnailData.readyPrompt}
+                        </p>
+                      </div>
+                    </div>
+                  )}
+
+                  {seoData && (
+                    <div className="bg-slate-900/80 backdrop-blur p-6 rounded-3xl border border-slate-800 space-y-5">
+                      <div className="flex items-center space-x-2 text-emerald-400 font-extrabold text-xs uppercase tracking-wider">
+                        <span>🏷️ YOUTUBE SEO METADATA PACKAGE ({language.toUpperCase()})</span>
+                      </div>
+
+                      <div className="space-y-2">
+                        <label className="text-xs font-bold text-slate-300 block">5 Opsi Judul Video YouTube SEO High-CTR</label>
+                        <div className="space-y-2">
+                          {seoData.seoTitles?.map((t, i) => (
+                            <div key={i} className="flex justify-between items-center bg-slate-950 p-3 rounded-xl border border-slate-800 text-xs text-slate-200">
+                              <span className="font-bold">{i + 1}. {t}</span>
+                              <button onClick={() => copyToClipboard(t, `Judul ${i + 1}`)} className="text-indigo-400 font-bold text-[11px] hover:underline flex items-center space-x-1">
+                                <Icons.Copy />
+                                <span>Salin</span>
+                              </button>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="space-y-2">
+                        <div className="flex justify-between items-center">
+                          <label className="text-xs font-bold text-slate-300">Deskripsi Video YouTube</label>
+                          <button onClick={() => copyToClipboard(seoData.videoDescription, "Deskripsi Video")} className="text-indigo-400 font-bold text-[11px] hover:underline flex items-center space-x-1">
+                            <Icons.Copy />
+                            <span>Salin Deskripsi</span>
+                          </button>
+                        </div>
+                        <textarea
+                          rows={5}
+                          readOnly
+                          value={seoData.videoDescription}
+                          className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-slate-300 focus:outline-none"
+                        />
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                        <div className="space-y-1">
+                          <span className="font-bold text-slate-400 block uppercase text-[10px]">Hashtags & Tags</span>
+                          <p className="bg-slate-950 p-3 rounded-xl border border-slate-800 text-indigo-300 font-bold">{seoData.hashtags}</p>
+                          <p className="bg-slate-950 p-3 rounded-xl border border-slate-800 text-slate-400 mt-1">{seoData.youtubeTags?.join(', ')}</p>
+                        </div>
+
+                        <div className="space-y-1">
+                          <span className="font-bold text-slate-400 block uppercase text-[10px]">Komentar Tersemat (Pinned Comment)</span>
+                          <p className="bg-slate-950 p-3 rounded-xl border border-slate-800 text-amber-300 italic">{seoData.pinnedComment}</p>
+                        </div>
+                      </div>
+
+                    </div>
+                  )}
+
+                  {!thumbnailData && !seoData && (
+                    <div className="text-center py-16 bg-slate-900/80 backdrop-blur rounded-3xl border border-slate-800 text-slate-500 text-xs">
+                      Belum ada metadata SEO & Thumbnail. Jalankan pipeline produksi di menu <button onClick={() => setActiveTab('studio')} className="text-indigo-400 underline font-bold">Studio Setup</button>.
+                    </div>
+                  )}
+
+                </div>
+              )}
+
+              {/* TAB 5: PACKAGE EXPORT */}
+              {activeTab === 'export' && (
+                <div className="max-w-4xl mx-auto space-y-6">
+                  <div className="flex justify-between items-center">
+                    <div>
+                      <span className="text-xs font-extrabold text-indigo-400 uppercase tracking-widest">Step 10 Output</span>
+                      <h2 className="text-2xl font-black text-white mt-0.5">Production Package Export</h2>
+                      <p className="text-xs text-slate-400">Download your synchronized animation package in TXT, Markdown, or DOCX formats.</p>
+                    </div>
+
+                    <button
+                      onClick={() => copyToClipboard(generateFullPackageText('md'), "Full Production Package")}
+                      className="bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold text-xs px-4 py-2 rounded-xl shadow-lg shadow-indigo-600/20 transition flex items-center space-x-1.5"
+                    >
+                      <Icons.Copy />
+                      <span>Copy Full Package</span>
+                    </button>
+                  </div>
+
+                  <div className="bg-slate-900/80 backdrop-blur p-6 rounded-3xl border border-slate-800 space-y-4">
+                    <span className="text-xs font-extrabold text-slate-300 uppercase tracking-wider block">Download Formats</span>
+                    
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                      <button
+                        onClick={() => exportAsFile(generateFullPackageText('txt'), `${selectedTitle || 'Animation_Package'}.txt`, 'text/plain')}
+                        className="p-4 rounded-2xl bg-slate-950 border border-slate-800 hover:border-indigo-500 text-left transition space-y-1"
+                      >
+                        <span className="text-xl">📄</span>
+                        <div className="font-extrabold text-xs text-white">Export TXT</div>
+                        <div className="text-[10px] text-slate-500">Plain text format</div>
+                      </button>
+
+                      <button
+                        onClick={() => exportAsFile(generateFullPackageText('md'), `${selectedTitle || 'Animation_Package'}.md`, 'text/markdown')}
+                        className="p-4 rounded-2xl bg-slate-950 border border-slate-800 hover:border-indigo-500 text-left transition space-y-1"
+                      >
+                        <span className="text-xl">📝</span>
+                        <div className="font-extrabold text-xs text-white">Export Markdown</div>
+                        <div className="text-[10px] text-slate-500">Formatted MD</div>
+                      </button>
+
+                      <button
+                        onClick={() => exportAsFile(generateFullPackageText('txt'), `${selectedTitle || 'Animation_Package'}.doc`, 'application/msword')}
+                        className="p-4 rounded-2xl bg-slate-950 border border-slate-800 hover:border-indigo-500 text-left transition space-y-1"
+                      >
+                        <span className="text-xl">📘</span>
+                        <div className="font-extrabold text-xs text-white">Export DOCX</div>
+                        <div className="text-[10px] text-slate-500">Word document</div>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="bg-slate-900/80 backdrop-blur p-6 rounded-3xl border border-slate-800 space-y-3">
+                    <span className="text-xs font-extrabold text-slate-300 uppercase tracking-wider block">Package Preview</span>
+                    <pre className="bg-slate-950 p-4 rounded-2xl border border-slate-800 text-xs font-mono text-slate-300 leading-relaxed overflow-x-auto max-h-96">
+                      {generateFullPackageText('md')}
+                    </pre>
+                  </div>
+                </div>
+              )}
+
+              {/* TAB 6: API SETTINGS */}
+              {activeTab === 'settings' && (
+                <div className="max-w-xl mx-auto space-y-6">
+                  
+                  <div className="bg-amber-500/10 border border-amber-500/30 p-6 rounded-3xl space-y-5">
+                    
+                    <div className="flex items-center space-x-2 text-amber-400 font-extrabold text-xs uppercase tracking-wider">
+                      <Icons.Zap />
+                      <span>API SETTINGS</span>
+                    </div>
+
+                    <div className="space-y-2">
+                      <label className="text-xs font-bold text-slate-300 block">Pilih API Provider</label>
+                      <select
+                        value={provider}
+                        onChange={e => handleProviderChange(e.target.value)}
+                        className="w-full bg-amber-950/40 border-2 border-amber-500/50 rounded-2xl p-3.5 text-xs font-extrabold text-amber-200 focus:outline-none focus:border-amber-400 cursor-pointer shadow-md"
+                      >
+                        <option value="openrouter">🌐 OpenRouter (FREE) - REKOMENDASI</option>
+                        <option value="gemini">🔵 Google Gemini Direct API</option>
+                      </select>
+                    </div>
+
+                    <div className="space-y-2">
+                      <label className="text-xs font-bold text-slate-300 block">Pilih Model AI</label>
+                      <select
+                        value={selectedModel}
+                        onChange={e => setSelectedModel(e.target.value)}
+                        className="w-full bg-slate-950 border border-slate-800 rounded-2xl p-3.5 text-xs font-mono text-slate-200 focus:outline-none focus:border-indigo-500 cursor-pointer"
+                      >
+                        {provider === 'openrouter' ? (
+                          customModelList.map(m => (
+                            <option key={m.id} value={m.id}>{m.name}</option>
+                          ))
+                        ) : (
+                          GEMINI_DIRECT_MODELS.map(m => (
+                            <option key={m.id} value={m.id}>{m.name}</option>
+                          ))
+                        )}
+                      </select>
+                    </div>
+
+                    <div className="space-y-2">
+                      <label className="text-xs font-bold text-slate-300 block">
+                        {provider === 'openrouter' ? 'OpenRouter API Key (sk-or-v1-...)' : 'Google Gemini API Key (AIzaSy...)'}
+                      </label>
+                      <input
+                        type="password"
+                        placeholder={provider === 'openrouter' ? 'sk-or-v1-...' : 'AIzaSy...'}
+                        value={provider === 'openrouter' ? openrouterKey : geminiKey}
+                        onChange={e => {
+                          if (provider === 'openrouter') setOpenrouterKey(e.target.value);
+                          else setGeminiKey(e.target.value);
+                        }}
+                        className="w-full bg-slate-950 border border-slate-800 rounded-2xl p-3.5 text-xs font-mono text-white focus:outline-none focus:border-amber-500"
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-3 gap-3 pt-2">
+                      <button
+                        onClick={handleTestKey}
+                        disabled={isTestingKey}
+                        className="bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-200 p-3 rounded-2xl text-xs font-bold flex flex-col items-center justify-center space-y-1 transition"
+                      >
+                        <span className="text-base">🔑</span>
+                        <span>{isTestingKey ? 'Testing...' : 'Test Key'}</span>
+                      </button>
+
+                      <button
+                        onClick={handleRefreshModels}
+                        disabled={isRefreshingModels}
+                        className="bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-200 p-3 rounded-2xl text-xs font-bold flex flex-col items-center justify-center space-y-1 transition text-center"
+                      >
+                        <span className="text-base">📦</span>
+                        <span className="line-clamp-1">{isRefreshingModels ? 'Refreshing...' : 'Refresh Model'}</span>
+                      </button>
+
+                      <button
+                        onClick={handleOpenGetKeyPage}
+                        className="bg-amber-900/30 hover:bg-amber-900/50 border border-amber-500/40 text-amber-300 p-3 rounded-2xl text-xs font-bold flex flex-col items-center justify-center space-y-1 transition"
+                      >
+                        <span className="text-base">📋</span>
+                        <span>Ambil Key</span>
+                      </button>
+                    </div>
+
+                  </div>
+
+                </div>
+              )}
+
+            </main>
+          </div>
+        </div>
+      );
     }
-    renderModelSelect();
-  } catch(e) {
-    showToast("Using default models", "info");
-  }
-  state.isRefreshingModels = false;
-  if (btn) btn.innerHTML = '<span class="text-base">📦</span> Refresh';
-}
 
-function handleOpenGetKeyPage() {
-  if (state.provider === 'openrouter') {
-    window.open("https://openrouter.ai/keys", "_blank");
-  } else {
-    window.open("https://aistudio.google.com/app/apikey", "_blank");
-  }
-}
-
-// ===================================================================
-// SAVE / LOAD
-// ===================================================================
-
-function saveState() {
-  const data = {
-    animationStyle: state.animationStyle,
-    customStyleText: state.customStyleText,
-    storyTheme: state.storyTheme,
-    duration: state.duration,
-    language: state.language,
-    targetAudience: state.targetAudience,
-    titles: state.titles,
-    selectedTitle: state.selectedTitle,
-    masterCharacter: state.masterCharacter,
-    story: state.story,
-    storyboards: state.storyboards,
-    thumbnailData: state.thumbnailData,
-    seoData: state.seoData
-  };
-  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(data));
-}
-
-function loadState() {
-  try {
-    const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
-    if (saved) {
-      const parsed = JSON.parse(saved);
-      if (parsed.animationStyle) state.animationStyle = parsed.animationStyle;
-      if (parsed.customStyleText) state.customStyleText = parsed.customStyleText;
-      if (parsed.storyTheme !== undefined) state.storyTheme = parsed.storyTheme;
-      if (parsed.duration) state.duration = parsed.duration;
-      if (parsed.language) state.language = parsed.language;
-      if (parsed.targetAudience) state.targetAudience = parsed.targetAudience;
-      if (parsed.titles) state.titles = parsed.titles;
-      if (parsed.selectedTitle) state.selectedTitle = parsed.selectedTitle;
-      if (parsed.masterCharacter) state.masterCharacter = parsed.masterCharacter;
-      if (parsed.story) state.story = parsed.story;
-      if (parsed.storyboards) state.storyboards = parsed.storyboards;
-      if (parsed.thumbnailData) state.thumbnailData = parsed.thumbnailData;
-      if (parsed.seoData) state.seoData = parsed.seoData;
-    }
-  } catch(e) { console.warn(e); }
-}
-
-// ===================================================================
-// INIT APP
-// ===================================================================
-
-function initApp() {
-  state.openrouterKey = localStorage.getItem("OPENROUTER_API_KEY") || "";
-  state.geminiKey = localStorage.getItem("GEMINI_API_KEY") || "";
-  state.provider = localStorage.getItem("AI_STUDIO_PROVIDER") || "openrouter";
-  state.selectedModel = localStorage.getItem("AI_STUDIO_MODEL") || "openrouter/free";
-  
-  loadState();
-  
-  const storyTheme = $('storyTheme');
-  const durationSelect = $('durationSelect');
-  const languageSelect = $('languageSelect');
-  const audienceSelect = $('audienceSelect');
-  const customStyleText = $('customStyleText');
-  const providerSelect = $('providerSelect');
-  
-  // Set storyTheme ke kosong
-  if (storyTheme) storyTheme.value = state.storyTheme || '';
-  if (durationSelect) durationSelect.value = state.duration;
-  if (languageSelect) languageSelect.value = state.language;
-  if (audienceSelect) audienceSelect.value = state.targetAudience;
-  if (customStyleText) customStyleText.value = state.customStyleText || '';
-  if (providerSelect) providerSelect.value = state.provider;
-  
-  renderModelSelect();
-  updateKeyFields();
-  
-  renderStyleGrid();
-  renderTitles();
-  renderCharacter();
-  renderStory();
-  renderStoryboards();
-  renderSeo();
-  updateSidebarInfo();
-  
-  if (state.activeTab === 'export') {
-    const preview = $('exportPreview');
-    if (preview) preview.textContent = generateFullPackageText('md');
-  }
-  
-  switchTab(state.activeTab);
-  
-  // Event listeners
-  if (storyTheme) {
-    storyTheme.addEventListener('input', e => { state.storyTheme = e.target.value; });
-  }
-  if (durationSelect) {
-    durationSelect.addEventListener('change', e => { state.duration = e.target.value; updateSidebarInfo(); });
-  }
-  if (languageSelect) {
-    languageSelect.addEventListener('change', e => { state.language = e.target.value; updateSidebarInfo(); });
-  }
-  if (audienceSelect) {
-    audienceSelect.addEventListener('change', e => { state.targetAudience = e.target.value; });
-  }
-  if (customStyleText) {
-    customStyleText.addEventListener('input', e => { state.customStyleText = e.target.value; updateSidebarInfo(); });
-  }
-  
-  const apiKeyInput = $('apiKeyInput');
-  if (apiKeyInput) {
-    apiKeyInput.addEventListener('input', e => {
-      if (state.provider === 'openrouter') {
-        state.openrouterKey = e.target.value;
-        localStorage.setItem("OPENROUTER_API_KEY", e.target.value);
-      } else {
-        state.geminiKey = e.target.value;
-        localStorage.setItem("GEMINI_API_KEY", e.target.value);
-      }
-    });
-  }
-  
-  const modelSelect = $('modelSelect');
-  if (modelSelect) {
-    modelSelect.addEventListener('change', e => {
-      state.selectedModel = e.target.value;
-      localStorage.setItem("AI_STUDIO_MODEL", state.selectedModel);
-      const loadingModel = $('loadingModel');
-      if (loadingModel) loadingModel.textContent = state.selectedModel;
-    });
-  }
-  
-  console.log("🔒 Studio Konten Pro initialized with login protection.");
-}
-
-// ===================================================================
-// AUTO SAVE
-// ===================================================================
-setInterval(saveState, 3000);
-
-// ===================================================================
-// START
-// ===================================================================
-checkSession();
-
-console.log('🔐 Studio Konten Pro - Login System');
-console.log('📌 Username: ' + VALID_CREDENTIALS.username);
-console.log('📌 Password: ' + VALID_CREDENTIALS.password);
-console.log('📞 Hubungi 0851-3871-8594 jika lupa');
-</script>
-
+    const rootElement = document.getElementById('root');
+    const root = ReactDOM.createRoot(rootElement);
+    root.render(<App />);
+  </script>
 </body>
 </html>
