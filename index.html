@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="id" class="dark">
+<html lang="id" class="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Viral Kids Animation Studio - Multi-Language Studio</title>
+  <title>AI Viral Kids Animation Studio - Light Theme Edition</title>
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -22,31 +22,30 @@
       font-family: 'Plus Jakarta Sans', sans-serif;
     }
 
-    /* Custom Webkit Scrollbars */
+    /* Custom Webkit Light Scrollbars */
     ::-webkit-scrollbar {
       width: 6px;
       height: 6px;
     }
     ::-webkit-scrollbar-track {
-      background: #090d16;
+      background: #f1f5f9;
     }
     ::-webkit-scrollbar-thumb {
-      background: #1e293b;
+      background: #cbd5e1;
       border-radius: 9999px;
     }
     ::-webkit-scrollbar-thumb:hover {
-      background: #334155;
+      background: #94a3b8;
     }
   </style>
 </head>
-<body class="bg-[#090d16] text-slate-100 selection:bg-indigo-500 selection:text-white font-sans antialiased min-h-screen">
+<body class="bg-slate-50 text-slate-800 selection:bg-indigo-500 selection:text-white font-sans antialiased min-h-screen">
   
   <div id="root"></div>
 
   <script type="text/babel">
     const { useState, useEffect } = React;
 
-    // SVG Icons Components for lightweight standalone rendering
     const Icons = {
       Zap: () => <svg className="w-4 h-4 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>,
       Sparkles: () => <svg className="w-4 h-4 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>,
@@ -745,30 +744,30 @@ Output MUST be JSON:
       };
 
       return (
-        <div className="min-h-screen flex flex-col bg-[#090d16] text-slate-100 font-sans">
+        <div className="min-h-screen flex flex-col bg-slate-50 text-slate-800 font-sans">
           
-          {/* Toast Notification */}
+          {/* Light Theme Toast Notification */}
           {toast && (
-            <div className={`fixed bottom-6 right-6 z-50 px-4 py-3 rounded-2xl shadow-2xl text-xs font-bold border flex items-center space-x-2 animate-bounce backdrop-blur-md ${
-              toast.type === 'success' ? 'bg-emerald-950/90 border-emerald-500 text-emerald-200' :
-              toast.type === 'error' ? 'bg-rose-950/90 border-rose-500 text-rose-200' :
-              'bg-indigo-950/90 border-indigo-500 text-indigo-200'
+            <div className={`fixed bottom-6 right-6 z-50 px-4 py-3 rounded-2xl shadow-xl text-xs font-bold border flex items-center space-x-2 animate-bounce backdrop-blur-md ${
+              toast.type === 'success' ? 'bg-emerald-50 border-emerald-300 text-emerald-900 shadow-emerald-500/10' :
+              toast.type === 'error' ? 'bg-rose-50 border-rose-300 text-rose-900 shadow-rose-500/10' :
+              'bg-indigo-50 border-indigo-300 text-indigo-900 shadow-indigo-500/10'
             }`}>
               <span>{toast.type === 'success' ? '✓' : '⚠️'}</span>
               <span>{toast.msg}</span>
             </div>
           )}
 
-          {/* Reset Modal */}
+          {/* Reset Modal - Light Theme */}
           {showResetModal && (
-            <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
-              <div className="bg-slate-900 border border-slate-800 p-6 rounded-3xl max-w-sm w-full space-y-4 shadow-2xl">
-                <h3 className="font-extrabold text-white text-base">Reset Studio Canvas?</h3>
-                <p className="text-xs text-slate-400">This will clear your current titles, script, master character sheet, generated storyboards, and SEO metadata.</p>
+            <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+              <div className="bg-white border border-slate-200 p-6 rounded-3xl max-w-sm w-full space-y-4 shadow-2xl">
+                <h3 className="font-extrabold text-slate-900 text-base">Reset Studio Canvas?</h3>
+                <p className="text-xs text-slate-500">This will clear your current titles, script, master character sheet, generated storyboards, and SEO metadata.</p>
                 <div className="flex space-x-3 justify-end pt-2">
                   <button 
                     onClick={() => setShowResetModal(false)}
-                    className="px-4 py-2 rounded-xl text-xs font-bold text-slate-400 hover:bg-slate-800 transition"
+                    className="px-4 py-2 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-100 transition"
                   >
                     Cancel
                   </button>
@@ -785,7 +784,7 @@ Output MUST be JSON:
                       setShowResetModal(false);
                       showToast("Studio canvas reset!", "info");
                     }}
-                    className="px-4 py-2 rounded-xl text-xs font-bold bg-rose-600 hover:bg-rose-500 text-white transition shadow-lg shadow-rose-600/30"
+                    className="px-4 py-2 rounded-xl text-xs font-bold bg-rose-600 hover:bg-rose-500 text-white transition shadow-lg shadow-rose-600/20"
                   >
                     Reset Canvas
                   </button>
@@ -794,64 +793,64 @@ Output MUST be JSON:
             </div>
           )}
 
-          {/* Loading Overlay */}
+          {/* Loading Overlay - Light Theme */}
           {isGenerating && (
-            <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex flex-col items-center justify-center p-4">
-              <div className="bg-slate-900/90 p-8 rounded-3xl flex flex-col items-center max-w-md text-center border border-indigo-500/30 shadow-2xl">
+            <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex flex-col items-center justify-center p-4">
+              <div className="bg-white/95 p-8 rounded-3xl flex flex-col items-center max-w-md text-center border border-indigo-200 shadow-2xl">
                 <div className="relative w-16 h-16 mb-4">
-                  <div className="absolute inset-0 rounded-full border-4 border-indigo-500/20"></div>
-                  <div className="absolute inset-0 rounded-full border-4 border-indigo-500 border-t-transparent animate-spin"></div>
+                  <div className="absolute inset-0 rounded-full border-4 border-indigo-200"></div>
+                  <div className="absolute inset-0 rounded-full border-4 border-indigo-600 border-t-transparent animate-spin"></div>
                   <div className="absolute inset-0 flex items-center justify-center text-xl">🎬</div>
                 </div>
-                <h3 className="text-base font-extrabold text-white tracking-tight">{loadingStepText || 'Processing Workflow...'}</h3>
-                <p className="text-xs text-slate-400 mt-2 font-medium">Model: <strong className="text-indigo-400">{selectedModel}</strong> ({provider.toUpperCase()})</p>
+                <h3 className="text-base font-extrabold text-slate-900 tracking-tight">{loadingStepText || 'Processing Workflow...'}</h3>
+                <p className="text-xs text-slate-500 mt-2 font-medium">Model: <strong className="text-indigo-600">{selectedModel}</strong> ({provider.toUpperCase()})</p>
               </div>
             </div>
           )}
 
-          {/* Main Header */}
-          <header className="bg-slate-900/80 backdrop-blur border-b border-slate-800 sticky top-0 z-30 px-6 py-3.5 flex items-center justify-between">
+          {}
+          <header className="bg-white/80 backdrop-blur border-b border-slate-200 sticky top-0 z-30 px-6 py-3.5 flex items-center justify-between shadow-sm">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-600 via-violet-600 to-pink-500 flex items-center justify-center text-white shadow-lg shadow-indigo-500/25 font-black text-xl">
+              <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-600 via-violet-600 to-pink-500 flex items-center justify-center text-white shadow-md shadow-indigo-500/20 font-black text-xl">
                 🚀
               </div>
               <div>
-                <h1 className="font-black text-base sm:text-lg tracking-tight text-white flex items-center space-x-2">
+                <h1 className="font-black text-base sm:text-lg tracking-tight text-slate-900 flex items-center space-x-2">
                   <span>AI Viral Kids Animation Studio</span>
-                  <span className="bg-indigo-500/10 text-indigo-400 text-[10px] font-bold px-2 py-0.5 rounded-full border border-indigo-500/20">v5.0 Multi-Lang</span>
+                  <span className="bg-indigo-50 text-indigo-600 text-[10px] font-bold px-2 py-0.5 rounded-full border border-indigo-200">Light Theme</span>
                 </h1>
-                <p className="text-xs text-slate-400 font-medium">1 Ide → Storyboard 6-Panel → Master Character → Visual & Video Prompts → SEO</p>
+                <p className="text-xs text-slate-500 font-medium">1 Ide → Storyboard 6-Panel → Master Character → Visual & Video Prompts → SEO</p>
               </div>
             </div>
 
             <div className="flex items-center space-x-3">
               <button 
                 onClick={() => setActiveTab('settings')}
-                className="flex items-center space-x-1.5 bg-amber-500/10 border border-amber-500/30 text-amber-300 text-[11px] font-bold px-3 py-1.5 rounded-xl hover:bg-amber-500/20 transition"
+                className="flex items-center space-x-1.5 bg-amber-50 border border-amber-200 text-amber-800 text-[11px] font-bold px-3 py-1.5 rounded-xl hover:bg-amber-100 transition shadow-sm"
               >
                 <span>⚡ API: {provider === 'openrouter' ? 'OpenRouter Free' : 'Google Gemini'}</span>
               </button>
               
               <button 
                 onClick={() => setShowResetModal(true)}
-                className="text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 px-3.5 py-1.5 rounded-xl transition"
+                className="text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200 px-3.5 py-1.5 rounded-xl transition"
               >
                 Reset
               </button>
             </div>
           </header>
 
-          {/* Body Container */}
+          {}
           <div className="flex flex-1 overflow-hidden">
             {/* Sidebar */}
-            <aside className="w-64 bg-slate-900/50 border-r border-slate-800/80 p-4 space-y-2 hidden md:flex flex-col justify-between">
+            <aside className="w-64 bg-white/80 border-r border-slate-200 p-4 space-y-2 hidden md:flex flex-col justify-between">
               <div className="space-y-1">
-                <div className="text-[10px] font-extrabold text-slate-500 uppercase tracking-wider px-3 mb-3">Studio Pipeline</div>
+                <div className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider px-3 mb-3">Studio Pipeline</div>
                 
                 <button 
                   onClick={() => setActiveTab('studio')}
                   className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold transition flex items-center space-x-3 ${
-                    activeTab === 'studio' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/30' : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+                    activeTab === 'studio' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/20' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
                   }`}
                 >
                   <span className="text-base">🎛️</span>
@@ -861,7 +860,7 @@ Output MUST be JSON:
                 <button 
                   onClick={() => setActiveTab('character')}
                   className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold transition flex items-center space-x-3 ${
-                    activeTab === 'character' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/30' : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+                    activeTab === 'character' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/20' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
                   }`}
                 >
                   <span className="text-base">👤</span>
@@ -871,7 +870,7 @@ Output MUST be JSON:
                 <button 
                   onClick={() => setActiveTab('storyboards')}
                   className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold transition flex items-center justify-between ${
-                    activeTab === 'storyboards' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/30' : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+                    activeTab === 'storyboards' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/20' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
                   }`}
                 >
                   <div className="flex items-center space-x-3">
@@ -879,14 +878,14 @@ Output MUST be JSON:
                     <span>3. Storyboards</span>
                   </div>
                   {storyboards.length > 0 && (
-                    <span className="bg-indigo-400/20 text-indigo-300 text-[10px] px-2 py-0.5 rounded-full font-bold">{storyboards.length}</span>
+                    <span className="bg-indigo-100 text-indigo-700 text-[10px] px-2 py-0.5 rounded-full font-bold">{storyboards.length}</span>
                   )}
                 </button>
 
                 <button 
                   onClick={() => setActiveTab('thumbnail_seo')}
                   className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold transition flex items-center space-x-3 ${
-                    activeTab === 'thumbnail_seo' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/30' : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+                    activeTab === 'thumbnail_seo' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/20' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
                   }`}
                 >
                   <span className="text-base">🖼️</span>
@@ -896,7 +895,7 @@ Output MUST be JSON:
                 <button 
                   onClick={() => setActiveTab('export')}
                   className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold transition flex items-center space-x-3 ${
-                    activeTab === 'export' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/30' : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+                    activeTab === 'export' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/20' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
                   }`}
                 >
                   <span className="text-base">📦</span>
@@ -906,7 +905,7 @@ Output MUST be JSON:
                 <button 
                   onClick={() => setActiveTab('settings')}
                   className={`w-full text-left px-3.5 py-2.5 rounded-xl text-xs font-bold transition flex items-center space-x-3 ${
-                    activeTab === 'settings' ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30 shadow-lg shadow-amber-500/10' : 'text-slate-400 hover:bg-slate-800 hover:text-slate-200'
+                    activeTab === 'settings' ? 'bg-amber-50 text-amber-900 border border-amber-300 shadow-sm' : 'text-slate-600 hover:bg-amber-50/60 hover:text-amber-900'
                   }`}
                 >
                   <span className="text-base">⚙️</span>
@@ -914,33 +913,33 @@ Output MUST be JSON:
                 </button>
               </div>
 
-              <div className="bg-slate-900/80 p-3.5 rounded-2xl border border-slate-800 space-y-2">
-                <span className="text-[10px] font-extrabold text-indigo-400 uppercase tracking-wider block">Active Pipeline</span>
-                <div className="text-xs font-bold text-slate-200 line-clamp-1">{currentStyleLabel}</div>
-                <div className="text-[11px] text-slate-400">Duration: <strong className="text-indigo-300">{duration}</strong></div>
-                <div className="text-[11px] text-slate-400">Language: <strong className="text-indigo-300">{language}</strong></div>
+              <div className="bg-slate-100 p-3.5 rounded-2xl border border-slate-200 space-y-2">
+                <span className="text-[10px] font-extrabold text-indigo-600 uppercase tracking-wider block">Active Pipeline</span>
+                <div className="text-xs font-bold text-slate-800 line-clamp-1">{currentStyleLabel}</div>
+                <div className="text-[11px] text-slate-500">Duration: <strong className="text-indigo-600">{duration}</strong></div>
+                <div className="text-[11px] text-slate-500">Language: <strong className="text-indigo-600">{language}</strong></div>
               </div>
             </aside>
 
-            {/* Main Content Workspace Pane */}
+            {}
             <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
               
               {/* TAB 1: STUDIO SETUP & IDEATION */}
               {activeTab === 'studio' && (
                 <div className="max-w-4xl mx-auto space-y-8">
                   
-                  <div className="bg-slate-900/80 backdrop-blur p-6 rounded-3xl border border-indigo-500/20 relative overflow-hidden">
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none"></div>
-                    <span className="text-xs font-extrabold text-indigo-400 uppercase tracking-widest block mb-1">Production Input</span>
-                    <h2 className="text-2xl font-black text-white">Create Animation Production Package</h2>
-                    <p className="text-xs text-slate-400 mt-1 max-w-xl">From 1 simple idea to 10 viral titles, master character sheets, emotional storytelling, 6-panel storyboard cuts, and YouTube SEO metadata.</p>
+                  <div className="bg-white p-6 rounded-3xl border border-indigo-100 shadow-sm relative overflow-hidden">
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/5 rounded-full blur-3xl pointer-events-none"></div>
+                    <span className="text-xs font-extrabold text-indigo-600 uppercase tracking-widest block mb-1">Production Input</span>
+                    <h2 className="text-2xl font-black text-slate-900">Create Animation Production Package</h2>
+                    <p className="text-xs text-slate-500 mt-1 max-w-xl">From 1 simple idea to 10 viral titles, master character sheets, emotional storytelling, 6-panel storyboard cuts, and YouTube SEO metadata.</p>
                   </div>
 
-                  <div className="bg-slate-900/80 backdrop-blur p-6 rounded-3xl border border-slate-800 space-y-6">
+                  <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-6">
                     
                     {/* 1. Animation Style Selection */}
                     <div className="space-y-3">
-                      <label className="block text-xs font-extrabold text-slate-300 uppercase tracking-wider">
+                      <label className="block text-xs font-extrabold text-slate-700 uppercase tracking-wider">
                         1. Select Animation Style
                       </label>
                       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5">
@@ -952,8 +951,8 @@ Output MUST be JSON:
                               onClick={() => setAnimationStyle(st.id)}
                               className={`p-3 rounded-2xl text-left border transition flex flex-col justify-between ${
                                 isSel 
-                                  ? 'bg-indigo-600/20 border-indigo-500 text-white ring-2 ring-indigo-500/30' 
-                                  : 'bg-slate-950/60 border-slate-800 hover:border-slate-700 text-slate-400'
+                                  ? 'bg-indigo-50 border-indigo-500 text-slate-900 ring-2 ring-indigo-500/20 shadow-sm' 
+                                  : 'bg-slate-50 border-slate-200 hover:border-slate-300 text-slate-700'
                               }`}
                             >
                               <div className="flex items-center space-x-2">
@@ -972,14 +971,14 @@ Output MUST be JSON:
                           placeholder="Describe your custom animation style..."
                           value={customStyleText}
                           onChange={e => setCustomStyleText(e.target.value)}
-                          className="w-full bg-slate-950 border border-indigo-500/50 rounded-xl p-3 text-xs text-white focus:outline-none"
+                          className="w-full bg-slate-50 border border-indigo-300 rounded-xl p-3 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-500"
                         />
                       )}
                     </div>
 
                     {/* 2. Story Theme */}
                     <div className="space-y-2">
-                      <label className="block text-xs font-extrabold text-slate-300 uppercase tracking-wider">
+                      <label className="block text-xs font-extrabold text-slate-700 uppercase tracking-wider">
                         2. Story Idea / Theme
                       </label>
                       <textarea
@@ -987,7 +986,7 @@ Output MUST be JSON:
                         placeholder="e.g. Brother saves sister from a friendly stray dog in the neighborhood..."
                         value={storyTheme}
                         onChange={e => setStoryTheme(e.target.value)}
-                        className="w-full bg-slate-950 border border-slate-800 rounded-2xl p-3.5 text-xs text-white focus:outline-none focus:border-indigo-500"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-2xl p-3.5 text-xs text-slate-900 focus:bg-white focus:outline-none focus:border-indigo-500 transition"
                       />
                     </div>
 
@@ -995,13 +994,13 @@ Output MUST be JSON:
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                       
                       <div>
-                        <label className="block text-xs font-extrabold text-slate-300 uppercase tracking-wider mb-2">
+                        <label className="block text-xs font-extrabold text-slate-700 uppercase tracking-wider mb-2">
                           Video Duration
                         </label>
                         <select
                           value={duration}
                           onChange={e => setDuration(e.target.value)}
-                          className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-indigo-500 font-bold"
+                          className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-900 focus:bg-white focus:outline-none focus:border-indigo-500 font-bold"
                         >
                           {DURATION_OPTIONS.map(d => (
                             <option key={d.value} value={d.value}>{d.label}</option>
@@ -1010,13 +1009,13 @@ Output MUST be JSON:
                       </div>
 
                       <div>
-                        <label className="block text-xs font-extrabold text-slate-300 uppercase tracking-wider mb-2">
+                        <label className="block text-xs font-extrabold text-slate-700 uppercase tracking-wider mb-2">
                           Language
                         </label>
                         <select
                           value={language}
                           onChange={e => setLanguage(e.target.value)}
-                          className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-indigo-500 font-bold"
+                          className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-900 focus:bg-white focus:outline-none focus:border-indigo-500 font-bold"
                         >
                           {LANGUAGES.map(l => (
                             <option key={l} value={l}>{l}</option>
@@ -1025,13 +1024,13 @@ Output MUST be JSON:
                       </div>
 
                       <div>
-                        <label className="block text-xs font-extrabold text-slate-300 uppercase tracking-wider mb-2">
+                        <label className="block text-xs font-extrabold text-slate-700 uppercase tracking-wider mb-2">
                           Target Audience
                         </label>
                         <select
                           value={targetAudience}
                           onChange={e => setTargetAudience(e.target.value)}
-                          className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-indigo-500 font-bold"
+                          className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-900 focus:bg-white focus:outline-none focus:border-indigo-500 font-bold"
                         >
                           {TARGET_AUDIENCES.map(t => (
                             <option key={t} value={t}>{t}</option>
@@ -1042,11 +1041,11 @@ Output MUST be JSON:
                     </div>
 
                     {/* Step 1 Action Button */}
-                    <div className="pt-2 border-t border-slate-800 flex justify-end">
+                    <div className="pt-2 border-t border-slate-200 flex justify-end">
                       <button
                         onClick={handleGenerateTitles}
                         disabled={isGenerating}
-                        className="bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold text-xs px-6 py-3 rounded-2xl shadow-lg shadow-indigo-600/30 transition flex items-center space-x-2"
+                        className="bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold text-xs px-6 py-3 rounded-2xl shadow-lg shadow-indigo-600/20 transition flex items-center space-x-2"
                       >
                         <span>✨ STEP 1: Generate 10 Viral Titles in {language}</span>
                       </button>
@@ -1056,15 +1055,15 @@ Output MUST be JSON:
 
                   {/* Step 1 Output: 10 Viral Titles Selection */}
                   {titles.length > 0 && (
-                    <div className="bg-slate-900/80 backdrop-blur p-6 rounded-3xl border border-indigo-500/30 space-y-4">
+                    <div className="bg-white p-6 rounded-3xl border border-indigo-200 shadow-sm space-y-4">
                       <div className="flex justify-between items-center">
                         <div>
-                          <span className="text-[10px] font-extrabold text-indigo-400 uppercase tracking-wider">Step 1 Complete</span>
-                          <h3 className="text-base font-black text-white mt-0.5">Select Your Title ({language})</h3>
+                          <span className="text-[10px] font-extrabold text-indigo-600 uppercase tracking-wider">Step 1 Complete</span>
+                          <h3 className="text-base font-black text-slate-900 mt-0.5">Select Your Title ({language})</h3>
                         </div>
                         <button
                           onClick={handleGenerateTitles}
-                          className="text-xs text-indigo-400 hover:text-indigo-300 font-bold"
+                          className="text-xs text-indigo-600 hover:text-indigo-800 font-bold"
                         >
                           🔄 Regenerate Titles
                         </button>
@@ -1079,8 +1078,8 @@ Output MUST be JSON:
                               onClick={() => setSelectedTitle(t)}
                               className={`p-3.5 rounded-2xl border text-left text-xs font-bold transition flex items-center justify-between ${
                                 isSel
-                                  ? 'bg-indigo-600 text-white border-indigo-400 shadow-md'
-                                  : 'bg-slate-950/80 border-slate-800 text-slate-300 hover:border-slate-700'
+                                  ? 'bg-indigo-600 text-white border-indigo-600 shadow-md'
+                                  : 'bg-slate-50 border-slate-200 text-slate-800 hover:border-indigo-300 hover:bg-indigo-50/50'
                               }`}
                             >
                               <span className="pr-2">{idx + 1}. {t}</span>
@@ -1090,15 +1089,15 @@ Output MUST be JSON:
                         })}
                       </div>
 
-                      <div className="pt-4 border-t border-slate-800/80 flex flex-col sm:flex-row justify-between items-center gap-3">
-                        <div className="text-xs text-slate-400">
-                          Selected: <strong className="text-indigo-300 font-extrabold">{selectedTitle}</strong>
+                      <div className="pt-4 border-t border-slate-200 flex flex-col sm:flex-row justify-between items-center gap-3">
+                        <div className="text-xs text-slate-500">
+                          Selected: <strong className="text-indigo-700 font-extrabold">{selectedTitle}</strong>
                         </div>
 
                         <button
                           onClick={handleRunFullPipeline}
                           disabled={isGenerating}
-                          className="w-full sm:w-auto bg-gradient-to-r from-indigo-600 via-violet-600 to-pink-600 hover:from-indigo-500 hover:to-pink-500 text-white font-black text-xs px-8 py-3.5 rounded-2xl shadow-xl shadow-indigo-600/30 transition flex items-center justify-center space-x-2"
+                          className="w-full sm:w-auto bg-gradient-to-r from-indigo-600 via-violet-600 to-pink-600 hover:from-indigo-500 hover:to-pink-500 text-white font-black text-xs px-8 py-3.5 rounded-2xl shadow-xl shadow-indigo-600/20 transition flex items-center justify-center space-x-2"
                         >
                           <span>🚀 RUN FULL ANIMATION PIPELINE</span>
                         </button>
@@ -1109,88 +1108,88 @@ Output MUST be JSON:
                 </div>
               )}
 
-              {/* TAB 2: MASTER CHARACTER SHEET ENGINE */}
+              {}
               {activeTab === 'character' && (
                 <div className="max-w-4xl mx-auto space-y-6">
                   <div className="flex justify-between items-center">
                     <div>
-                      <span className="text-xs font-extrabold text-indigo-400 uppercase tracking-widest">Step 7 Engine</span>
-                      <h2 className="text-2xl font-black text-white mt-0.5">Master Character Sheet</h2>
-                      <p className="text-xs text-slate-400">Maintains absolute visual consistency across all storyboards & panels.</p>
+                      <span className="text-xs font-extrabold text-indigo-600 uppercase tracking-widest">Step 7 Engine</span>
+                      <h2 className="text-2xl font-black text-slate-900 mt-0.5">Master Character Sheet</h2>
+                      <p className="text-xs text-slate-500">Maintains absolute visual consistency across all storyboards & panels.</p>
                     </div>
                   </div>
 
                   {masterCharacter ? (
-                    <div className="bg-slate-900/80 backdrop-blur p-6 rounded-3xl border border-indigo-500/30 space-y-6">
+                    <div className="bg-white p-6 rounded-3xl border border-indigo-200 shadow-sm space-y-6">
                       
-                      <div className="flex items-center space-x-4 border-b border-slate-800 pb-4">
-                        <div className="w-16 h-16 rounded-2xl bg-indigo-600/20 border border-indigo-500/40 flex items-center justify-center text-3xl">
+                      <div className="flex items-center space-x-4 border-b border-slate-200 pb-4">
+                        <div className="w-16 h-16 rounded-2xl bg-indigo-50 border border-indigo-200 flex items-center justify-center text-3xl">
                           👤
                         </div>
                         <div>
-                          <h3 className="text-lg font-black text-white">{masterCharacter.characterName || 'Main Character'}</h3>
-                          <span className="bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 text-[10px] font-bold px-2.5 py-0.5 rounded-full">
+                          <h3 className="text-lg font-black text-slate-900">{masterCharacter.characterName || 'Main Character'}</h3>
+                          <span className="bg-indigo-50 text-indigo-700 border border-indigo-200 text-[10px] font-bold px-2.5 py-0.5 rounded-full">
                             {masterCharacter.archetype || 'Hero'}
                           </span>
                         </div>
                       </div>
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-                        <div className="bg-slate-950/60 p-4 rounded-2xl border border-slate-800 space-y-1">
-                          <span className="text-[10px] font-extrabold text-slate-500 uppercase">Face & Expression</span>
-                          <p className="text-slate-200 font-medium">{masterCharacter.face || 'Standard'}</p>
+                        <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+                          <span className="text-[10px] font-extrabold text-slate-400 uppercase">Face & Expression</span>
+                          <p className="text-slate-800 font-medium">{masterCharacter.face || 'Standard'}</p>
                         </div>
                         
-                        <div className="bg-slate-950/60 p-4 rounded-2xl border border-slate-800 space-y-1">
-                          <span className="text-[10px] font-extrabold text-slate-500 uppercase">Hair & Style</span>
-                          <p className="text-slate-200 font-medium">{masterCharacter.hair || 'Standard'}</p>
+                        <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+                          <span className="text-[10px] font-extrabold text-slate-400 uppercase">Hair & Style</span>
+                          <p className="text-slate-800 font-medium">{masterCharacter.hair || 'Standard'}</p>
                         </div>
 
-                        <div className="bg-slate-950/60 p-4 rounded-2xl border border-slate-800 space-y-1">
-                          <span className="text-[10px] font-extrabold text-slate-500 uppercase">Outfit & Clothes</span>
-                          <p className="text-slate-200 font-medium">{masterCharacter.clothes || 'Standard'}</p>
+                        <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+                          <span className="text-[10px] font-extrabold text-slate-400 uppercase">Outfit & Clothes</span>
+                          <p className="text-slate-800 font-medium">{masterCharacter.clothes || 'Standard'}</p>
                         </div>
 
-                        <div className="bg-slate-950/60 p-4 rounded-2xl border border-slate-800 space-y-1">
-                          <span className="text-[10px] font-extrabold text-slate-500 uppercase">Body & Colors</span>
-                          <p className="text-slate-200 font-medium">{masterCharacter.body} | Colors: {masterCharacter.colors}</p>
+                        <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
+                          <span className="text-[10px] font-extrabold text-slate-400 uppercase">Body & Colors</span>
+                          <p className="text-slate-800 font-medium">{masterCharacter.body} | Colors: {masterCharacter.colors}</p>
                         </div>
                       </div>
 
-                      <div className="bg-indigo-950/40 border border-indigo-500/30 p-4 rounded-2xl space-y-2">
+                      <div className="bg-indigo-50/70 border border-indigo-200 p-4 rounded-2xl space-y-2">
                         <div className="flex justify-between items-center">
-                          <span className="text-xs font-extrabold text-indigo-300 uppercase">Master Character Prompt Snippet</span>
+                          <span className="text-xs font-extrabold text-indigo-800 uppercase">Master Character Prompt Snippet</span>
                           <button
                             onClick={() => copyToClipboard(masterCharacter.masterPromptSnippet, "Character Prompt Snippet")}
-                            className="text-[11px] text-indigo-400 font-bold hover:underline flex items-center space-x-1"
+                            className="text-[11px] text-indigo-600 font-bold hover:underline flex items-center space-x-1"
                           >
                             <Icons.Copy />
                             <span>Copy Snippet</span>
                           </button>
                         </div>
-                        <p className="text-xs font-mono text-slate-300 bg-slate-950 p-3 rounded-xl border border-slate-800">
+                        <p className="text-xs font-mono text-slate-800 bg-white p-3 rounded-xl border border-slate-200">
                           {masterCharacter.masterPromptSnippet || 'No snippet generated yet.'}
                         </p>
                       </div>
 
                     </div>
                   ) : (
-                    <div className="text-center py-16 bg-slate-900/80 backdrop-blur rounded-3xl border border-slate-800 text-slate-500 text-xs">
+                    <div className="text-center py-16 bg-white rounded-3xl border border-slate-200 text-slate-500 text-xs shadow-sm">
                       No Master Character Sheet generated yet. Complete Step 1 and run the pipeline.
                     </div>
                   )}
 
                   {/* Story Script Section */}
                   {story && (
-                    <div className="bg-slate-900/80 backdrop-blur p-6 rounded-3xl border border-slate-800 space-y-3">
+                    <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-3">
                       <div className="flex justify-between items-center">
-                        <h3 className="text-sm font-black text-white uppercase tracking-wider">Step 2: Complete Animation Script ({language})</h3>
-                        <button onClick={() => copyToClipboard(story, "Story Script")} className="text-xs text-indigo-400 font-bold hover:underline flex items-center space-x-1">
+                        <h3 className="text-sm font-black text-slate-900 uppercase tracking-wider">Step 2: Complete Animation Script ({language})</h3>
+                        <button onClick={() => copyToClipboard(story, "Story Script")} className="text-xs text-indigo-600 font-bold hover:underline flex items-center space-x-1">
                           <Icons.Copy />
                           <span>Copy Story</span>
                         </button>
                       </div>
-                      <div className="bg-slate-950 p-4 rounded-2xl border border-slate-800 text-xs text-slate-300 leading-relaxed font-sans whitespace-pre-line max-h-96 overflow-y-auto">
+                      <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-xs text-slate-800 leading-relaxed font-sans whitespace-pre-line max-h-96 overflow-y-auto">
                         {story}
                       </div>
                     </div>
@@ -1199,19 +1198,19 @@ Output MUST be JSON:
                 </div>
               )}
 
-              {/* TAB 3: STORYBOARDS */}
+              {}
               {activeTab === 'storyboards' && (
                 <div className="max-w-5xl mx-auto space-y-6">
                   
-                  <div className="bg-slate-900/90 border border-indigo-500/30 p-4 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
+                  <div className="bg-white border border-indigo-200 p-4 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs shadow-sm">
                     <div className="space-y-1">
                       <div className="flex items-center space-x-2">
-                        <span className="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-bold px-2 py-0.5 rounded-full">
+                        <span className="bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-bold px-2 py-0.5 rounded-full">
                           ✓ PIPELINE SYNCHRONIZED
                         </span>
-                        <span className="text-slate-400 font-medium">Language: <strong className="text-white">{language}</strong></span>
+                        <span className="text-slate-500 font-medium">Language: <strong className="text-slate-800">{language}</strong></span>
                       </div>
-                      <div className="text-slate-300 font-bold line-clamp-1">
+                      <div className="text-slate-800 font-bold line-clamp-1">
                         Judul: "{selectedTitle || 'Petualangan Animasi'}"
                       </div>
                     </div>
@@ -1226,40 +1225,40 @@ Output MUST be JSON:
                   </div>
 
                   {storyboards.length === 0 ? (
-                    <div className="text-center py-16 bg-slate-900/80 backdrop-blur rounded-3xl border border-slate-800 text-slate-500 text-xs">
-                      No storyboards generated yet. Go to <button onClick={() => setActiveTab('studio')} className="text-indigo-400 underline font-bold">Studio Ideation</button> and run pipeline.
+                    <div className="text-center py-16 bg-white rounded-3xl border border-slate-200 text-slate-500 text-xs shadow-sm">
+                      No storyboards generated yet. Go to <button onClick={() => setActiveTab('studio')} className="text-indigo-600 underline font-bold">Studio Ideation</button> and run pipeline.
                     </div>
                   ) : (
                     <div className="space-y-6">
                       {storyboards.map((sb, idx) => (
-                        <div key={idx} className="bg-slate-900/80 backdrop-blur p-6 rounded-3xl border border-slate-800 space-y-5">
+                        <div key={idx} className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-5">
                           
-                          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center pb-3 border-b border-slate-800 gap-2">
+                          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center pb-3 border-b border-slate-200 gap-2">
                             <div className="flex items-center space-x-3">
                               <span className="w-8 h-8 rounded-xl bg-indigo-600 text-white font-black text-xs flex items-center justify-center">
                                 #{sb.storyboardId}
                               </span>
                               <div>
-                                <h3 className="text-sm font-black text-white">{sb.sceneTitle || `Storyboard Cut #${sb.storyboardId}`}</h3>
-                                <span className="text-[10px] text-slate-400 font-medium">Location: {sb.locationAndTime}</span>
+                                <h3 className="text-sm font-black text-slate-900">{sb.sceneTitle || `Storyboard Cut #${sb.storyboardId}`}</h3>
+                                <span className="text-[10px] text-slate-500 font-medium">Location: {sb.locationAndTime}</span>
                               </div>
                             </div>
                           </div>
 
                           <div className="space-y-2">
-                            <span className="text-[10px] font-extrabold text-indigo-400 uppercase tracking-wider block">
+                            <span className="text-[10px] font-extrabold text-indigo-600 uppercase tracking-wider block">
                               STEP 4: 6 Connected Comic Panels ({language})
                             </span>
                             
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                               {sb.panels && Array.isArray(sb.panels) && sb.panels.map((p, pIdx) => (
-                                <div key={pIdx} className="bg-slate-950 p-3.5 rounded-2xl border border-slate-800 space-y-1.5 text-xs">
+                                <div key={pIdx} className="bg-slate-50 p-3.5 rounded-2xl border border-slate-200 space-y-1.5 text-xs">
                                   <div className="flex justify-between items-center">
-                                    <span className="font-extrabold text-indigo-400 text-[10px]">PANEL {p.panelNum || pIdx + 1}</span>
+                                    <span className="font-extrabold text-indigo-600 text-[10px]">PANEL {p.panelNum || pIdx + 1}</span>
                                   </div>
-                                  <p className="text-slate-300 font-medium leading-snug">{p.action}</p>
+                                  <p className="text-slate-800 font-medium leading-snug">{p.action}</p>
                                   {p.dialogue && p.dialogue !== 'N/A' && (
-                                    <p className="text-[11px] text-amber-300 font-semibold italic bg-amber-500/10 p-2 rounded-lg border border-amber-500/20">
+                                    <p className="text-[11px] text-amber-900 font-semibold italic bg-amber-50 p-2 rounded-lg border border-amber-200">
                                       💬 "{p.dialogue}"
                                     </p>
                                   )}
@@ -1268,34 +1267,34 @@ Output MUST be JSON:
                             </div>
                           </div>
 
-                          <div className="bg-slate-950 p-4 rounded-2xl border border-indigo-500/20 space-y-2">
+                          <div className="bg-indigo-50/60 p-4 rounded-2xl border border-indigo-200 space-y-2">
                             <div className="flex justify-between items-center">
-                              <span className="text-xs font-extrabold text-indigo-300">🖼️ STEP 5: Image Prompt (6-Panel Grid Format)</span>
+                              <span className="text-xs font-extrabold text-indigo-900">🖼️ STEP 5: Image Prompt (6-Panel Grid Format)</span>
                               <button
                                 onClick={() => copyToClipboard(sb.imagePrompt, `Image Prompt #${sb.storyboardId}`)}
-                                className="text-[11px] text-indigo-400 font-bold hover:underline flex items-center space-x-1"
+                                className="text-[11px] text-indigo-600 font-bold hover:underline flex items-center space-x-1"
                               >
                                 <Icons.Copy />
                                 <span>Copy Prompt</span>
                               </button>
                             </div>
-                            <p className="text-xs font-mono text-slate-300 bg-slate-900 p-3 rounded-xl border border-slate-800">
+                            <p className="text-xs font-mono text-slate-800 bg-white p-3 rounded-xl border border-slate-200">
                               {sb.imagePrompt}
                             </p>
                           </div>
 
-                          <div className="bg-slate-950 p-4 rounded-2xl border border-violet-500/20 space-y-2">
+                          <div className="bg-violet-50/60 p-4 rounded-2xl border border-violet-200 space-y-2">
                             <div className="flex justify-between items-center">
-                              <span className="text-xs font-extrabold text-violet-300">📹 STEP 6: Video Prompt (Omni Flash / Sora)</span>
+                              <span className="text-xs font-extrabold text-violet-900">📹 STEP 6: Video Prompt (Omni Flash / Sora)</span>
                               <button
                                 onClick={() => copyToClipboard(sb.videoPrompt, `Video Prompt #${sb.storyboardId}`)}
-                                className="text-[11px] text-violet-400 font-bold hover:underline flex items-center space-x-1"
+                                className="text-[11px] text-violet-600 font-bold hover:underline flex items-center space-x-1"
                               >
                                 <Icons.Copy />
                                 <span>Copy Prompt</span>
                               </button>
                             </div>
-                            <p className="text-xs font-mono text-slate-300 bg-slate-900 p-3 rounded-xl border border-slate-800">
+                            <p className="text-xs font-mono text-slate-800 bg-white p-3 rounded-xl border border-slate-200">
                               {sb.videoPrompt}
                             </p>
                           </div>
@@ -1308,27 +1307,27 @@ Output MUST be JSON:
                 </div>
               )}
 
-              {/* TAB 4: THUMBNAIL & SEO */}
+              {}
               {activeTab === 'thumbnail_seo' && (
                 <div className="max-w-4xl mx-auto space-y-6">
                   
                   <div>
-                    <span className="text-xs font-extrabold text-indigo-400 uppercase tracking-widest">Metadata Engine</span>
-                    <h2 className="text-2xl font-black text-white mt-0.5">Thumbnail Studio & YouTube SEO</h2>
-                    <p className="text-xs text-slate-400">High-CTR thumbnail prompts, video description, tags, and pinned comment in <strong className="text-indigo-300">{language}</strong>.</p>
+                    <span className="text-xs font-extrabold text-indigo-600 uppercase tracking-widest">Metadata Engine</span>
+                    <h2 className="text-2xl font-black text-slate-900 mt-0.5">Thumbnail Studio & YouTube SEO</h2>
+                    <p className="text-xs text-slate-500">High-CTR thumbnail prompts, video description, tags, and pinned comment in <strong className="text-indigo-600">{language}</strong>.</p>
                   </div>
 
                   {thumbnailData && (
-                    <div className="bg-slate-900/80 backdrop-blur p-6 rounded-3xl border border-indigo-500/30 space-y-5">
-                      <div className="flex items-center space-x-2 text-indigo-300 font-extrabold text-xs uppercase tracking-wider">
+                    <div className="bg-white p-6 rounded-3xl border border-indigo-200 shadow-sm space-y-5">
+                      <div className="flex items-center space-x-2 text-indigo-800 font-extrabold text-xs uppercase tracking-wider">
                         <span>🖼️ THUMBNAIL STUDIO & HIGH-CTR PROMPT</span>
                       </div>
 
                       <div className="space-y-3">
-                        <label className="text-xs font-bold text-slate-300 block">Pilihan Teks Headline High-CTR</label>
+                        <label className="text-xs font-bold text-slate-700 block">Pilihan Teks Headline High-CTR</label>
                         <div className="flex flex-wrap gap-2">
                           {thumbnailData.ctrTextOptions?.map((txt, i) => (
-                            <span key={i} className="bg-indigo-950/60 border border-indigo-500/40 text-indigo-200 text-xs px-3 py-1.5 rounded-xl font-extrabold">
+                            <span key={i} className="bg-indigo-50 border border-indigo-200 text-indigo-800 text-xs px-3 py-1.5 rounded-xl font-extrabold">
                               "{txt}"
                             </span>
                           ))}
@@ -1337,21 +1336,21 @@ Output MUST be JSON:
 
                       <div className="space-y-1 text-xs">
                         <span className="font-bold text-slate-400 block uppercase text-[10px]">Konsep Visual</span>
-                        <p className="text-slate-200 bg-slate-950 p-3 rounded-xl border border-slate-800">{thumbnailData.visualConcept}</p>
+                        <p className="text-slate-800 bg-slate-50 p-3 rounded-xl border border-slate-200">{thumbnailData.visualConcept}</p>
                       </div>
 
                       <div className="space-y-2">
                         <div className="flex justify-between items-center">
-                          <span className="text-xs font-extrabold text-indigo-300">Prompt Thumbnail (Midjourney / Imagen)</span>
+                          <span className="text-xs font-extrabold text-indigo-900">Prompt Thumbnail (Midjourney / Imagen)</span>
                           <button
                             onClick={() => copyToClipboard(thumbnailData.readyPrompt, "Prompt Thumbnail")}
-                            className="text-[11px] text-indigo-400 font-bold hover:underline flex items-center space-x-1"
+                            className="text-[11px] text-indigo-600 font-bold hover:underline flex items-center space-x-1"
                           >
                             <Icons.Copy />
                             <span>Salin Prompt</span>
                           </button>
                         </div>
-                        <p className="text-xs font-mono text-slate-300 bg-slate-950 p-3 rounded-xl border border-slate-800">
+                        <p className="text-xs font-mono text-slate-800 bg-slate-50 p-3 rounded-xl border border-slate-200">
                           {thumbnailData.readyPrompt}
                         </p>
                       </div>
@@ -1359,18 +1358,18 @@ Output MUST be JSON:
                   )}
 
                   {seoData && (
-                    <div className="bg-slate-900/80 backdrop-blur p-6 rounded-3xl border border-slate-800 space-y-5">
-                      <div className="flex items-center space-x-2 text-emerald-400 font-extrabold text-xs uppercase tracking-wider">
+                    <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-5">
+                      <div className="flex items-center space-x-2 text-emerald-700 font-extrabold text-xs uppercase tracking-wider">
                         <span>🏷️ YOUTUBE SEO METADATA PACKAGE ({language.toUpperCase()})</span>
                       </div>
 
                       <div className="space-y-2">
-                        <label className="text-xs font-bold text-slate-300 block">5 Opsi Judul Video YouTube SEO High-CTR</label>
+                        <label className="text-xs font-bold text-slate-700 block">5 Opsi Judul Video YouTube SEO High-CTR</label>
                         <div className="space-y-2">
                           {seoData.seoTitles?.map((t, i) => (
-                            <div key={i} className="flex justify-between items-center bg-slate-950 p-3 rounded-xl border border-slate-800 text-xs text-slate-200">
+                            <div key={i} className="flex justify-between items-center bg-slate-50 p-3 rounded-xl border border-slate-200 text-xs text-slate-800">
                               <span className="font-bold">{i + 1}. {t}</span>
-                              <button onClick={() => copyToClipboard(t, `Judul ${i + 1}`)} className="text-indigo-400 font-bold text-[11px] hover:underline flex items-center space-x-1">
+                              <button onClick={() => copyToClipboard(t, `Judul ${i + 1}`)} className="text-indigo-600 font-bold text-[11px] hover:underline flex items-center space-x-1">
                                 <Icons.Copy />
                                 <span>Salin</span>
                               </button>
@@ -1381,8 +1380,8 @@ Output MUST be JSON:
 
                       <div className="space-y-2">
                         <div className="flex justify-between items-center">
-                          <label className="text-xs font-bold text-slate-300">Deskripsi Video YouTube</label>
-                          <button onClick={() => copyToClipboard(seoData.videoDescription, "Deskripsi Video")} className="text-indigo-400 font-bold text-[11px] hover:underline flex items-center space-x-1">
+                          <label className="text-xs font-bold text-slate-700">Deskripsi Video YouTube</label>
+                          <button onClick={() => copyToClipboard(seoData.videoDescription, "Deskripsi Video")} className="text-indigo-600 font-bold text-[11px] hover:underline flex items-center space-x-1">
                             <Icons.Copy />
                             <span>Salin Deskripsi</span>
                           </button>
@@ -1391,20 +1390,20 @@ Output MUST be JSON:
                           rows={5}
                           readOnly
                           value={seoData.videoDescription}
-                          className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-slate-300 focus:outline-none"
+                          className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-800 focus:outline-none"
                         />
                       </div>
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
                         <div className="space-y-1">
                           <span className="font-bold text-slate-400 block uppercase text-[10px]">Hashtags & Tags</span>
-                          <p className="bg-slate-950 p-3 rounded-xl border border-slate-800 text-indigo-300 font-bold">{seoData.hashtags}</p>
-                          <p className="bg-slate-950 p-3 rounded-xl border border-slate-800 text-slate-400 mt-1">{seoData.youtubeTags?.join(', ')}</p>
+                          <p className="bg-slate-50 p-3 rounded-xl border border-slate-200 text-indigo-700 font-bold">{seoData.hashtags}</p>
+                          <p className="bg-slate-50 p-3 rounded-xl border border-slate-200 text-slate-600 mt-1">{seoData.youtubeTags?.join(', ')}</p>
                         </div>
 
                         <div className="space-y-1">
                           <span className="font-bold text-slate-400 block uppercase text-[10px]">Komentar Tersemat (Pinned Comment)</span>
-                          <p className="bg-slate-950 p-3 rounded-xl border border-slate-800 text-amber-300 italic">{seoData.pinnedComment}</p>
+                          <p className="bg-amber-50 p-3 rounded-xl border border-amber-200 text-amber-900 italic">{seoData.pinnedComment}</p>
                         </div>
                       </div>
 
@@ -1412,22 +1411,22 @@ Output MUST be JSON:
                   )}
 
                   {!thumbnailData && !seoData && (
-                    <div className="text-center py-16 bg-slate-900/80 backdrop-blur rounded-3xl border border-slate-800 text-slate-500 text-xs">
-                      Belum ada metadata SEO & Thumbnail. Jalankan pipeline produksi di menu <button onClick={() => setActiveTab('studio')} className="text-indigo-400 underline font-bold">Studio Setup</button>.
+                    <div className="text-center py-16 bg-white rounded-3xl border border-slate-200 text-slate-500 text-xs shadow-sm">
+                      Belum ada metadata SEO & Thumbnail. Jalankan pipeline produksi di menu <button onClick={() => setActiveTab('studio')} className="text-indigo-600 underline font-bold">Studio Setup</button>.
                     </div>
                   )}
 
                 </div>
               )}
 
-              {/* TAB 5: PACKAGE EXPORT */}
+              {}
               {activeTab === 'export' && (
                 <div className="max-w-4xl mx-auto space-y-6">
                   <div className="flex justify-between items-center">
                     <div>
-                      <span className="text-xs font-extrabold text-indigo-400 uppercase tracking-widest">Step 10 Output</span>
-                      <h2 className="text-2xl font-black text-white mt-0.5">Production Package Export</h2>
-                      <p className="text-xs text-slate-400">Download your synchronized animation package in TXT, Markdown, or DOCX formats.</p>
+                      <span className="text-xs font-extrabold text-indigo-600 uppercase tracking-widest">Step 10 Output</span>
+                      <h2 className="text-2xl font-black text-slate-900 mt-0.5">Production Package Export</h2>
+                      <p className="text-xs text-slate-500">Download your synchronized animation package in TXT, Markdown, or DOCX formats.</p>
                     </div>
 
                     <button
@@ -1439,65 +1438,65 @@ Output MUST be JSON:
                     </button>
                   </div>
 
-                  <div className="bg-slate-900/80 backdrop-blur p-6 rounded-3xl border border-slate-800 space-y-4">
-                    <span className="text-xs font-extrabold text-slate-300 uppercase tracking-wider block">Download Formats</span>
+                  <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+                    <span className="text-xs font-extrabold text-slate-700 uppercase tracking-wider block">Download Formats</span>
                     
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                       <button
                         onClick={() => exportAsFile(generateFullPackageText('txt'), `${selectedTitle || 'Animation_Package'}.txt`, 'text/plain')}
-                        className="p-4 rounded-2xl bg-slate-950 border border-slate-800 hover:border-indigo-500 text-left transition space-y-1"
+                        className="p-4 rounded-2xl bg-slate-50 border border-slate-200 hover:border-indigo-400 hover:bg-indigo-50/30 text-left transition space-y-1"
                       >
                         <span className="text-xl">📄</span>
-                        <div className="font-extrabold text-xs text-white">Export TXT</div>
+                        <div className="font-extrabold text-xs text-slate-900">Export TXT</div>
                         <div className="text-[10px] text-slate-500">Plain text format</div>
                       </button>
 
                       <button
                         onClick={() => exportAsFile(generateFullPackageText('md'), `${selectedTitle || 'Animation_Package'}.md`, 'text/markdown')}
-                        className="p-4 rounded-2xl bg-slate-950 border border-slate-800 hover:border-indigo-500 text-left transition space-y-1"
+                        className="p-4 rounded-2xl bg-slate-50 border border-slate-200 hover:border-indigo-400 hover:bg-indigo-50/30 text-left transition space-y-1"
                       >
                         <span className="text-xl">📝</span>
-                        <div className="font-extrabold text-xs text-white">Export Markdown</div>
+                        <div className="font-extrabold text-xs text-slate-900">Export Markdown</div>
                         <div className="text-[10px] text-slate-500">Formatted MD</div>
                       </button>
 
                       <button
                         onClick={() => exportAsFile(generateFullPackageText('txt'), `${selectedTitle || 'Animation_Package'}.doc`, 'application/msword')}
-                        className="p-4 rounded-2xl bg-slate-950 border border-slate-800 hover:border-indigo-500 text-left transition space-y-1"
+                        className="p-4 rounded-2xl bg-slate-50 border border-slate-200 hover:border-indigo-400 hover:bg-indigo-50/30 text-left transition space-y-1"
                       >
                         <span className="text-xl">📘</span>
-                        <div className="font-extrabold text-xs text-white">Export DOCX</div>
+                        <div className="font-extrabold text-xs text-slate-900">Export DOCX</div>
                         <div className="text-[10px] text-slate-500">Word document</div>
                       </button>
                     </div>
                   </div>
 
-                  <div className="bg-slate-900/80 backdrop-blur p-6 rounded-3xl border border-slate-800 space-y-3">
-                    <span className="text-xs font-extrabold text-slate-300 uppercase tracking-wider block">Package Preview</span>
-                    <pre className="bg-slate-950 p-4 rounded-2xl border border-slate-800 text-xs font-mono text-slate-300 leading-relaxed overflow-x-auto max-h-96">
+                  <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-3">
+                    <span className="text-xs font-extrabold text-slate-700 uppercase tracking-wider block">Package Preview</span>
+                    <pre className="bg-slate-900 p-4 rounded-2xl border border-slate-800 text-xs font-mono text-slate-200 leading-relaxed overflow-x-auto max-h-96">
                       {generateFullPackageText('md')}
                     </pre>
                   </div>
                 </div>
               )}
 
-              {/* TAB 6: API SETTINGS */}
+              {}
               {activeTab === 'settings' && (
                 <div className="max-w-xl mx-auto space-y-6">
                   
-                  <div className="bg-amber-500/10 border border-amber-500/30 p-6 rounded-3xl space-y-5">
+                  <div className="bg-amber-50/80 border border-amber-200 p-6 rounded-3xl space-y-5 shadow-sm">
                     
-                    <div className="flex items-center space-x-2 text-amber-400 font-extrabold text-xs uppercase tracking-wider">
+                    <div className="flex items-center space-x-2 text-amber-800 font-extrabold text-xs uppercase tracking-wider">
                       <Icons.Zap />
                       <span>API SETTINGS</span>
                     </div>
 
                     <div className="space-y-2">
-                      <label className="text-xs font-bold text-slate-300 block">Pilih API Provider</label>
+                      <label className="text-xs font-bold text-slate-700 block">Pilih API Provider</label>
                       <select
                         value={provider}
                         onChange={e => handleProviderChange(e.target.value)}
-                        className="w-full bg-amber-950/40 border-2 border-amber-500/50 rounded-2xl p-3.5 text-xs font-extrabold text-amber-200 focus:outline-none focus:border-amber-400 cursor-pointer shadow-md"
+                        className="w-full bg-white border-2 border-amber-400 rounded-2xl p-3.5 text-xs font-extrabold text-amber-900 focus:outline-none cursor-pointer shadow-sm"
                       >
                         <option value="openrouter">🌐 OpenRouter (FREE) - REKOMENDASI</option>
                         <option value="gemini">🔵 Google Gemini Direct API</option>
@@ -1505,11 +1504,11 @@ Output MUST be JSON:
                     </div>
 
                     <div className="space-y-2">
-                      <label className="text-xs font-bold text-slate-300 block">Pilih Model AI</label>
+                      <label className="text-xs font-bold text-slate-700 block">Pilih Model AI</label>
                       <select
                         value={selectedModel}
                         onChange={e => setSelectedModel(e.target.value)}
-                        className="w-full bg-slate-950 border border-slate-800 rounded-2xl p-3.5 text-xs font-mono text-slate-200 focus:outline-none focus:border-indigo-500 cursor-pointer"
+                        className="w-full bg-white border border-amber-200 rounded-2xl p-3.5 text-xs font-mono text-slate-800 focus:outline-none focus:border-indigo-500 cursor-pointer shadow-sm"
                       >
                         {provider === 'openrouter' ? (
                           customModelList.map(m => (
@@ -1524,7 +1523,7 @@ Output MUST be JSON:
                     </div>
 
                     <div className="space-y-2">
-                      <label className="text-xs font-bold text-slate-300 block">
+                      <label className="text-xs font-bold text-slate-700 block">
                         {provider === 'openrouter' ? 'OpenRouter API Key (sk-or-v1-...)' : 'Google Gemini API Key (AIzaSy...)'}
                       </label>
                       <input
@@ -1535,7 +1534,7 @@ Output MUST be JSON:
                           if (provider === 'openrouter') setOpenrouterKey(e.target.value);
                           else setGeminiKey(e.target.value);
                         }}
-                        className="w-full bg-slate-950 border border-slate-800 rounded-2xl p-3.5 text-xs font-mono text-white focus:outline-none focus:border-amber-500"
+                        className="w-full bg-white border border-amber-200 rounded-2xl p-3.5 text-xs font-mono text-slate-900 focus:outline-none focus:border-amber-500 shadow-sm"
                       />
                     </div>
 
@@ -1543,7 +1542,7 @@ Output MUST be JSON:
                       <button
                         onClick={handleTestKey}
                         disabled={isTestingKey}
-                        className="bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-200 p-3 rounded-2xl text-xs font-bold flex flex-col items-center justify-center space-y-1 transition"
+                        className="bg-white hover:bg-amber-100/50 border border-amber-200 text-slate-800 p-3 rounded-2xl text-xs font-bold flex flex-col items-center justify-center space-y-1 transition shadow-sm"
                       >
                         <span className="text-base">🔑</span>
                         <span>{isTestingKey ? 'Testing...' : 'Test Key'}</span>
@@ -1552,7 +1551,7 @@ Output MUST be JSON:
                       <button
                         onClick={handleRefreshModels}
                         disabled={isRefreshingModels}
-                        className="bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-200 p-3 rounded-2xl text-xs font-bold flex flex-col items-center justify-center space-y-1 transition text-center"
+                        className="bg-white hover:bg-amber-100/50 border border-amber-200 text-slate-800 p-3 rounded-2xl text-xs font-bold flex flex-col items-center justify-center space-y-1 transition text-center shadow-sm"
                       >
                         <span className="text-base">📦</span>
                         <span className="line-clamp-1">{isRefreshingModels ? 'Refreshing...' : 'Refresh Model'}</span>
@@ -1560,7 +1559,7 @@ Output MUST be JSON:
 
                       <button
                         onClick={handleOpenGetKeyPage}
-                        className="bg-amber-900/30 hover:bg-amber-900/50 border border-amber-500/40 text-amber-300 p-3 rounded-2xl text-xs font-bold flex flex-col items-center justify-center space-y-1 transition"
+                        className="bg-amber-100 hover:bg-amber-200 border border-amber-300 text-amber-900 p-3 rounded-2xl text-xs font-bold flex flex-col items-center justify-center space-y-1 transition shadow-sm"
                       >
                         <span className="text-base">📋</span>
                         <span>Ambil Key</span>
