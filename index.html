@@ -60,11 +60,13 @@
       Settings: () => <svg className="w-4 h-4 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>,
       Refresh: () => <svg className="w-4 h-4 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>,
       Download: () => <svg className="w-4 h-4 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>,
-      Monitor: () => <svg className="w-4 h-4 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>,
-      Smartphone: () => <svg className="w-4 h-4 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+      Key: () => <svg className="w-4 h-4 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/></svg>
     };
 
     const ANIMATION_STYLES = [
+      { id: 'cute_3d_cgi', label: 'Cute 3D CGI (Pixar Style)', icon: '✨', desc: 'Gaya 3D CGI imut, mata besar glossy, pencahayaan studio & warna vibrant' },
+      { id: '3d_chibi_toy', label: '3D Chibi Toy Style', icon: '🧸', desc: 'Karakter 3D Chibi imut mirip mainan animasi modern, imut & berkilau' },
+      { id: '3d_studio_movie', label: '3D Cinematic Studio', icon: '🎬', desc: 'Kualitas sinematik animasi film 3D bioskop anak bertekstur halus' },
       { id: 'doraemon', label: 'Doraemon Style', icon: '🔔', desc: 'Japanese 3D/2D suburban gadget adventures' },
       { id: 'dolewak', label: 'Dolewak Style', icon: '🤪', desc: 'Ekspresif, kocak & komedi kartun khas lokal Indonesia' },
       { id: 'dot_design', label: 'Dot Design Art', icon: '🔴', desc: 'Halftone polka-dot pattern & vibrant pop-art dot design' },
@@ -79,10 +81,8 @@
       { id: 'fairy_tales', label: 'Fairy Tales', icon: '🏰', desc: 'Magical folklore & enchanted worlds' },
       { id: 'school_stories', label: 'School Stories', icon: '🎒', desc: 'Relatable classroom & friendship tales' },
       { id: 'family_stories', label: 'Family Stories', icon: '🏠', desc: 'Heartwarming home & sibling bonding' },
-      { id: 'fantasy', label: 'Epic Fantasy', icon: '🐉', desc: 'Dragons, magic spells & mythical quests' },
-      { id: 'horror_kids', label: 'Horror for Kids', icon: '👻', desc: 'Spooky-funny mystery tales' },
       { id: 'funny_stories', label: 'Funny Slapstick', icon: '🤡', desc: 'High-energy slapstick laugh-out-loud comedy' },
-      { id: 'custom', label: 'Custom Style', icon: '✨', desc: 'Define your own unique animation style' }
+      { id: 'custom', label: 'Custom Style', icon: '🎨', desc: 'Define your own unique animation style' }
     ];
 
     const ASPECT_RATIO_OPTIONS = [
@@ -111,14 +111,14 @@
     ];
 
     const GEMINI_DIRECT_MODELS = [
-      { id: 'gemini-2.5-flash', name: '⚡ Gemini 2.5 Flash (Google AI)', tag: 'Latest' },
-      { id: 'gemini-2.0-flash', name: '⚡ Gemini 2.0 Flash (Google AI)', tag: 'Stable' },
-      { id: 'gemini-1.5-flash', name: '⚡ Gemini 1.5 Flash (Google AI)', tag: 'Standard' }
+      { id: 'gemini-2.0-flash', name: '⚡ Gemini 2.0 Flash (Google AI)', tag: 'Latest Fast' },
+      { id: 'gemini-1.5-flash', name: '⚡ Gemini 1.5 Flash (Google AI)', tag: 'Stable' },
+      { id: 'gemini-1.5-pro', name: '⚡ Gemini 1.5 Pro (Google AI)', tag: 'High Precision' }
     ];
 
     const TARGET_AUDIENCES = ['Kids', 'Family', 'Educational', 'Comedy', 'Adventure'];
     const LANGUAGES = ['Indonesian', 'English', 'Spanish', 'Japanese', 'Other'];
-    const LOCAL_STORAGE_KEY = "AI_ANIMATION_STUDIO_PROJECT_V6";
+    const LOCAL_STORAGE_KEY = "AI_ANIMATION_STUDIO_PROJECT_V7";
 
     function extractJSON(text) {
       if (!text) return null;
@@ -133,7 +133,7 @@
     }
 
     function generateFallbackTitles(theme, style, lang) {
-      const cleanTheme = theme ? theme.trim() : "Petualangan Ajaib";
+      const cleanTheme = theme && theme.trim().length > 0 ? theme.trim() : "Petualangan Ajaib";
       return [
         `Rahasia Dibalik ${cleanTheme}!`,
         `Kisah Nyata: ${cleanTheme} (Versi Animasi)`,
@@ -153,16 +153,18 @@
       const charName = words.length > 0 && words[0].length > 2 ? words[0].replace(/[^a-zA-Z]/g, '') : "Kiki";
       const cleanTitle = title || theme || "Petualangan Animasi";
       
-      const styleDesc = style === 'dolewak' 
+      const styleDesc = style === 'cute_3d_cgi' 
+        ? "cute 3D CGI cartoon style, Pixar-like glossy big eyes, vibrant colors"
+        : style === '3d_chibi_toy'
+        ? "3D chibi toy style, smooth glossy surface, expressive face"
+        : style === 'dolewak'
         ? "gaya komedi Dolewak khas kartun lokal, mata kocak ekspresif"
-        : style === 'dot_design'
-        ? "gaya Dot Design halftone pop-art dengan pola bintik-bintik artistik"
         : `${style} animation style`;
 
       return {
         characterName: charName,
         archetype: "Pahlawan Utama Cerita",
-        face: style === 'dolewak' ? "Wajah kocak elastis ekspresif dengan raut muka jahil dan ramah" : "Wajah bulat ekspresif, mata besar bersinar ramah",
+        face: "Wajah bulat ekspresif imut, mata besar bersinar ramah dan ceria",
         hair: "Rambut ikal warna cokelat terang potongan rapi",
         clothes: "Jaket hoodie biru muda dengan kaos putih bertuliskan logo bintang, celana kargo pendek",
         body: "Postur anak usia 8-10 tahun, lincah, proporsional",
@@ -232,9 +234,12 @@ Pada akhirnya, petualangan ini memberikan pelajaran berharga bagi ${name} dan se
     }
 
     async function callUniversalAI(prompt, provider, model, openrouterKey, geminiKey, systemInstruction = "") {
+      const cleanOpenRouterKey = openrouterKey ? openrouterKey.trim() : "";
+      const cleanGeminiKey = geminiKey ? geminiKey.trim() : "";
+
       if (provider === 'openrouter') {
-        if (!openrouterKey || openrouterKey.trim() === "") {
-          throw new Error("NO_KEY: Silakan masukkan OpenRouter API Key di menu API Settings.");
+        if (!cleanOpenRouterKey) {
+          throw new Error("NO_KEY: Silakan masukkan OpenRouter API Key di menu API Settings atau tombol cepat di atas.");
         }
 
         const endpoint = "https://openrouter.ai/api/v1/chat/completions";
@@ -247,9 +252,9 @@ Pada akhirnya, petualangan ini memberikan pelajaran berharga bagi ${name} dan se
         const response = await fetch(endpoint, {
           method: "POST",
           headers: {
-            "Authorization": `Bearer ${openrouterKey.trim()}`,
+            "Authorization": `Bearer ${cleanOpenRouterKey}`,
             "Content-Type": "application/json",
-            "HTTP-Referer": window.location.href || "https://github.com",
+            "HTTP-Referer": window.location.href || "https://localhost",
             "X-Title": "AI Viral Kids Studio"
           },
           body: JSON.stringify({
@@ -261,18 +266,21 @@ Pada akhirnya, petualangan ini memberikan pelajaran berharga bagi ${name} dan se
 
         if (!response.ok) {
           const errData = await response.json().catch(() => ({}));
-          throw new Error(errData.error?.message || `OpenRouter API Error (${response.status})`);
+          const errMsg = errData.error?.message || `OpenRouter API HTTP Error ${response.status}`;
+          throw new Error(`OpenRouter Error: ${errMsg}`);
         }
 
         const data = await response.json();
-        return data.choices?.[0]?.message?.content || "";
+        const output = data.choices?.[0]?.message?.content || "";
+        if (!output) throw new Error("OpenRouter mengembalikan respon kosong.");
+        return output;
       } else {
-        if (!geminiKey || geminiKey.trim() === "") {
-          throw new Error("NO_KEY: Silakan masukkan Google Gemini API Key di API Settings.");
+        if (!cleanGeminiKey) {
+          throw new Error("NO_KEY: Silakan masukkan Google Gemini API Key di menu API Settings atau tombol cepat di atas.");
         }
 
-        const modelToUse = model || "gemini-2.5-flash";
-        const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${modelToUse}:generateContent?key=${geminiKey.trim()}`;
+        const modelToUse = model || "gemini-2.0-flash";
+        const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${modelToUse}:generateContent?key=${cleanGeminiKey}`;
 
         const requestBody = {
           contents: [{ role: "user", parts: [{ text: prompt }] }]
@@ -290,14 +298,19 @@ Pada akhirnya, petualangan ini memberikan pelajaran berharga bagi ${name} dan se
 
         if (!response.ok) {
           const errData = await response.json().catch(() => ({}));
+          if (response.status === 400 || response.status === 403) {
+            throw new Error(`Gemini Key Invalid/Forbidden (${response.status}): Check API Key permission.`);
+          }
           if (response.status === 429 || errData.error?.message?.toLowerCase().includes("quota")) {
-            throw new Error("QUOTA_EXCEEDED: Rate limit/kuota Gemini API tercapai.");
+            throw new Error("QUOTA_EXCEEDED: Rate limit atau kuota Gemini API tercapai.");
           }
           throw new Error(errData.error?.message || `Gemini API Request failed (${response.status})`);
         }
 
         const data = await response.json();
-        return data.candidates?.[0]?.content?.parts?.[0]?.text || "";
+        const text = data.candidates?.[0]?.content?.parts?.[0]?.text || "";
+        if (!text) throw new Error("Google Gemini API mengembalikan respon kosong.");
+        return text;
       }
     }
 
@@ -321,10 +334,13 @@ Pada akhirnya, petualangan ini memberikan pelajaran berharga bagi ${name} dan se
       
       const [activeTab, setActiveTab] = useState('studio');
       
-      const [animationStyle, setAnimationStyle] = useState('doraemon');
+      const [animationStyle, setAnimationStyle] = useState('cute_3d_cgi');
       const [customStyleText, setCustomStyleText] = useState('');
-      const [aspectRatio, setAspectRatio] = useState('16:9'); // Default Landscape Mode
-      const [storyTheme, setStoryTheme] = useState('Petualangan seru adik dan kakak menyelamatkan anak anjing lucu di kompleks perumahan.');
+      const [aspectRatio, setAspectRatio] = useState('16:9'); // Default Widescreen Landscape Mode
+      
+      // Default story theme set to EMPTY as requested
+      const [storyTheme, setStoryTheme] = useState('');
+      
       const [duration, setDuration] = useState('60 sec');
       const [language, setLanguage] = useState('Indonesian');
       const [targetAudience, setTargetAudience] = useState('Kids');
@@ -347,6 +363,9 @@ Pada akhirnya, petualangan ini memberikan pelajaran berharga bagi ${name} dan se
       const [showResetModal, setShowResetModal] = useState(false);
       const [customModelList, setCustomModelList] = useState(OPENROUTER_FREE_MODELS);
 
+      // Quick API Key inline editor on Studio tab
+      const [showQuickKeyBar, setShowQuickKeyBar] = useState(false);
+
       useEffect(() => {
         localStorage.setItem("AI_STUDIO_PROVIDER", provider);
         localStorage.setItem("OPENROUTER_API_KEY", openrouterKey);
@@ -359,7 +378,7 @@ Pada akhirnya, petualangan ini memberikan pelajaran berharga bagi ${name} dan se
         if (newProvider === 'openrouter') {
           setSelectedModel('openrouter/free');
         } else {
-          setSelectedModel('gemini-2.5-flash');
+          setSelectedModel('gemini-2.0-flash');
         }
       };
 
@@ -380,7 +399,7 @@ Pada akhirnya, petualangan ini memberikan pelajaran berharga bagi ${name} dan se
             if (parsed.animationStyle) setAnimationStyle(parsed.animationStyle);
             if (parsed.customStyleText) setCustomStyleText(parsed.customStyleText);
             if (parsed.aspectRatio) setAspectRatio(parsed.aspectRatio);
-            if (parsed.storyTheme) setStoryTheme(parsed.storyTheme);
+            if (parsed.storyTheme !== undefined) setStoryTheme(parsed.storyTheme);
             if (parsed.duration) setDuration(parsed.duration);
             if (parsed.language) setLanguage(parsed.language);
             if (parsed.targetAudience) setTargetAudience(parsed.targetAudience);
@@ -400,7 +419,7 @@ Pada akhirnya, petualangan ini memberikan pelajaran berharga bagi ${name} dan se
 
       const showToast = (msg, type = 'info') => {
         setToast({ msg, type });
-        setTimeout(() => setToast(null), 3500);
+        setTimeout(() => setToast(null), 4000);
       };
 
       const copyToClipboard = (text, label) => {
@@ -421,9 +440,13 @@ Pada akhirnya, petualangan ini memberikan pelajaran berharga bagi ${name} dan se
       const handleTestKey = async () => {
         setIsTestingKey(true);
         try {
-          const testPrompt = "Reply with 'API Key Active OK'";
+          const activeKey = provider === 'openrouter' ? openrouterKey : geminiKey;
+          if (!activeKey || activeKey.trim() === '') {
+            throw new Error(`Silakan masukkan API key ${provider === 'openrouter' ? 'OpenRouter' : 'Gemini'} terlebih dahulu.`);
+          }
+          const testPrompt = "Respond with 'API Key OK'";
           const resp = await callUniversalAI(testPrompt, provider, selectedModel, openrouterKey, geminiKey);
-          showToast(`Key Valid! Model ${selectedModel} responded: ${resp.substring(0, 30)}...`, "success");
+          showToast(`SUCCESS! Key Valid & Active! Model ${selectedModel} responded: ${resp.substring(0, 30)}...`, "success");
         } catch (err) {
           showToast(`Test Failed: ${err.message}`, "error");
         } finally {
@@ -451,10 +474,10 @@ Pada akhirnya, petualangan ini memberikan pelajaran berharga bagi ${name} dan se
               }
             }
           } else {
-            showToast("Gemini models list refreshed.", "info");
+            showToast("Gemini models list updated.", "info");
           }
         } catch (err) {
-          showToast("Could not fetch online models. Using default free list.", "info");
+          showToast("Could not fetch online models. Using preset free list.", "info");
         } finally {
           setIsRefreshingModels(false);
         }
@@ -468,16 +491,19 @@ Pada akhirnya, petualangan ini memberikan pelajaran berharga bagi ${name} dan se
         }
       };
 
-      const currentStyleLabel = animationStyle === 'custom' ? customStyleText : (ANIMATION_STYLES.find(s => s.id === animationStyle)?.label || 'Doraemon Style');
+      const currentStyleLabel = animationStyle === 'custom' ? customStyleText : (ANIMATION_STYLES.find(s => s.id === animationStyle)?.label || 'Cute 3D CGI Cartoon');
       const targetDurationObj = DURATION_OPTIONS.find(d => d.value === duration) || DURATION_OPTIONS[1];
+      const hasActiveKey = provider === 'openrouter' ? (openrouterKey && openrouterKey.trim().length > 5) : (geminiKey && geminiKey.trim().length > 5);
 
       const handleGenerateTitles = async () => {
+        const themeToUse = storyTheme && storyTheme.trim().length > 0 ? storyTheme.trim() : "Petualangan Seru Karakter Kartun Imut";
+
         setIsGenerating(true);
         setLoadingStepText(`STEP 1: Generating 10 Viral Titles in ${language}...`);
         try {
           const prompt = `Generate exactly 10 high-CTR, highly engaging viral cartoon animation titles for kids/family based on:
 Style: ${currentStyleLabel}
-Theme: ${storyTheme}
+Theme: ${themeToUse}
 Orientation/Aspect Ratio: ${aspectRatio} (${aspectRatio === '16:9' ? 'Landscape Widescreen' : 'Portrait Vertical'})
 CRITICAL LANGUAGE RULE: Must be written strictly in ${language}.
 Target Audience: ${targetAudience}
@@ -492,17 +518,17 @@ Output MUST be a JSON array of 10 title strings ONLY in ${language}. Example: ["
             if (!selectedTitle || !parsed.includes(selectedTitle)) {
               setSelectedTitle(parsed[0]);
             }
-            showToast("10 Viral Titles generated!", "success");
+            showToast("10 Viral Titles generated successfully!", "success");
           } else {
-            throw new Error("Format output bukan JSON array.");
+            throw new Error("Format output AI bukan JSON array.");
           }
         } catch (err) {
-          const fallbackList = generateFallbackTitles(storyTheme, currentStyleLabel, language);
+          const fallbackList = generateFallbackTitles(themeToUse, currentStyleLabel, language);
           setTitles(fallbackList);
           if (!selectedTitle || !fallbackList.includes(selectedTitle)) {
             setSelectedTitle(fallbackList[0]);
           }
-          showToast(`Notice: ${err.message}. Used fallback engine.`, "info");
+          showToast(`Notice: ${err.message}. Using built-in generator.`, "info");
         } finally {
           setIsGenerating(false);
         }
@@ -514,6 +540,8 @@ Output MUST be a JSON array of 10 title strings ONLY in ${language}. Example: ["
           return;
         }
 
+        const themeToUse = storyTheme && storyTheme.trim().length > 0 ? storyTheme.trim() : selectedTitle;
+
         setIsGenerating(true);
         try {
           setLoadingStepText("STEP 7: Building Master Character Sheet...");
@@ -522,7 +550,7 @@ Output MUST be a JSON array of 10 title strings ONLY in ${language}. Example: ["
             const charPrompt = `Create one Master Character Sheet for the main character(s) in this story.
 Title: "${selectedTitle}"
 Style: ${currentStyleLabel}
-Theme: ${storyTheme}
+Theme: ${themeToUse}
 Aspect Ratio: ${aspectRatio} (${aspectRatio === '16:9' ? 'Mode Lanskap Widescreen' : 'Mode Potret Vertikal'})
 Language: ${language}
 
@@ -550,7 +578,7 @@ Output MUST be JSON with fields:
           }
           
           if (!charParsed || !charParsed.characterName) {
-            charParsed = generateFallbackCharacter(selectedTitle, storyTheme, currentStyleLabel, aspectRatio);
+            charParsed = generateFallbackCharacter(selectedTitle, themeToUse, currentStyleLabel, aspectRatio);
           }
           setMasterCharacter(charParsed);
 
@@ -577,7 +605,7 @@ Requirements:
           }
           
           if (!generatedStory || generatedStory.trim().length < 50) {
-            generatedStory = generateFallbackScript(selectedTitle, currentStyleLabel, duration, storyTheme, charParsed);
+            generatedStory = generateFallbackScript(selectedTitle, currentStyleLabel, duration, themeToUse, charParsed);
           }
           setStory(generatedStory);
 
@@ -643,7 +671,7 @@ Format output as pure JSON:
             const seoPrompt = `Create a YouTube SEO & Thumbnail Package for this animated video:
 Title: "${selectedTitle}"
 Style: ${currentStyleLabel}
-Theme: ${storyTheme}
+Theme: ${themeToUse}
 Aspect Ratio: ${aspectRatio}
 Language: ${language}
 Target Audience: ${targetAudience}
@@ -710,7 +738,7 @@ Output MUST be JSON:
         txt += `Project Name: ${selectedTitle || 'Untitled Story'}\n`;
         txt += `Animation Style: ${currentStyleLabel}\n`;
         txt += `Aspect Ratio: ${aspectRatio} (${aspectRatio === '16:9' ? 'Lanskap' : 'Potret'})\n`;
-        txt += `Story Theme: ${storyTheme}\n`;
+        txt += `Story Theme: ${storyTheme || 'Default Theme'}\n`;
         txt += `Target Duration: ${duration}\n`;
         txt += `Language: ${language} | Audience: ${targetAudience}\n`;
         txt += `=======================================================\n\n`;
@@ -846,18 +874,23 @@ Output MUST be JSON:
               <div>
                 <h1 className="font-black text-base sm:text-lg tracking-tight text-slate-900 flex items-center space-x-2">
                   <span>AI Viral Kids Animation Studio</span>
-                  <span className="bg-indigo-50 text-indigo-600 text-[10px] font-bold px-2 py-0.5 rounded-full border border-indigo-200">Lanskap & Dot Edition</span>
+                  <span className="bg-indigo-50 text-indigo-600 text-[10px] font-bold px-2 py-0.5 rounded-full border border-indigo-200">3D Cartoon & Lanskap</span>
                 </h1>
-                <p className="text-xs text-slate-500 font-medium">Mode Lanskap 16:9 • Dot Design & Dolewak Style • Storyboard & Prompts</p>
+                <p className="text-xs text-slate-500 font-medium">Model 3D CGI Imut • Dolewak & Dot Design • Mode Lanskap 16:9</p>
               </div>
             </div>
 
             <div className="flex items-center space-x-3">
               <button 
                 onClick={() => setActiveTab('settings')}
-                className="flex items-center space-x-1.5 bg-amber-50 border border-amber-200 text-amber-800 text-[11px] font-bold px-3 py-1.5 rounded-xl hover:bg-amber-100 transition shadow-sm"
+                className={`flex items-center space-x-1.5 text-[11px] font-bold px-3 py-1.5 rounded-xl transition shadow-sm border ${
+                  hasActiveKey 
+                    ? 'bg-emerald-50 border-emerald-300 text-emerald-800 hover:bg-emerald-100' 
+                    : 'bg-amber-50 border-amber-300 text-amber-900 hover:bg-amber-100 animate-pulse'
+                }`}
               >
-                <span>⚡ API: {provider === 'openrouter' ? 'OpenRouter Free' : 'Google Gemini'}</span>
+                <Icons.Key />
+                <span>API: {provider === 'openrouter' ? 'OpenRouter' : 'Gemini'} ({hasActiveKey ? '🔑 Ready' : '⚠️ Key Belum Set'})</span>
               </button>
               
               <button 
@@ -869,7 +902,6 @@ Output MUST be JSON:
             </div>
           </header>
 
-          {}
           <div className="flex flex-1 overflow-hidden">
             {/* Sidebar */}
             <aside className="w-64 bg-white/80 border-r border-slate-200 p-4 space-y-2 hidden md:flex flex-col justify-between">
@@ -953,20 +985,38 @@ Output MUST be JSON:
             {/* Main Content Area */}
             <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
               
-              {}
               {activeTab === 'studio' && (
                 <div className="max-w-4xl mx-auto space-y-8">
                   
+                  {/* API Key Missing Quick Alert Banner */}
+                  {!hasActiveKey && (
+                    <div className="bg-amber-50 border-2 border-amber-300 p-4 rounded-3xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs shadow-sm">
+                      <div className="space-y-1">
+                        <div className="font-extrabold text-amber-900 flex items-center space-x-1.5">
+                          <Icons.Key />
+                          <span>API Key Belum Terpasang!</span>
+                        </div>
+                        <p className="text-amber-700">Masukkan API Key {provider === 'openrouter' ? 'OpenRouter' : 'Google Gemini'} Anda agar pembuatan judul dan storyboard berfungsi normal.</p>
+                      </div>
+                      <button
+                        onClick={() => setActiveTab('settings')}
+                        className="bg-amber-500 hover:bg-amber-600 text-white font-extrabold px-4 py-2 rounded-xl transition shrink-0 shadow-sm"
+                      >
+                        Pasang API Key Now 🔑
+                      </button>
+                    </div>
+                  )}
+
                   <div className="bg-white p-6 rounded-3xl border border-indigo-100 shadow-sm relative overflow-hidden">
                     <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/5 rounded-full blur-3xl pointer-events-none"></div>
                     <span className="text-xs font-extrabold text-indigo-600 uppercase tracking-widest block mb-1">Production Input</span>
                     <h2 className="text-2xl font-black text-slate-900">Create Animation Production Package</h2>
-                    <p className="text-xs text-slate-500 mt-1 max-w-xl">Pilih Mode Lanskap (16:9), gaya animasi favorit seperti Dolewak atau Dot Design, lalu hasilkan cerita & storyboard otomatis.</p>
+                    <p className="text-xs text-slate-500 mt-1 max-w-xl">Pilih Mode Lanskap (16:9), gaya animasi kartun 3D imut, Dolewak, atau Dot Design, lalu buat cerita & storyboard otomatis.</p>
                   </div>
 
                   <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-6">
                     
-                    {/* Mode Lanskap / Aspect Ratio Selection */}
+                    {/* Aspect Ratio Selection */}
                     <div className="space-y-3">
                       <label className="block text-xs font-extrabold text-slate-700 uppercase tracking-wider">
                         1. Mode Tampilan / Aspect Ratio (Mode Lanskap)
@@ -998,7 +1048,7 @@ Output MUST be JSON:
                     {/* Animation Style Selection */}
                     <div className="space-y-3">
                       <label className="block text-xs font-extrabold text-slate-700 uppercase tracking-wider">
-                        2. Pilih Gaya Animasi (Termasuk Dolewak & Dot Design)
+                        2. Pilih Gaya Animasi (Termasuk Model 3D CGI Kartun, Dolewak & Dot Design)
                       </label>
                       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5">
                         {ANIMATION_STYLES.map(st => {
@@ -1034,14 +1084,14 @@ Output MUST be JSON:
                       )}
                     </div>
 
-                    {/* Story Theme */}
+                    {/* Story Theme (Cleared by default) */}
                     <div className="space-y-2">
                       <label className="block text-xs font-extrabold text-slate-700 uppercase tracking-wider">
                         3. Ide / Tema Cerita
                       </label>
                       <textarea
                         rows={3}
-                        placeholder="Contoh: Petualangan kocak Si Dolewak dan teman-temannya mencari harta karun di desa..."
+                        placeholder="Ketikkan ide atau tema cerita animasi Anda di sini (contoh: Petualangan kocak Si Dolewak dan teman-temannya mencari harta karun di desa...)"
                         value={storyTheme}
                         onChange={e => setStoryTheme(e.target.value)}
                         className="w-full bg-slate-50 border border-slate-200 rounded-2xl p-3.5 text-xs text-slate-900 focus:bg-white focus:outline-none focus:border-indigo-500 transition"
@@ -1164,7 +1214,6 @@ Output MUST be JSON:
                 </div>
               )}
 
-              {}
               {activeTab === 'character' && (
                 <div className="max-w-4xl mx-auto space-y-6">
                   <div className="flex justify-between items-center">
@@ -1180,7 +1229,7 @@ Output MUST be JSON:
                       
                       <div className="flex items-center space-x-4 border-b border-slate-200 pb-4">
                         <div className="w-16 h-16 rounded-2xl bg-indigo-50 border border-indigo-200 flex items-center justify-center text-3xl">
-                          {animationStyle === 'dot_design' ? '🔴' : animationStyle === 'dolewak' ? '🤪' : '👤'}
+                          {animationStyle.includes('3d') ? '✨' : animationStyle === 'dot_design' ? '🔴' : '👤'}
                         </div>
                         <div>
                           <h3 className="text-lg font-black text-slate-900">{masterCharacter.characterName || 'Main Character'}</h3>
@@ -1254,7 +1303,6 @@ Output MUST be JSON:
                 </div>
               )}
 
-              {}
               {activeTab === 'storyboards' && (
                 <div className="max-w-5xl mx-auto space-y-6">
                   
@@ -1365,7 +1413,6 @@ Output MUST be JSON:
                 </div>
               )}
 
-              {}
               {activeTab === 'thumbnail_seo' && (
                 <div className="max-w-4xl mx-auto space-y-6">
                   
@@ -1471,7 +1518,6 @@ Output MUST be JSON:
                 </div>
               )}
 
-              {}
               {activeTab === 'export' && (
                 <div className="max-w-4xl mx-auto space-y-6">
                   <div className="flex justify-between items-center">
@@ -1532,7 +1578,6 @@ Output MUST be JSON:
                 </div>
               )}
 
-              {}
               {activeTab === 'settings' && (
                 <div className="max-w-xl mx-auto space-y-6">
                   
@@ -1540,7 +1585,7 @@ Output MUST be JSON:
                     
                     <div className="flex items-center space-x-2 text-amber-800 font-extrabold text-xs uppercase tracking-wider">
                       <Icons.Zap />
-                      <span>API SETTINGS</span>
+                      <span>API SETTINGS & KEYS</span>
                     </div>
 
                     <div className="space-y-2">
@@ -1550,7 +1595,7 @@ Output MUST be JSON:
                         onChange={e => handleProviderChange(e.target.value)}
                         className="w-full bg-white border-2 border-amber-400 rounded-2xl p-3.5 text-xs font-extrabold text-amber-900 focus:outline-none cursor-pointer shadow-sm"
                       >
-                        <option value="openrouter">🌐 OpenRouter (FREE) - REKOMENDASI</option>
+                        <option value="openrouter">🌐 OpenRouter API (FREE / Standard)</option>
                         <option value="gemini">🔵 Google Gemini Direct API</option>
                       </select>
                     </div>
@@ -1575,18 +1620,20 @@ Output MUST be JSON:
                     </div>
 
                     <div className="space-y-2">
-                      <label className="text-xs font-bold text-slate-700 block">
-                        {provider === 'openrouter' ? 'OpenRouter API Key (sk-or-v1-...)' : 'Google Gemini API Key (AIzaSy...)'}
+                      <label className="text-xs font-bold text-slate-700 block flex items-center justify-between">
+                        <span>{provider === 'openrouter' ? 'OpenRouter API Key (sk-or-v1-...)' : 'Google Gemini API Key (AIzaSy...)'}</span>
+                        <span className="text-[10px] text-amber-800 font-medium">Tersimpan otomatis</span>
                       </label>
                       <input
                         type="password"
                         placeholder={provider === 'openrouter' ? 'sk-or-v1-...' : 'AIzaSy...'}
                         value={provider === 'openrouter' ? openrouterKey : geminiKey}
                         onChange={e => {
-                          if (provider === 'openrouter') setOpenrouterKey(e.target.value);
-                          else setGeminiKey(e.target.value);
+                          const val = e.target.value;
+                          if (provider === 'openrouter') setOpenrouterKey(val);
+                          else setGeminiKey(val);
                         }}
-                        className="w-full bg-white border border-amber-200 rounded-2xl p-3.5 text-xs font-mono text-slate-900 focus:outline-none focus:border-amber-500 shadow-sm"
+                        className="w-full bg-white border border-amber-300 rounded-2xl p-3.5 text-xs font-mono text-slate-900 focus:outline-none focus:border-indigo-500 shadow-sm"
                       />
                     </div>
 
@@ -1594,7 +1641,7 @@ Output MUST be JSON:
                       <button
                         onClick={handleTestKey}
                         disabled={isTestingKey}
-                        className="bg-white hover:bg-amber-100/50 border border-amber-200 text-slate-800 p-3 rounded-2xl text-xs font-bold flex flex-col items-center justify-center space-y-1 transition shadow-sm"
+                        className="bg-white hover:bg-amber-100/50 border border-amber-300 text-slate-800 p-3 rounded-2xl text-xs font-bold flex flex-col items-center justify-center space-y-1 transition shadow-sm"
                       >
                         <span className="text-base">🔑</span>
                         <span>{isTestingKey ? 'Testing...' : 'Test Key'}</span>
@@ -1603,7 +1650,7 @@ Output MUST be JSON:
                       <button
                         onClick={handleRefreshModels}
                         disabled={isRefreshingModels}
-                        className="bg-white hover:bg-amber-100/50 border border-amber-200 text-slate-800 p-3 rounded-2xl text-xs font-bold flex flex-col items-center justify-center space-y-1 transition text-center shadow-sm"
+                        className="bg-white hover:bg-amber-100/50 border border-amber-300 text-slate-800 p-3 rounded-2xl text-xs font-bold flex flex-col items-center justify-center space-y-1 transition text-center shadow-sm"
                       >
                         <span className="text-base">📦</span>
                         <span className="line-clamp-1">{isRefreshingModels ? 'Refreshing...' : 'Refresh Model'}</span>
@@ -1611,7 +1658,7 @@ Output MUST be JSON:
 
                       <button
                         onClick={handleOpenGetKeyPage}
-                        className="bg-amber-100 hover:bg-amber-200 border border-amber-300 text-amber-900 p-3 rounded-2xl text-xs font-bold flex flex-col items-center justify-center space-y-1 transition shadow-sm"
+                        className="bg-amber-200 hover:bg-amber-300 border border-amber-400 text-amber-950 p-3 rounded-2xl text-xs font-bold flex flex-col items-center justify-center space-y-1 transition shadow-sm"
                       >
                         <span className="text-base">📋</span>
                         <span>Ambil Key</span>
