@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Viral Kids Animation Studio - Light Theme Edition</title>
+  <title>AI Viral Kids Animation Studio - Landscape & Dot Design Edition</title>
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -37,6 +37,12 @@
     ::-webkit-scrollbar-thumb:hover {
       background: #94a3b8;
     }
+
+    /* Dot Design Background Pattern Helper */
+    .bg-dot-pattern {
+      background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+      background-size: 12px 12px;
+    }
   </style>
 </head>
 <body class="bg-slate-50 text-slate-800 selection:bg-indigo-500 selection:text-white font-sans antialiased min-h-screen">
@@ -53,11 +59,15 @@
       Check: () => <svg className="w-4 h-4 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"/></svg>,
       Settings: () => <svg className="w-4 h-4 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>,
       Refresh: () => <svg className="w-4 h-4 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>,
-      Download: () => <svg className="w-4 h-4 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+      Download: () => <svg className="w-4 h-4 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>,
+      Monitor: () => <svg className="w-4 h-4 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>,
+      Smartphone: () => <svg className="w-4 h-4 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
     };
 
     const ANIMATION_STYLES = [
       { id: 'doraemon', label: 'Doraemon Style', icon: '🔔', desc: 'Japanese 3D/2D suburban gadget adventures' },
+      { id: 'dolewak', label: 'Dolewak Style', icon: '🤪', desc: 'Ekspresif, kocak & komedi kartun khas lokal Indonesia' },
+      { id: 'dot_design', label: 'Dot Design Art', icon: '🔴', desc: 'Halftone polka-dot pattern & vibrant pop-art dot design' },
       { id: 'spongebob', label: 'SpongeBob Style', icon: '🧽', desc: 'Vibrant underwater cartoon comedy' },
       { id: 'upin_ipin', label: 'Upin & Ipin Style', icon: '🇲🇾', desc: 'Tropical village 3D heartwarming stories' },
       { id: 'roblox', label: 'Roblox Animation', icon: '🧱', desc: 'Blocky avatar gaming storytime' },
@@ -71,9 +81,14 @@
       { id: 'family_stories', label: 'Family Stories', icon: '🏠', desc: 'Heartwarming home & sibling bonding' },
       { id: 'fantasy', label: 'Epic Fantasy', icon: '🐉', desc: 'Dragons, magic spells & mythical quests' },
       { id: 'horror_kids', label: 'Horror for Kids', icon: '👻', desc: 'Spooky-funny mystery tales' },
-      { id: 'educational', label: 'Educational Stories', icon: '🧠', desc: 'Fun science, math & moral lessons' },
       { id: 'funny_stories', label: 'Funny Slapstick', icon: '🤡', desc: 'High-energy slapstick laugh-out-loud comedy' },
       { id: 'custom', label: 'Custom Style', icon: '✨', desc: 'Define your own unique animation style' }
+    ];
+
+    const ASPECT_RATIO_OPTIONS = [
+      { id: '16:9', label: '16:9 Lanskap (YouTube / TV Widescreen)', icon: '🖥️', desc: 'Format horizontal standar video YouTube' },
+      { id: '9:16', label: '9:16 Potret (Shorts / Reels / TikTok)', icon: '📱', desc: 'Format vertikal seluler' },
+      { id: '4:3', label: '4:3 Classic Lanskap', icon: '📺', desc: 'Format klasik TV kartun' }
     ];
 
     const DURATION_OPTIONS = [
@@ -103,7 +118,7 @@
 
     const TARGET_AUDIENCES = ['Kids', 'Family', 'Educational', 'Comedy', 'Adventure'];
     const LANGUAGES = ['Indonesian', 'English', 'Spanish', 'Japanese', 'Other'];
-    const LOCAL_STORAGE_KEY = "AI_ANIMATION_STUDIO_PROJECT_V5";
+    const LOCAL_STORAGE_KEY = "AI_ANIMATION_STUDIO_PROJECT_V6";
 
     function extractJSON(text) {
       if (!text) return null;
@@ -133,15 +148,21 @@
       ];
     }
 
-    function generateFallbackCharacter(title, theme, style) {
+    function generateFallbackCharacter(title, theme, style, aspectRatio) {
       const words = theme ? theme.split(' ') : [];
       const charName = words.length > 0 && words[0].length > 2 ? words[0].replace(/[^a-zA-Z]/g, '') : "Kiki";
       const cleanTitle = title || theme || "Petualangan Animasi";
       
+      const styleDesc = style === 'dolewak' 
+        ? "gaya komedi Dolewak khas kartun lokal, mata kocak ekspresif"
+        : style === 'dot_design'
+        ? "gaya Dot Design halftone pop-art dengan pola bintik-bintik artistik"
+        : `${style} animation style`;
+
       return {
         characterName: charName,
         archetype: "Pahlawan Utama Cerita",
-        face: "Wajah bulat ekspresif, mata besar bersinar ramah, ekspresi antusias khas animasi 3D/2D",
+        face: style === 'dolewak' ? "Wajah kocak elastis ekspresif dengan raut muka jahil dan ramah" : "Wajah bulat ekspresif, mata besar bersinar ramah",
         hair: "Rambut ikal warna cokelat terang potongan rapi",
         clothes: "Jaket hoodie biru muda dengan kaos putih bertuliskan logo bintang, celana kargo pendek",
         body: "Postur anak usia 8-10 tahun, lincah, proporsional",
@@ -149,7 +170,7 @@
         accessories: "Ransel petualang warna jingga terang",
         age: "8-10 Tahun",
         expressionStyle: "Sangat ekspresif, ceria, berani, dan penyayang",
-        masterPromptSnippet: `Master Character: ${charName}, main hero of "${cleanTitle}", expressive face, big sparkling eyes, curly light brown hair, wearing light blue hoodie, white star t-shirt, grey cargo shorts, orange backpack, ${style} animation style`
+        masterPromptSnippet: `Master Character: ${charName}, main hero of "${cleanTitle}", ${styleDesc}, aspect ratio ${aspectRatio}`
       };
     }
 
@@ -167,7 +188,7 @@ Dengan tekad yang kuat, ${name} mengambil langkah pertama. Momen puncak terjadi 
 Pada akhirnya, petualangan ini memberikan pelajaran berharga bagi ${name} dan semua teman-temannya. Keberanian sejati bukan tentang tidak memiliki rasa takut, melainkan tentang bertindak demi kebaikan.`;
     }
 
-    function generateFallbackStoryboards(durationObj, style, charObj, title, storyText, lang) {
+    function generateFallbackStoryboards(durationObj, style, charObj, title, storyText, lang, aspectRatio) {
       const count = durationObj?.storyboards || 3;
       const charSnippet = charObj?.masterPromptSnippet || `Main character for ${title}, ${style}`;
       const charName = charObj?.characterName || "Kiki";
@@ -202,8 +223,8 @@ Pada akhirnya, petualangan ini memberikan pelajaran berharga bagi ${name} dan se
             { panelNum: 5, action: `Hasil dari aksi terlihat dengan ekspresi lega dan gembira`, dialogue: `Berhasil!` },
             { panelNum: 6, action: `${charName} bersiap melangkah ke adegan berikutnya`, dialogue: `Petualangan berlanjut...` }
           ],
-          imagePrompt: `A 6-panel comic grid layout, ${style} art style. ${charSnippet}. Scene context: "${currentSectionText.substring(0, 100)}...". Panel 1 to 6 progression: character entering, observing, reacting, taking action, achieving result, transitioning to next board. Vibrant cartoon lighting, high continuity, 6-panel comic book format. Spoken dialogue in ${lang}.`,
-          videoPrompt: `Omni Flash / Sora Video Prompt (Storyboard #${i}): Cinematic smooth camera pan, ${charSnippet}. Action: ${charName} taking heroic action in "${currentSectionText.substring(0, 80)}...". Dynamic cartoon motion, lighting matching ${style}, max 10s.`
+          imagePrompt: `A 6-panel grid layout, ${aspectRatio} aspect ratio format, ${style} style art. ${charSnippet}. Scene context: "${currentSectionText.substring(0, 100)}...". Panel 1 to 6 progression: character entering, observing, reacting, taking action, achieving result, transitioning. Vibrant cartoon lighting, high continuity, 6-panel layout. Spoken dialogue in ${lang}. --ar ${aspectRatio.replace(':', ' -ar ')}`,
+          videoPrompt: `Omni Flash / Sora Video Prompt (Storyboard #${i}): Smooth camera pan widescreen ${aspectRatio}, ${charSnippet}. Action: ${charName} taking heroic action in "${currentSectionText.substring(0, 80)}...". Dynamic cartoon motion, lighting matching ${style}, max 10s --ar ${aspectRatio}`
         });
       }
 
@@ -302,7 +323,8 @@ Pada akhirnya, petualangan ini memberikan pelajaran berharga bagi ${name} dan se
       
       const [animationStyle, setAnimationStyle] = useState('doraemon');
       const [customStyleText, setCustomStyleText] = useState('');
-      const [storyTheme, setStoryTheme] = useState('A brave little brother saves his sister from a friendly stray dog in the neighborhood.');
+      const [aspectRatio, setAspectRatio] = useState('16:9'); // Default Landscape Mode
+      const [storyTheme, setStoryTheme] = useState('Petualangan seru adik dan kakak menyelamatkan anak anjing lucu di kompleks perumahan.');
       const [duration, setDuration] = useState('60 sec');
       const [language, setLanguage] = useState('Indonesian');
       const [targetAudience, setTargetAudience] = useState('Kids');
@@ -343,12 +365,12 @@ Pada akhirnya, petualangan ini memberikan pelajaran berharga bagi ${name} dan se
 
       useEffect(() => {
         const stateToSave = {
-          animationStyle, customStyleText, storyTheme, duration, language, targetAudience,
+          animationStyle, customStyleText, aspectRatio, storyTheme, duration, language, targetAudience,
           titles, selectedTitle, masterCharacter, story, storyAnalysis, storyboards,
           thumbnailData, seoData
         };
         localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(stateToSave));
-      }, [animationStyle, customStyleText, storyTheme, duration, language, targetAudience, titles, selectedTitle, masterCharacter, story, storyAnalysis, storyboards, thumbnailData, seoData]);
+      }, [animationStyle, customStyleText, aspectRatio, storyTheme, duration, language, targetAudience, titles, selectedTitle, masterCharacter, story, storyAnalysis, storyboards, thumbnailData, seoData]);
 
       useEffect(() => {
         try {
@@ -357,6 +379,7 @@ Pada akhirnya, petualangan ini memberikan pelajaran berharga bagi ${name} dan se
             const parsed = JSON.parse(saved);
             if (parsed.animationStyle) setAnimationStyle(parsed.animationStyle);
             if (parsed.customStyleText) setCustomStyleText(parsed.customStyleText);
+            if (parsed.aspectRatio) setAspectRatio(parsed.aspectRatio);
             if (parsed.storyTheme) setStoryTheme(parsed.storyTheme);
             if (parsed.duration) setDuration(parsed.duration);
             if (parsed.language) setLanguage(parsed.language);
@@ -455,6 +478,7 @@ Pada akhirnya, petualangan ini memberikan pelajaran berharga bagi ${name} dan se
           const prompt = `Generate exactly 10 high-CTR, highly engaging viral cartoon animation titles for kids/family based on:
 Style: ${currentStyleLabel}
 Theme: ${storyTheme}
+Orientation/Aspect Ratio: ${aspectRatio} (${aspectRatio === '16:9' ? 'Landscape Widescreen' : 'Portrait Vertical'})
 CRITICAL LANGUAGE RULE: Must be written strictly in ${language}.
 Target Audience: ${targetAudience}
 
@@ -499,6 +523,7 @@ Output MUST be a JSON array of 10 title strings ONLY in ${language}. Example: ["
 Title: "${selectedTitle}"
 Style: ${currentStyleLabel}
 Theme: ${storyTheme}
+Aspect Ratio: ${aspectRatio} (${aspectRatio === '16:9' ? 'Mode Lanskap Widescreen' : 'Mode Potret Vertikal'})
 Language: ${language}
 
 Define exact visual rules that NEVER change.
@@ -516,7 +541,7 @@ Output MUST be JSON with fields:
   "accessories": "...",
   "age": "...",
   "expressionStyle": "...",
-  "masterPromptSnippet": "Visual tag snippet for image generator"
+  "masterPromptSnippet": "Visual tag snippet for image generator including ${currentStyleLabel} and aspect ratio ${aspectRatio}"
 }`;
             const charText = await callUniversalAI(charPrompt, provider, selectedModel, openrouterKey, geminiKey);
             charParsed = extractJSON(charText);
@@ -525,7 +550,7 @@ Output MUST be JSON with fields:
           }
           
           if (!charParsed || !charParsed.characterName) {
-            charParsed = generateFallbackCharacter(selectedTitle, storyTheme, currentStyleLabel);
+            charParsed = generateFallbackCharacter(selectedTitle, storyTheme, currentStyleLabel, aspectRatio);
           }
           setMasterCharacter(charParsed);
 
@@ -536,6 +561,7 @@ Output MUST be JSON with fields:
 Title: "${selectedTitle}"
 Style: ${currentStyleLabel}
 Duration: ${duration}
+Aspect Ratio: ${aspectRatio}
 CRITICAL LANGUAGE RULE: Entire script MUST be written strictly in ${language}.
 Audience: ${targetAudience}
 Main Character: "${charParsed.characterName}"
@@ -563,11 +589,12 @@ Requirements:
 
 CRITICAL LANGUAGE RULE:
 1. Scene Title, Action descriptions, Continuity Notes, and Character Dialogues MUST be written strictly in ${language}.
-2. Image Prompt and Video Prompt should be optimized in English for AI models (Midjourney/Omni Flash), but explicitly mention spoken dialogue in ${language} if applicable.
+2. Image Prompt and Video Prompt should be optimized in English for AI models (Midjourney/Omni Flash), but explicitly specify aspect ratio ${aspectRatio} (${aspectRatio === '16:9' ? 'Landscape widescreen' : 'Portrait vertical'}) and spoken dialogue in ${language}.
 
 Story Title: "${selectedTitle}"
 Character Name: ${charParsed.characterName}
 Target Language: ${language}
+Aspect Ratio: ${aspectRatio}
 
 Format output as pure JSON:
 {
@@ -590,8 +617,8 @@ Format output as pure JSON:
         {"panelNum": 5, "action": "Action in ${language}", "dialogue": "Dialogue in ${language}"},
         {"panelNum": 6, "action": "Action in ${language}", "dialogue": "Dialogue in ${language}"}
       ],
-      "imagePrompt": "6-panel comic grid prompt in English specifying ${currentStyleLabel} and character snippet ${charParsed.masterPromptSnippet}",
-      "videoPrompt": "Omni Flash / Sora prompt max 10s motion"
+      "imagePrompt": "6-panel comic grid prompt in English specifying ${currentStyleLabel}, aspect ratio ${aspectRatio}, and character snippet ${charParsed.masterPromptSnippet}",
+      "videoPrompt": "Omni Flash / Sora prompt max 10s motion widescreen ${aspectRatio}"
     }
   ]
 }`;
@@ -608,7 +635,7 @@ Format output as pure JSON:
             setStoryboards(pipelineParsed.storyboards);
           } else {
             setStoryAnalysis({ totalStoryboardsNeeded: targetDurationObj.storyboards, pacingNotes: "Pacing disesuaikan", emotionalArc: "Alur konsisten" });
-            setStoryboards(generateFallbackStoryboards(targetDurationObj, currentStyleLabel, charParsed, selectedTitle, generatedStory, language));
+            setStoryboards(generateFallbackStoryboards(targetDurationObj, currentStyleLabel, charParsed, selectedTitle, generatedStory, language, aspectRatio));
           }
 
           setLoadingStepText(`STEP 10: Generating Thumbnail & SEO Metadata in ${language}...`);
@@ -617,6 +644,7 @@ Format output as pure JSON:
 Title: "${selectedTitle}"
 Style: ${currentStyleLabel}
 Theme: ${storyTheme}
+Aspect Ratio: ${aspectRatio}
 Language: ${language}
 Target Audience: ${targetAudience}
 
@@ -625,7 +653,7 @@ Output MUST be JSON:
   "thumbnail": {
     "ctrTextOptions": ["Text Option 1", "Text Option 2", "Text Option 3"],
     "visualConcept": "Visual description for thumbnail in ${language}",
-    "readyPrompt": "High-CTR 16:9 thumbnail prompt for Midjourney/Imagen in English including character snippet ${charParsed.masterPromptSnippet}"
+    "readyPrompt": "High-CTR ${aspectRatio} thumbnail prompt for Midjourney/Imagen in English including character snippet ${charParsed.masterPromptSnippet}"
   },
   "seo": {
     "seoTitles": ["Title 1", "Title 2", "Title 3", "Title 4", "Title 5"],
@@ -646,8 +674,8 @@ Output MUST be JSON:
           } catch (e) {
             setThumbnailData({
               ctrTextOptions: [`RAHASIA ${selectedTitle}!`, `JANGAN DITONTON SENDIRIAN!`, `TERNYATA BEGINI...`],
-              visualConcept: `Karakter utama ${charParsed.characterName} menunjukkan ekspresi kaget dengan latar belakang animasi ${currentStyleLabel}.`,
-              readyPrompt: `High-CTR 16:9 YouTube thumbnail, ${currentStyleLabel} style. Main character ${charParsed.masterPromptSnippet} with shocked reaction expression. Bold catchy headline text 'RAHASIA BIG!', vibrant gradient lighting, 8k resolution.`
+              visualConcept: `Karakter utama ${charParsed.characterName} menunjukkan ekspresi kaget dengan latar belakang animasi ${currentStyleLabel} format ${aspectRatio}.`,
+              readyPrompt: `High-CTR ${aspectRatio} YouTube thumbnail, ${currentStyleLabel} style. Main character ${charParsed.masterPromptSnippet} with shocked reaction expression. Bold catchy headline text 'RAHASIA BIG!', vibrant gradient lighting, 8k resolution --ar ${aspectRatio}`
             });
             setSeoData({
               seoTitles: [
@@ -681,6 +709,7 @@ Output MUST be JSON:
         
         txt += `Project Name: ${selectedTitle || 'Untitled Story'}\n`;
         txt += `Animation Style: ${currentStyleLabel}\n`;
+        txt += `Aspect Ratio: ${aspectRatio} (${aspectRatio === '16:9' ? 'Lanskap' : 'Potret'})\n`;
         txt += `Story Theme: ${storyTheme}\n`;
         txt += `Target Duration: ${duration}\n`;
         txt += `Language: ${language} | Audience: ${targetAudience}\n`;
@@ -705,7 +734,7 @@ Output MUST be JSON:
         }
 
         if (storyboards && storyboards.length > 0) {
-          txt += isMd ? `## 🎨 STORYBOARD BREAKDOWN & AI PROMPTS (${storyboards.length} Storyboards x 6 Panels)\n\n` : `STORYBOARD BREAKDOWN & AI PROMPTS\n\n`;
+          txt += isMd ? `## 🎨 STORYBOARD BREAKDOWN & AI PROMPTS (${storyboards.length} Storyboards x 6 Panels - ${aspectRatio})\n\n` : `STORYBOARD BREAKDOWN & AI PROMPTS\n\n`;
           storyboards.forEach((sb) => {
             txt += `-------------------------------------------------------\n`;
             txt += `STORYBOARD #${sb.storyboardId}: ${sb.sceneTitle || 'Scene Cut'}\n`;
@@ -725,7 +754,7 @@ Output MUST be JSON:
         }
 
         if (thumbnailData) {
-          txt += isMd ? `## 🖼️ THUMBNAIL STUDIO & CTR PROMPTS\n` : `THUMBNAIL STUDIO & CTR PROMPTS\n`;
+          txt += isMd ? `## 🖼️ THUMBNAIL STUDIO & CTR PROMPTS (${aspectRatio})\n` : `THUMBNAIL STUDIO & CTR PROMPTS\n`;
           txt += `Visual Concept: ${thumbnailData.visualConcept}\n`;
           txt += `Headline Options: ${thumbnailData.ctrTextOptions?.join(' | ')}\n`;
           txt += `Thumbnail Prompt:\n${thumbnailData.readyPrompt}\n\n`;
@@ -758,7 +787,7 @@ Output MUST be JSON:
             </div>
           )}
 
-          {/* Reset Modal - Light Theme */}
+          {/* Reset Modal */}
           {showResetModal && (
             <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
               <div className="bg-white border border-slate-200 p-6 rounded-3xl max-w-sm w-full space-y-4 shadow-2xl">
@@ -793,7 +822,7 @@ Output MUST be JSON:
             </div>
           )}
 
-          {/* Loading Overlay - Light Theme */}
+          {/* Loading Overlay */}
           {isGenerating && (
             <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex flex-col items-center justify-center p-4">
               <div className="bg-white/95 p-8 rounded-3xl flex flex-col items-center max-w-md text-center border border-indigo-200 shadow-2xl">
@@ -808,7 +837,7 @@ Output MUST be JSON:
             </div>
           )}
 
-          {}
+          {/* Header Bar */}
           <header className="bg-white/80 backdrop-blur border-b border-slate-200 sticky top-0 z-30 px-6 py-3.5 flex items-center justify-between shadow-sm">
             <div className="flex items-center space-x-3">
               <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-600 via-violet-600 to-pink-500 flex items-center justify-center text-white shadow-md shadow-indigo-500/20 font-black text-xl">
@@ -817,9 +846,9 @@ Output MUST be JSON:
               <div>
                 <h1 className="font-black text-base sm:text-lg tracking-tight text-slate-900 flex items-center space-x-2">
                   <span>AI Viral Kids Animation Studio</span>
-                  <span className="bg-indigo-50 text-indigo-600 text-[10px] font-bold px-2 py-0.5 rounded-full border border-indigo-200">Light Theme</span>
+                  <span className="bg-indigo-50 text-indigo-600 text-[10px] font-bold px-2 py-0.5 rounded-full border border-indigo-200">Lanskap & Dot Edition</span>
                 </h1>
-                <p className="text-xs text-slate-500 font-medium">1 Ide → Storyboard 6-Panel → Master Character → Visual & Video Prompts → SEO</p>
+                <p className="text-xs text-slate-500 font-medium">Mode Lanskap 16:9 • Dot Design & Dolewak Style • Storyboard & Prompts</p>
               </div>
             </div>
 
@@ -916,15 +945,15 @@ Output MUST be JSON:
               <div className="bg-slate-100 p-3.5 rounded-2xl border border-slate-200 space-y-2">
                 <span className="text-[10px] font-extrabold text-indigo-600 uppercase tracking-wider block">Active Pipeline</span>
                 <div className="text-xs font-bold text-slate-800 line-clamp-1">{currentStyleLabel}</div>
+                <div className="text-[11px] text-slate-500">Mode Aspect: <strong className="text-indigo-600">{aspectRatio} ({aspectRatio === '16:9' ? 'Lanskap' : 'Potret'})</strong></div>
                 <div className="text-[11px] text-slate-500">Duration: <strong className="text-indigo-600">{duration}</strong></div>
-                <div className="text-[11px] text-slate-500">Language: <strong className="text-indigo-600">{language}</strong></div>
               </div>
             </aside>
 
-            {}
+            {/* Main Content Area */}
             <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
               
-              {/* TAB 1: STUDIO SETUP & IDEATION */}
+              {}
               {activeTab === 'studio' && (
                 <div className="max-w-4xl mx-auto space-y-8">
                   
@@ -932,15 +961,44 @@ Output MUST be JSON:
                     <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/5 rounded-full blur-3xl pointer-events-none"></div>
                     <span className="text-xs font-extrabold text-indigo-600 uppercase tracking-widest block mb-1">Production Input</span>
                     <h2 className="text-2xl font-black text-slate-900">Create Animation Production Package</h2>
-                    <p className="text-xs text-slate-500 mt-1 max-w-xl">From 1 simple idea to 10 viral titles, master character sheets, emotional storytelling, 6-panel storyboard cuts, and YouTube SEO metadata.</p>
+                    <p className="text-xs text-slate-500 mt-1 max-w-xl">Pilih Mode Lanskap (16:9), gaya animasi favorit seperti Dolewak atau Dot Design, lalu hasilkan cerita & storyboard otomatis.</p>
                   </div>
 
                   <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-6">
                     
-                    {/* 1. Animation Style Selection */}
+                    {/* Mode Lanskap / Aspect Ratio Selection */}
                     <div className="space-y-3">
                       <label className="block text-xs font-extrabold text-slate-700 uppercase tracking-wider">
-                        1. Select Animation Style
+                        1. Mode Tampilan / Aspect Ratio (Mode Lanskap)
+                      </label>
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        {ASPECT_RATIO_OPTIONS.map(opt => {
+                          const isSel = aspectRatio === opt.id;
+                          return (
+                            <button
+                              key={opt.id}
+                              onClick={() => setAspectRatio(opt.id)}
+                              className={`p-3.5 rounded-2xl border text-left transition flex flex-col justify-between ${
+                                isSel 
+                                  ? 'bg-indigo-600 text-white border-indigo-600 shadow-md ring-2 ring-indigo-500/30' 
+                                  : 'bg-slate-50 border-slate-200 hover:border-slate-300 text-slate-700'
+                              }`}
+                            >
+                              <div className="flex items-center space-x-2">
+                                <span className="text-xl">{opt.icon}</span>
+                                <span className="font-extrabold text-xs">{opt.label}</span>
+                              </div>
+                              <span className={`text-[10px] mt-2 ${isSel ? 'text-indigo-100' : 'text-slate-500'}`}>{opt.desc}</span>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    {/* Animation Style Selection */}
+                    <div className="space-y-3">
+                      <label className="block text-xs font-extrabold text-slate-700 uppercase tracking-wider">
+                        2. Pilih Gaya Animasi (Termasuk Dolewak & Dot Design)
                       </label>
                       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5">
                         {ANIMATION_STYLES.map(st => {
@@ -968,7 +1026,7 @@ Output MUST be JSON:
                       {animationStyle === 'custom' && (
                         <input
                           type="text"
-                          placeholder="Describe your custom animation style..."
+                          placeholder="Deskripsikan gaya animasi khusus Anda..."
                           value={customStyleText}
                           onChange={e => setCustomStyleText(e.target.value)}
                           className="w-full bg-slate-50 border border-indigo-300 rounded-xl p-3 text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-500"
@@ -976,26 +1034,25 @@ Output MUST be JSON:
                       )}
                     </div>
 
-                    {/* 2. Story Theme */}
+                    {/* Story Theme */}
                     <div className="space-y-2">
                       <label className="block text-xs font-extrabold text-slate-700 uppercase tracking-wider">
-                        2. Story Idea / Theme
+                        3. Ide / Tema Cerita
                       </label>
                       <textarea
                         rows={3}
-                        placeholder="e.g. Brother saves sister from a friendly stray dog in the neighborhood..."
+                        placeholder="Contoh: Petualangan kocak Si Dolewak dan teman-temannya mencari harta karun di desa..."
                         value={storyTheme}
                         onChange={e => setStoryTheme(e.target.value)}
                         className="w-full bg-slate-50 border border-slate-200 rounded-2xl p-3.5 text-xs text-slate-900 focus:bg-white focus:outline-none focus:border-indigo-500 transition"
                       />
                     </div>
 
-                    {/* 3. Duration, Language & Audience Controls */}
+                    {/* Duration, Language & Audience Controls */}
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                      
                       <div>
                         <label className="block text-xs font-extrabold text-slate-700 uppercase tracking-wider mb-2">
-                          Video Duration
+                          Durasi Video
                         </label>
                         <select
                           value={duration}
@@ -1010,7 +1067,7 @@ Output MUST be JSON:
 
                       <div>
                         <label className="block text-xs font-extrabold text-slate-700 uppercase tracking-wider mb-2">
-                          Language
+                          Bahasa
                         </label>
                         <select
                           value={language}
@@ -1025,7 +1082,7 @@ Output MUST be JSON:
 
                       <div>
                         <label className="block text-xs font-extrabold text-slate-700 uppercase tracking-wider mb-2">
-                          Target Audience
+                          Target Penonton
                         </label>
                         <select
                           value={targetAudience}
@@ -1037,7 +1094,6 @@ Output MUST be JSON:
                           ))}
                         </select>
                       </div>
-
                     </div>
 
                     {/* Step 1 Action Button */}
@@ -1047,7 +1103,7 @@ Output MUST be JSON:
                         disabled={isGenerating}
                         className="bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold text-xs px-6 py-3 rounded-2xl shadow-lg shadow-indigo-600/20 transition flex items-center space-x-2"
                       >
-                        <span>✨ STEP 1: Generate 10 Viral Titles in {language}</span>
+                        <span>✨ STEP 1: Buat 10 Judul Viral ({language})</span>
                       </button>
                     </div>
 
@@ -1059,7 +1115,7 @@ Output MUST be JSON:
                       <div className="flex justify-between items-center">
                         <div>
                           <span className="text-[10px] font-extrabold text-indigo-600 uppercase tracking-wider">Step 1 Complete</span>
-                          <h3 className="text-base font-black text-slate-900 mt-0.5">Select Your Title ({language})</h3>
+                          <h3 className="text-base font-black text-slate-900 mt-0.5">Pilih Judul Video ({language})</h3>
                         </div>
                         <button
                           onClick={handleGenerateTitles}
@@ -1091,7 +1147,7 @@ Output MUST be JSON:
 
                       <div className="pt-4 border-t border-slate-200 flex flex-col sm:flex-row justify-between items-center gap-3">
                         <div className="text-xs text-slate-500">
-                          Selected: <strong className="text-indigo-700 font-extrabold">{selectedTitle}</strong>
+                          Pilihan: <strong className="text-indigo-700 font-extrabold">{selectedTitle}</strong>
                         </div>
 
                         <button
@@ -1099,7 +1155,7 @@ Output MUST be JSON:
                           disabled={isGenerating}
                           className="w-full sm:w-auto bg-gradient-to-r from-indigo-600 via-violet-600 to-pink-600 hover:from-indigo-500 hover:to-pink-500 text-white font-black text-xs px-8 py-3.5 rounded-2xl shadow-xl shadow-indigo-600/20 transition flex items-center justify-center space-x-2"
                         >
-                          <span>🚀 RUN FULL ANIMATION PIPELINE</span>
+                          <span>🚀 JALANKAN PIPELINE PRODUKSI LANSKAP</span>
                         </button>
                       </div>
                     </div>
@@ -1115,7 +1171,7 @@ Output MUST be JSON:
                     <div>
                       <span className="text-xs font-extrabold text-indigo-600 uppercase tracking-widest">Step 7 Engine</span>
                       <h2 className="text-2xl font-black text-slate-900 mt-0.5">Master Character Sheet</h2>
-                      <p className="text-xs text-slate-500">Maintains absolute visual consistency across all storyboards & panels.</p>
+                      <p className="text-xs text-slate-500">Menjaga konsistensi visual karakter di seluruh panel storyboard.</p>
                     </div>
                   </div>
 
@@ -1124,35 +1180,35 @@ Output MUST be JSON:
                       
                       <div className="flex items-center space-x-4 border-b border-slate-200 pb-4">
                         <div className="w-16 h-16 rounded-2xl bg-indigo-50 border border-indigo-200 flex items-center justify-center text-3xl">
-                          👤
+                          {animationStyle === 'dot_design' ? '🔴' : animationStyle === 'dolewak' ? '🤪' : '👤'}
                         </div>
                         <div>
                           <h3 className="text-lg font-black text-slate-900">{masterCharacter.characterName || 'Main Character'}</h3>
                           <span className="bg-indigo-50 text-indigo-700 border border-indigo-200 text-[10px] font-bold px-2.5 py-0.5 rounded-full">
-                            {masterCharacter.archetype || 'Hero'}
+                            {masterCharacter.archetype || 'Hero'} • {currentStyleLabel}
                           </span>
                         </div>
                       </div>
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
                         <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
-                          <span className="text-[10px] font-extrabold text-slate-400 uppercase">Face & Expression</span>
+                          <span className="text-[10px] font-extrabold text-slate-400 uppercase">Wajah & Ekspresi</span>
                           <p className="text-slate-800 font-medium">{masterCharacter.face || 'Standard'}</p>
                         </div>
                         
                         <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
-                          <span className="text-[10px] font-extrabold text-slate-400 uppercase">Hair & Style</span>
+                          <span className="text-[10px] font-extrabold text-slate-400 uppercase">Rambut & Gaya</span>
                           <p className="text-slate-800 font-medium">{masterCharacter.hair || 'Standard'}</p>
                         </div>
 
                         <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
-                          <span className="text-[10px] font-extrabold text-slate-400 uppercase">Outfit & Clothes</span>
+                          <span className="text-[10px] font-extrabold text-slate-400 uppercase">Pakaian & Kostum</span>
                           <p className="text-slate-800 font-medium">{masterCharacter.clothes || 'Standard'}</p>
                         </div>
 
                         <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-1">
-                          <span className="text-[10px] font-extrabold text-slate-400 uppercase">Body & Colors</span>
-                          <p className="text-slate-800 font-medium">{masterCharacter.body} | Colors: {masterCharacter.colors}</p>
+                          <span className="text-[10px] font-extrabold text-slate-400 uppercase">Postur & Warna</span>
+                          <p className="text-slate-800 font-medium">{masterCharacter.body} | Warna: {masterCharacter.colors}</p>
                         </div>
                       </div>
 
@@ -1164,7 +1220,7 @@ Output MUST be JSON:
                             className="text-[11px] text-indigo-600 font-bold hover:underline flex items-center space-x-1"
                           >
                             <Icons.Copy />
-                            <span>Copy Snippet</span>
+                            <span>Salin Snippet</span>
                           </button>
                         </div>
                         <p className="text-xs font-mono text-slate-800 bg-white p-3 rounded-xl border border-slate-200">
@@ -1175,7 +1231,7 @@ Output MUST be JSON:
                     </div>
                   ) : (
                     <div className="text-center py-16 bg-white rounded-3xl border border-slate-200 text-slate-500 text-xs shadow-sm">
-                      No Master Character Sheet generated yet. Complete Step 1 and run the pipeline.
+                      Belum ada Master Character Sheet. Selesaikan Step 1 dan jalankan pipeline.
                     </div>
                   )}
 
@@ -1183,10 +1239,10 @@ Output MUST be JSON:
                   {story && (
                     <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-3">
                       <div className="flex justify-between items-center">
-                        <h3 className="text-sm font-black text-slate-900 uppercase tracking-wider">Step 2: Complete Animation Script ({language})</h3>
+                        <h3 className="text-sm font-black text-slate-900 uppercase tracking-wider">Step 2: Naskah Cerita Lengkap ({language})</h3>
                         <button onClick={() => copyToClipboard(story, "Story Script")} className="text-xs text-indigo-600 font-bold hover:underline flex items-center space-x-1">
                           <Icons.Copy />
-                          <span>Copy Story</span>
+                          <span>Salin Naskah</span>
                         </button>
                       </div>
                       <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-xs text-slate-800 leading-relaxed font-sans whitespace-pre-line max-h-96 overflow-y-auto">
@@ -1208,7 +1264,9 @@ Output MUST be JSON:
                         <span className="bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-bold px-2 py-0.5 rounded-full">
                           ✓ PIPELINE SYNCHRONIZED
                         </span>
-                        <span className="text-slate-500 font-medium">Language: <strong className="text-slate-800">{language}</strong></span>
+                        <span className="bg-indigo-50 text-indigo-700 border border-indigo-200 text-[10px] font-bold px-2 py-0.5 rounded-full">
+                          Mode {aspectRatio === '16:9' ? 'Lanskap (16:9)' : 'Potret (9:16)'}
+                        </span>
                       </div>
                       <div className="text-slate-800 font-bold line-clamp-1">
                         Judul: "{selectedTitle || 'Petualangan Animasi'}"
@@ -1226,7 +1284,7 @@ Output MUST be JSON:
 
                   {storyboards.length === 0 ? (
                     <div className="text-center py-16 bg-white rounded-3xl border border-slate-200 text-slate-500 text-xs shadow-sm">
-                      No storyboards generated yet. Go to <button onClick={() => setActiveTab('studio')} className="text-indigo-600 underline font-bold">Studio Ideation</button> and run pipeline.
+                      Belum ada storyboard. Buka menu <button onClick={() => setActiveTab('studio')} className="text-indigo-600 underline font-bold">Studio Setup</button> dan jalankan pipeline.
                     </div>
                   ) : (
                     <div className="space-y-6">
@@ -1240,14 +1298,14 @@ Output MUST be JSON:
                               </span>
                               <div>
                                 <h3 className="text-sm font-black text-slate-900">{sb.sceneTitle || `Storyboard Cut #${sb.storyboardId}`}</h3>
-                                <span className="text-[10px] text-slate-500 font-medium">Location: {sb.locationAndTime}</span>
+                                <span className="text-[10px] text-slate-500 font-medium">Lokasi: {sb.locationAndTime}</span>
                               </div>
                             </div>
                           </div>
 
                           <div className="space-y-2">
                             <span className="text-[10px] font-extrabold text-indigo-600 uppercase tracking-wider block">
-                              STEP 4: 6 Connected Comic Panels ({language})
+                              STEP 4: 6 Panel Komik Berantai ({aspectRatio === '16:9' ? 'Lanskap' : 'Potret'})
                             </span>
                             
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -1269,13 +1327,13 @@ Output MUST be JSON:
 
                           <div className="bg-indigo-50/60 p-4 rounded-2xl border border-indigo-200 space-y-2">
                             <div className="flex justify-between items-center">
-                              <span className="text-xs font-extrabold text-indigo-900">🖼️ STEP 5: Image Prompt (6-Panel Grid Format)</span>
+                              <span className="text-xs font-extrabold text-indigo-900">🖼️ STEP 5: Prompt Gambar (Grid 6 Panel - Aspect Ratio {aspectRatio})</span>
                               <button
                                 onClick={() => copyToClipboard(sb.imagePrompt, `Image Prompt #${sb.storyboardId}`)}
                                 className="text-[11px] text-indigo-600 font-bold hover:underline flex items-center space-x-1"
                               >
                                 <Icons.Copy />
-                                <span>Copy Prompt</span>
+                                <span>Salin Prompt</span>
                               </button>
                             </div>
                             <p className="text-xs font-mono text-slate-800 bg-white p-3 rounded-xl border border-slate-200">
@@ -1285,13 +1343,13 @@ Output MUST be JSON:
 
                           <div className="bg-violet-50/60 p-4 rounded-2xl border border-violet-200 space-y-2">
                             <div className="flex justify-between items-center">
-                              <span className="text-xs font-extrabold text-violet-900">📹 STEP 6: Video Prompt (Omni Flash / Sora)</span>
+                              <span className="text-xs font-extrabold text-violet-900">📹 STEP 6: Prompt Video (Omni Flash / Sora - Lanskap {aspectRatio})</span>
                               <button
                                 onClick={() => copyToClipboard(sb.videoPrompt, `Video Prompt #${sb.storyboardId}`)}
                                 className="text-[11px] text-violet-600 font-bold hover:underline flex items-center space-x-1"
                               >
                                 <Icons.Copy />
-                                <span>Copy Prompt</span>
+                                <span>Salin Prompt</span>
                               </button>
                             </div>
                             <p className="text-xs font-mono text-slate-800 bg-white p-3 rounded-xl border border-slate-200">
@@ -1314,13 +1372,13 @@ Output MUST be JSON:
                   <div>
                     <span className="text-xs font-extrabold text-indigo-600 uppercase tracking-widest">Metadata Engine</span>
                     <h2 className="text-2xl font-black text-slate-900 mt-0.5">Thumbnail Studio & YouTube SEO</h2>
-                    <p className="text-xs text-slate-500">High-CTR thumbnail prompts, video description, tags, and pinned comment in <strong className="text-indigo-600">{language}</strong>.</p>
+                    <p className="text-xs text-slate-500">Prompt thumbnail High-CTR format <strong className="text-indigo-600">{aspectRatio} Mode Lanskap</strong>, deskripsi, dan tag.</p>
                   </div>
 
                   {thumbnailData && (
                     <div className="bg-white p-6 rounded-3xl border border-indigo-200 shadow-sm space-y-5">
                       <div className="flex items-center space-x-2 text-indigo-800 font-extrabold text-xs uppercase tracking-wider">
-                        <span>🖼️ THUMBNAIL STUDIO & HIGH-CTR PROMPT</span>
+                        <span>🖼️ THUMBNAIL STUDIO ({aspectRatio})</span>
                       </div>
 
                       <div className="space-y-3">
@@ -1410,12 +1468,6 @@ Output MUST be JSON:
                     </div>
                   )}
 
-                  {!thumbnailData && !seoData && (
-                    <div className="text-center py-16 bg-white rounded-3xl border border-slate-200 text-slate-500 text-xs shadow-sm">
-                      Belum ada metadata SEO & Thumbnail. Jalankan pipeline produksi di menu <button onClick={() => setActiveTab('studio')} className="text-indigo-600 underline font-bold">Studio Setup</button>.
-                    </div>
-                  )}
-
                 </div>
               )}
 
@@ -1426,7 +1478,7 @@ Output MUST be JSON:
                     <div>
                       <span className="text-xs font-extrabold text-indigo-600 uppercase tracking-widest">Step 10 Output</span>
                       <h2 className="text-2xl font-black text-slate-900 mt-0.5">Production Package Export</h2>
-                      <p className="text-xs text-slate-500">Download your synchronized animation package in TXT, Markdown, or DOCX formats.</p>
+                      <p className="text-xs text-slate-500">Unduh seluruh paket animasi lanskap Anda dalam format TXT, Markdown, atau DOCX.</p>
                     </div>
 
                     <button
@@ -1434,12 +1486,12 @@ Output MUST be JSON:
                       className="bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold text-xs px-4 py-2 rounded-xl shadow-lg shadow-indigo-600/20 transition flex items-center space-x-1.5"
                     >
                       <Icons.Copy />
-                      <span>Copy Full Package</span>
+                      <span>Salin Seluruh Paket</span>
                     </button>
                   </div>
 
                   <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
-                    <span className="text-xs font-extrabold text-slate-700 uppercase tracking-wider block">Download Formats</span>
+                    <span className="text-xs font-extrabold text-slate-700 uppercase tracking-wider block">Format Unduhan</span>
                     
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                       <button
@@ -1448,7 +1500,7 @@ Output MUST be JSON:
                       >
                         <span className="text-xl">📄</span>
                         <div className="font-extrabold text-xs text-slate-900">Export TXT</div>
-                        <div className="text-[10px] text-slate-500">Plain text format</div>
+                        <div className="text-[10px] text-slate-500">Format teks polos</div>
                       </button>
 
                       <button
@@ -1457,7 +1509,7 @@ Output MUST be JSON:
                       >
                         <span className="text-xl">📝</span>
                         <div className="font-extrabold text-xs text-slate-900">Export Markdown</div>
-                        <div className="text-[10px] text-slate-500">Formatted MD</div>
+                        <div className="text-[10px] text-slate-500">Format rapi MD</div>
                       </button>
 
                       <button
@@ -1466,13 +1518,13 @@ Output MUST be JSON:
                       >
                         <span className="text-xl">📘</span>
                         <div className="font-extrabold text-xs text-slate-900">Export DOCX</div>
-                        <div className="text-[10px] text-slate-500">Word document</div>
+                        <div className="text-[10px] text-slate-500">Dokumen MS Word</div>
                       </button>
                     </div>
                   </div>
 
                   <div className="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-3">
-                    <span className="text-xs font-extrabold text-slate-700 uppercase tracking-wider block">Package Preview</span>
+                    <span className="text-xs font-extrabold text-slate-700 uppercase tracking-wider block">Pratinjau Isi Paket</span>
                     <pre className="bg-slate-900 p-4 rounded-2xl border border-slate-800 text-xs font-mono text-slate-200 leading-relaxed overflow-x-auto max-h-96">
                       {generateFullPackageText('md')}
                     </pre>
